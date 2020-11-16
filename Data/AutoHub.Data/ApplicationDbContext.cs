@@ -26,6 +26,20 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Vehicle> Vehicles { get; set; }
+
+        public DbSet<Make> Makes { get; set; }
+
+        public DbSet<Model> Models { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Color> Colors { get; set; }
+
+        public DbSet<DealerShip> DealerShips { get; set; }
+
+        public DbSet<Review> Reviews { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
