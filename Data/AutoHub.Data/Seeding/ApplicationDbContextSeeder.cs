@@ -29,6 +29,7 @@
                               new SettingsSeeder(),
                               new CategoriesSeeder(),
                               new ColorSeeder(),
+                              new MakesSeeder(),
                           };
 
             foreach (var seeder in seeders)

@@ -7,6 +7,8 @@
 
     public class Vehicle : BaseDeletableModel<int>
     {
+        public string Name { get; set; }
+
         public int MakeId { get; set; }
 
         public virtual Make Make { get; set; }

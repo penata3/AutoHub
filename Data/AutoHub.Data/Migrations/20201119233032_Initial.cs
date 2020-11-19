@@ -18,7 +18,7 @@ namespace AutoHub.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true)
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -282,7 +282,7 @@ namespace AutoHub.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    CategoryId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     MakeId = table.Column<int>(nullable: false),
                     Price = table.Column<int>(nullable: false),
                     Type = table.Column<int>(nullable: false),
@@ -294,7 +294,8 @@ namespace AutoHub.Data.Migrations
                     Description = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
                     AddedByUserId = table.Column<string>(nullable: true),
-                    DealerShipId = table.Column<int>(nullable: true)
+                    DealerShipId = table.Column<int>(nullable: true),
+                    CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -327,6 +328,32 @@ namespace AutoHub.Data.Migrations
                         name: "FK_Vehicles_Makes_MakeId",
                         column: x => x.MakeId,
                         principalTable: "Makes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reviews",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    VideoUrl = table.Column<string>(nullable: true),
+                    ModelId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reviews", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Models_ModelId",
+                        column: x => x.ModelId,
+                        principalTable: "Models",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -411,6 +438,16 @@ namespace AutoHub.Data.Migrations
                 column: "MakeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Reviews_IsDeleted",
+                table: "Reviews",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_ModelId",
+                table: "Reviews",
+                column: "ModelId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Settings_IsDeleted",
                 table: "Settings",
                 column: "IsDeleted");
@@ -464,7 +501,7 @@ namespace AutoHub.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Models");
+                name: "Reviews");
 
             migrationBuilder.DropTable(
                 name: "Settings");
@@ -474,6 +511,9 @@ namespace AutoHub.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Models");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

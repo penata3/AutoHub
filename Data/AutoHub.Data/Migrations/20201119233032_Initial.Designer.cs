@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoHub.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201116162211_Initial")]
+    [Migration("20201119233032_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -297,6 +297,46 @@ namespace AutoHub.Data.Migrations
                     b.ToTable("Models");
                 });
 
+            modelBuilder.Entity("AutoHub.Data.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ModelId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VideoUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("ModelId");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("AutoHub.Data.Models.Setting", b =>
                 {
                     b.Property<int>("Id")
@@ -377,6 +417,9 @@ namespace AutoHub.Data.Migrations
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
@@ -513,6 +556,15 @@ namespace AutoHub.Data.Migrations
                     b.HasOne("AutoHub.Data.Models.Make", "Make")
                         .WithMany()
                         .HasForeignKey("MakeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.Review", b =>
+                {
+                    b.HasOne("AutoHub.Data.Models.Model", "Model")
+                        .WithMany()
+                        .HasForeignKey("ModelId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
