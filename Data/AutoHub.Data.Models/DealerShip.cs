@@ -8,7 +8,7 @@
     {
         public DealerShip()
         {
-            this.Vehicles = new HashSet<Vehicle>();
+            this.Cars = new HashSet<Car>();
         }
 
         public string Name { get; set; }
@@ -17,6 +17,6 @@
 
         public string Location { get; set; }
 
-        public virtual ICollection<Vehicle> Vehicles { get; set; }
+        public virtual ICollection<Car> Cars { get; set; }
     }
 }

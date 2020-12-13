@@ -1,6 +1,7 @@
 ﻿namespace AutoHub.Data.Seeding
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using AngleSharp;
@@ -10,6 +11,11 @@
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
+            if (dbContext.Makes.Any())
+            {
+                return;
+            }
+
             var config = Configuration.Default.WithDefaultLoader();
             var context = new BrowsingContext(config);
 

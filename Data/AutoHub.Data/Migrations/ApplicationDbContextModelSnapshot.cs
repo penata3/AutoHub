@@ -19,6 +19,35 @@ namespace AutoHub.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("AutoHub.Data.Models.Addition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Additions");
+                });
+
             modelBuilder.Entity("AutoHub.Data.Models.ApplicationRole", b =>
                 {
                     b.Property<string>("Id")
@@ -139,21 +168,51 @@ namespace AutoHub.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("AutoHub.Data.Models.Category", b =>
+            modelBuilder.Entity("AutoHub.Data.Models.Car", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AddedByUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ColorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ConditionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CoupeId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("DealerShipId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GearBoxId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<int>("MakeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ManufactureDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Milage")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -161,11 +220,53 @@ namespace AutoHub.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("AddedByUserId");
+
+                    b.HasIndex("ColorId");
+
+                    b.HasIndex("ConditionId");
+
+                    b.HasIndex("CoupeId");
+
+                    b.HasIndex("DealerShipId");
+
+                    b.HasIndex("GearBoxId");
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("Categories");
+                    b.HasIndex("MakeId");
+
+                    b.ToTable("Car");
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.CarAddition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AdditionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdditionId");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("CarAdditions");
                 });
 
             modelBuilder.Entity("AutoHub.Data.Models.Color", b =>
@@ -195,6 +296,64 @@ namespace AutoHub.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Colors");
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.Condition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Conditions");
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.Coupe", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Coupes");
                 });
 
             modelBuilder.Entity("AutoHub.Data.Models.DealerShip", b =>
@@ -230,6 +389,75 @@ namespace AutoHub.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("DealerShips");
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.GearBox", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("GearBoxes");
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.Image", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AddedByUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RemoteImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddedByUserId");
+
+                    b.HasIndex("CarId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("AutoHub.Data.Models.Make", b =>
@@ -367,84 +595,6 @@ namespace AutoHub.Data.Migrations
                     b.ToTable("Settings");
                 });
 
-            modelBuilder.Entity("AutoHub.Data.Models.Vehicle", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AddedByUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ColorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Condition")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("DealerShipId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GearBox")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("MakeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ManufactureDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("Milage")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddedByUserId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("DealerShipId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("MakeId");
-
-                    b.ToTable("Vehicles");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -549,6 +699,75 @@ namespace AutoHub.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("AutoHub.Data.Models.Car", b =>
+                {
+                    b.HasOne("AutoHub.Data.Models.ApplicationUser", "AddedByUser")
+                        .WithMany()
+                        .HasForeignKey("AddedByUserId");
+
+                    b.HasOne("AutoHub.Data.Models.Color", "Color")
+                        .WithMany()
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AutoHub.Data.Models.Condition", "Condition")
+                        .WithMany("Cars")
+                        .HasForeignKey("ConditionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AutoHub.Data.Models.Coupe", "Coupe")
+                        .WithMany("Cars")
+                        .HasForeignKey("CoupeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AutoHub.Data.Models.DealerShip", "DealerShip")
+                        .WithMany("Cars")
+                        .HasForeignKey("DealerShipId");
+
+                    b.HasOne("AutoHub.Data.Models.GearBox", "GearBox")
+                        .WithMany("Cars")
+                        .HasForeignKey("GearBoxId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AutoHub.Data.Models.Make", "Make")
+                        .WithMany()
+                        .HasForeignKey("MakeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.CarAddition", b =>
+                {
+                    b.HasOne("AutoHub.Data.Models.Addition", "Addition")
+                        .WithMany("Cars")
+                        .HasForeignKey("AdditionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AutoHub.Data.Models.Car", "Car")
+                        .WithMany("Additions")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.Image", b =>
+                {
+                    b.HasOne("AutoHub.Data.Models.ApplicationUser", "AddedByUser")
+                        .WithMany()
+                        .HasForeignKey("AddedByUserId");
+
+                    b.HasOne("AutoHub.Data.Models.Car", "Car")
+                        .WithMany("Images")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("AutoHub.Data.Models.Model", b =>
                 {
                     b.HasOne("AutoHub.Data.Models.Make", "Make")
@@ -563,35 +782,6 @@ namespace AutoHub.Data.Migrations
                     b.HasOne("AutoHub.Data.Models.Model", "Model")
                         .WithMany()
                         .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AutoHub.Data.Models.Vehicle", b =>
-                {
-                    b.HasOne("AutoHub.Data.Models.ApplicationUser", "AddedByUser")
-                        .WithMany()
-                        .HasForeignKey("AddedByUserId");
-
-                    b.HasOne("AutoHub.Data.Models.Category", "Category")
-                        .WithMany("Vehicles")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("AutoHub.Data.Models.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("AutoHub.Data.Models.DealerShip", "DealerShip")
-                        .WithMany("Vehicles")
-                        .HasForeignKey("DealerShipId");
-
-                    b.HasOne("AutoHub.Data.Models.Make", "Make")
-                        .WithMany()
-                        .HasForeignKey("MakeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using AutoHub.Data.Models.Enums;
 
     public class AddVehicleInputModel
     {
@@ -16,15 +15,11 @@
         [Required]
         public int Price { get; set; }
 
-        public CoupeType Type { get; set; }
-
-        public GearBox GearBox { get; set; }
 
         [Required]
         [Range(1, int.MaxValue)]
         public decimal Milage { get; set; }
 
-        public Condition Condition { get; set; }
 
         [DisplayFormat(DataFormatString = "{dd/MM/yyyy}")]
         public DateTime ManufactureDate { get; set; }

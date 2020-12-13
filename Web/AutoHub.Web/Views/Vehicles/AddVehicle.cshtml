@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Add Vehicle";
-    var categoryItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key));
     var makesItems = this.Model.MakesItems.Select(x => new SelectListItem(x.Value, x.Key));
     var colors = this.Model.Colors.Select(x => new SelectListItem(x.Value, x.Key));
 }
@@ -21,12 +20,7 @@
 <form method="post" >
 
     <div class="row">
-        <div class="col-md-4">
-            <label asp-for="CategoryId"></label>
-            <select asp-for="CategoryId" class="form-control" asp-items="categoryItems"></select>
-            <span asp-validation-for="CategoryId" class="text-danger"></span>
-        </div>
-
+   
         <div class="col-md-4">
             <label asp-for="MakeId"></label>
             <select asp-for="MakeId" class="form-control" asp-items="makesItems"></select>
@@ -34,45 +28,25 @@
         </div>
         <div class="col-md-4">
             <label asp-for="Price"></label>
-            <input asp-for="Price" class="form-control" />
+            <input asp-for="Price" class="form-control" placeholder="0" />
             <span asp-validation-for="Price"></span>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-4">
-            <label asp-for="Type"></label>
-            <select asp-for="Type" asp-items="@Html.GetEnumSelectList<CoupeType>()" class="form-control">
-                <option selected="selected" value="">Select coupe type</option>
-            </select>
-            <span asp-validation-for="Type"></span>
-        </div>
+        
 
 
-        <div class="col-md-4">
-            <label asp-for="GearBox"></label>
-            <select asp-for="GearBox" asp-items="@Html.GetEnumSelectList<GearBox>()" class="form-control">
-                <option selected="selected" value="">Select gearbox type</option>
-            </select>
-            <span asp-validation-for="GearBox"></span>
-        </div>
 
         <div class="col-md-4">
             <label asp-for="Milage"></label>
-            <input asp-for="Milage" class="form-control" />
+            <input asp-for="Milage" class="form-control" placeholder="0" />
             <span asp-validation-for="Milage"></span>
         </div>
     </div>
 
     <div class="row">
 
-        <div class="col-md-4">
-            <label asp-for="Condition"></label>
-            <select asp-for="Condition" asp-items="@Html.GetEnumSelectList<Condition>()" class="form-control">
-                <option selected="selected" value="">Select Condition type</option>
-            </select>
-            <span asp-validation-for="Condition"></span>
-        </div>
 
 
         <div class="col-md-4">

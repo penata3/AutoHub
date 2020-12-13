@@ -26,19 +26,29 @@
 
         public DbSet<Setting> Settings { get; set; }
 
-        public DbSet<Vehicle> Vehicles { get; set; }
-
         public DbSet<Make> Makes { get; set; }
 
         public DbSet<Model> Models { get; set; }
-
-        public DbSet<Category> Categories { get; set; }
 
         public DbSet<Color> Colors { get; set; }
 
         public DbSet<DealerShip> DealerShips { get; set; }
 
         public DbSet<Review> Reviews { get; set; }
+
+        public DbSet<Condition> Conditions { get; set; }
+
+        public DbSet<Coupe> Coupes { get; set; }
+
+        public DbSet<GearBox> GearBoxes { get; set; }
+
+        public DbSet<Image> Images { get; set; }
+
+        public DbSet<Addition> Additions { get; set; }
+
+        public DbSet<CarAddition> CarAdditions { get; set; }
+
+
 
         public override int SaveChanges() => this.SaveChanges(true);
 
