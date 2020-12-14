@@ -37,7 +37,7 @@
             foreach (var reg in regionsTowns)
             {
                 var region = new Region() { Name = reg.Key };
-                await dbContext.AddAsync(region);
+                await dbContext.Regions.AddAsync(region);
                 await dbContext.SaveChangesAsync();
 
                 foreach (var town in reg.Value)
@@ -46,7 +46,6 @@
                 }
 
                 await dbContext.SaveChangesAsync();
-
 
             }
         }

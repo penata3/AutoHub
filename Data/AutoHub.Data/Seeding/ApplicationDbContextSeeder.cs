@@ -27,9 +27,9 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
-                              new MakesSeeder(),
                               new ConditionsSeeder(),
                               new RegionsAndTownsSeeder(),
+                              new MakeModelsSeeder(),
                           };
 
             foreach (var seeder in seeders)
