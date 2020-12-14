@@ -47,6 +47,10 @@
         public DbSet<Addition> Additions { get; set; }
 
         public DbSet<CarAddition> CarAdditions { get; set; }
+        
+        public DbSet<Region> Regions { get; set; }
+
+        public DbSet<Town> Towns { get; set; }
 
 
 

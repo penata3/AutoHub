@@ -4,14 +4,16 @@ using AutoHub.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AutoHub.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201214143254_TownsAndRegions")]
+    partial class TownsAndRegions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,12 +225,6 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RegionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TownId")
-                        .HasColumnType("int");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -249,10 +245,6 @@ namespace AutoHub.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("MakeId");
-
-                    b.HasIndex("RegionId");
-
-                    b.HasIndex("TownId");
 
                     b.ToTable("Car");
                 });
@@ -394,19 +386,9 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("PhoneNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("RegionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TownId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("RegionId");
-
-                    b.HasIndex("TownId");
 
                     b.ToTable("DealerShips");
                 });
@@ -821,14 +803,6 @@ namespace AutoHub.Data.Migrations
                         .HasForeignKey("MakeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("AutoHub.Data.Models.Region", "Region")
-                        .WithMany()
-                        .HasForeignKey("RegionId");
-
-                    b.HasOne("AutoHub.Data.Models.Town", "Town")
-                        .WithMany()
-                        .HasForeignKey("TownId");
                 });
 
             modelBuilder.Entity("AutoHub.Data.Models.CarAddition", b =>
@@ -844,19 +818,6 @@ namespace AutoHub.Data.Migrations
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("AutoHub.Data.Models.DealerShip", b =>
-                {
-                    b.HasOne("AutoHub.Data.Models.Region", "Region")
-                        .WithMany()
-                        .HasForeignKey("RegionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("AutoHub.Data.Models.Town", "Town")
-                        .WithMany()
-                        .HasForeignKey("TownId");
                 });
 
             modelBuilder.Entity("AutoHub.Data.Models.Image", b =>

@@ -51,6 +51,13 @@
 
         public virtual DealerShip DealerShip { get; set; }
 
+        public int? RegionId { get; set; }
+
+        public virtual Region Region { get; set; }
+
+        public int? TownId { get; set; }
+
+        public virtual Town Town { get; set; }
 
         public virtual IEnumerable<Image> Images { get; set; }
 

@@ -29,6 +29,7 @@
                               new SettingsSeeder(),
                               new MakesSeeder(),
                               new ConditionsSeeder(),
+                              new RegionsAndTownsSeeder(),
                           };
 
             foreach (var seeder in seeders)

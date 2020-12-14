@@ -45,4 +45,10 @@
     <ProjectReference Include="..\AutoHub.Data.Models\AutoHub.Data.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Seeding\towns.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

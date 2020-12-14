@@ -17,6 +17,14 @@
 
         public string Location { get; set; }
 
+        public int RegionId { get; set; }
+
+        public virtual Region Region { get; set; }
+
+        public int? TownId { get; set; }
+
+        public virtual Town Town { get; set; }
+
         public virtual ICollection<Car> Cars { get; set; }
     }
 }
