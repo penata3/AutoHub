@@ -6,31 +6,35 @@
     using Microsoft.AspNetCore.Mvc;
 
 
-    public class VehiclesController : Controller
+    public class CarsController : Controller
     {
         private readonly IMakeService makeService;
         private readonly IColorService colorService;
+        private readonly ICoupesService coupesService;
 
-        public VehiclesController(
+        public CarsController(
             IMakeService makeService,
-            IColorService colorService)
+            IColorService colorService,
+            ICoupesService coupesService)
         {
             this.makeService = makeService;
             this.colorService = colorService;
+            this.coupesService = coupesService;
         }
 
         [Authorize]
-        public IActionResult AddVehicle()
+        public IActionResult AddCar()
         {
-            var viewModel = new AddVehicleInputModel();
+            var viewModel = new AddCarInputModel();
             viewModel.MakesItems = this.makeService.GetAllMakes();
             viewModel.Colors = this.colorService.GetAllColors();
+            viewModel.CoupeTypes = this.coupesService.GetAllCoupes();
             return this.View(viewModel);
         }
 
         [HttpPost]
         [Authorize]
-        public IActionResult AddVehicle(AddVehicleInputModel model)
+        public IActionResult AddCar(AddCarInputModel model)
         {
             return this.Json(model);
         }

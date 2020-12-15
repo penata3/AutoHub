@@ -66,6 +66,8 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IMakeService, MakesService>();
             services.AddTransient<IColorService, ColorsService>();
+            services.AddTransient<ICoupesService, CoupesService>();
+            services.AddTransient<IModelsService, ModelsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -8,6 +8,23 @@ namespace AutoHub.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Additions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Additions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -72,23 +89,6 @@ namespace AutoHub.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Conditions",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Conditions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Coupes",
                 columns: table => new
                 {
@@ -106,7 +106,7 @@ namespace AutoHub.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DealerShips",
+                name: "Fuels",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -115,13 +115,11 @@ namespace AutoHub.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<int>(nullable: false),
-                    Location = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DealerShips", x => x.Id);
+                    table.PrimaryKey("PK_Fuels", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -156,6 +154,23 @@ namespace AutoHub.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Makes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Regions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Regions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -283,77 +298,6 @@ namespace AutoHub.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Car",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    MakeId = table.Column<int>(nullable: false),
-                    Price = table.Column<int>(nullable: false),
-                    CoupeId = table.Column<int>(nullable: false),
-                    GearBoxId = table.Column<int>(nullable: false),
-                    Milage = table.Column<decimal>(nullable: false),
-                    ConditionId = table.Column<int>(nullable: false),
-                    ManufactureDate = table.Column<DateTime>(nullable: false),
-                    ColorId = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false),
-                    AddedByUserId = table.Column<string>(nullable: true),
-                    DealerShipId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Car", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Car_AspNetUsers_AddedByUserId",
-                        column: x => x.AddedByUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Car_Colors_ColorId",
-                        column: x => x.ColorId,
-                        principalTable: "Colors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Car_Conditions_ConditionId",
-                        column: x => x.ConditionId,
-                        principalTable: "Conditions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Car_Coupes_CoupeId",
-                        column: x => x.CoupeId,
-                        principalTable: "Coupes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Car_DealerShips_DealerShipId",
-                        column: x => x.DealerShipId,
-                        principalTable: "DealerShips",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Car_GearBoxes_GearBoxId",
-                        column: x => x.GearBoxId,
-                        principalTable: "GearBoxes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Car_Makes_MakeId",
-                        column: x => x.MakeId,
-                        principalTable: "Makes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Models",
                 columns: table => new
                 {
@@ -373,6 +317,30 @@ namespace AutoHub.Data.Migrations
                         name: "FK_Models_Makes_MakeId",
                         column: x => x.MakeId,
                         principalTable: "Makes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Towns",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    RegionId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Towns", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Towns_Regions_RegionId",
+                        column: x => x.RegionId,
+                        principalTable: "Regions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -402,6 +370,187 @@ namespace AutoHub.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "DealerShips",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<int>(nullable: false),
+                    Location = table.Column<string>(nullable: true),
+                    RegionId = table.Column<int>(nullable: false),
+                    TownId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DealerShips", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DealerShips_Regions_RegionId",
+                        column: x => x.RegionId,
+                        principalTable: "Regions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DealerShips_Towns_TownId",
+                        column: x => x.TownId,
+                        principalTable: "Towns",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Car",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    MakeId = table.Column<int>(nullable: false),
+                    Price = table.Column<int>(nullable: false),
+                    CoupeId = table.Column<int>(nullable: false),
+                    GearBoxId = table.Column<int>(nullable: false),
+                    Milage = table.Column<decimal>(nullable: false),
+                    Condition = table.Column<int>(nullable: false),
+                    ManufactureDate = table.Column<DateTime>(nullable: false),
+                    ColorId = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: false),
+                    AddedByUserId = table.Column<string>(nullable: true),
+                    DealerShipId = table.Column<int>(nullable: true),
+                    RegionId = table.Column<int>(nullable: true),
+                    TownId = table.Column<int>(nullable: true),
+                    FuelId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Car", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Car_AspNetUsers_AddedByUserId",
+                        column: x => x.AddedByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Car_Colors_ColorId",
+                        column: x => x.ColorId,
+                        principalTable: "Colors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Car_Coupes_CoupeId",
+                        column: x => x.CoupeId,
+                        principalTable: "Coupes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Car_DealerShips_DealerShipId",
+                        column: x => x.DealerShipId,
+                        principalTable: "DealerShips",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Car_Fuels_FuelId",
+                        column: x => x.FuelId,
+                        principalTable: "Fuels",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Car_GearBoxes_GearBoxId",
+                        column: x => x.GearBoxId,
+                        principalTable: "GearBoxes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Car_Makes_MakeId",
+                        column: x => x.MakeId,
+                        principalTable: "Makes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Car_Regions_RegionId",
+                        column: x => x.RegionId,
+                        principalTable: "Regions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Car_Towns_TownId",
+                        column: x => x.TownId,
+                        principalTable: "Towns",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CarAdditions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CarId = table.Column<int>(nullable: false),
+                    AdditionId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarAdditions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CarAdditions_Additions_AdditionId",
+                        column: x => x.AdditionId,
+                        principalTable: "Additions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CarAdditions_Car_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Car",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    CarId = table.Column<int>(nullable: false),
+                    Extension = table.Column<string>(nullable: true),
+                    RemoteImageUrl = table.Column<string>(nullable: true),
+                    AddedByUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Images_AspNetUsers_AddedByUserId",
+                        column: x => x.AddedByUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Images_Car_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Car",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Additions_IsDeleted",
+                table: "Additions",
+                column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -463,11 +612,6 @@ namespace AutoHub.Data.Migrations
                 column: "ColorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Car_ConditionId",
-                table: "Car",
-                column: "ConditionId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Car_CoupeId",
                 table: "Car",
                 column: "CoupeId");
@@ -476,6 +620,11 @@ namespace AutoHub.Data.Migrations
                 name: "IX_Car_DealerShipId",
                 table: "Car",
                 column: "DealerShipId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Car_FuelId",
+                table: "Car",
+                column: "FuelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Car_GearBoxId",
@@ -493,13 +642,28 @@ namespace AutoHub.Data.Migrations
                 column: "MakeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Colors_IsDeleted",
-                table: "Colors",
-                column: "IsDeleted");
+                name: "IX_Car_RegionId",
+                table: "Car",
+                column: "RegionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Conditions_IsDeleted",
-                table: "Conditions",
+                name: "IX_Car_TownId",
+                table: "Car",
+                column: "TownId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CarAdditions_AdditionId",
+                table: "CarAdditions",
+                column: "AdditionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CarAdditions_CarId",
+                table: "CarAdditions",
+                column: "CarId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Colors_IsDeleted",
+                table: "Colors",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
@@ -513,8 +677,38 @@ namespace AutoHub.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DealerShips_RegionId",
+                table: "DealerShips",
+                column: "RegionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DealerShips_TownId",
+                table: "DealerShips",
+                column: "TownId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Fuels_IsDeleted",
+                table: "Fuels",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_GearBoxes_IsDeleted",
                 table: "GearBoxes",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Images_AddedByUserId",
+                table: "Images",
+                column: "AddedByUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Images_CarId",
+                table: "Images",
+                column: "CarId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Images_IsDeleted",
+                table: "Images",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
@@ -533,6 +727,11 @@ namespace AutoHub.Data.Migrations
                 column: "MakeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Regions_IsDeleted",
+                table: "Regions",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reviews_IsDeleted",
                 table: "Reviews",
                 column: "IsDeleted");
@@ -546,6 +745,16 @@ namespace AutoHub.Data.Migrations
                 name: "IX_Settings_IsDeleted",
                 table: "Settings",
                 column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Towns_IsDeleted",
+                table: "Towns",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Towns_RegionId",
+                table: "Towns",
+                column: "RegionId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -566,7 +775,10 @@ namespace AutoHub.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Car");
+                name: "CarAdditions");
+
+            migrationBuilder.DropTable(
+                name: "Images");
 
             migrationBuilder.DropTable(
                 name: "Reviews");
@@ -578,13 +790,19 @@ namespace AutoHub.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Additions");
+
+            migrationBuilder.DropTable(
+                name: "Car");
+
+            migrationBuilder.DropTable(
+                name: "Models");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Colors");
-
-            migrationBuilder.DropTable(
-                name: "Conditions");
 
             migrationBuilder.DropTable(
                 name: "Coupes");
@@ -593,13 +811,19 @@ namespace AutoHub.Data.Migrations
                 name: "DealerShips");
 
             migrationBuilder.DropTable(
+                name: "Fuels");
+
+            migrationBuilder.DropTable(
                 name: "GearBoxes");
 
             migrationBuilder.DropTable(
-                name: "Models");
+                name: "Makes");
 
             migrationBuilder.DropTable(
-                name: "Makes");
+                name: "Towns");
+
+            migrationBuilder.DropTable(
+                name: "Regions");
         }
     }
 }

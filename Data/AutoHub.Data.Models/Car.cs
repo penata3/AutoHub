@@ -4,6 +4,7 @@
     using System.Collections.Generic;
 
     using AutoHub.Data.Common.Models;
+    using AutoHub.Data.Models.Enums;
 
     public class Car : BaseDeletableModel<int>
     {
@@ -31,9 +32,7 @@
 
         public decimal Milage { get; set; }
 
-        public int ConditionId { get; set; }
-
-        public virtual Condition Condition { get; set; }
+        public CarCondition Condition { get; set; }
 
         public DateTime ManufactureDate { get; set; }
 
@@ -61,7 +60,10 @@
 
         public virtual IEnumerable<Image> Images { get; set; }
 
-        public virtual IEnumerable<CarAddition> Additions { get; set; }
+        public int FuelId { get; set; }
 
+        public virtual Fuel Fuel { get; set; }
+
+        public virtual IEnumerable<CarAddition> Additions { get; set; }
     }
 }

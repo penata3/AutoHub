@@ -1,12 +1,12 @@
 ﻿namespace AutoHub.Data.Models
 {
+    using AutoHub.Data.Common.Models;
     using System.Collections.Generic;
 
-    using AutoHub.Data.Common.Models;
 
-    public class Condition : BaseDeletableModel<int>
+    public class Fuel : BaseDeletableModel<int>
     {
-        public Condition()
+        public Fuel()
         {
             this.Cars = new HashSet<Car>();
         }
@@ -14,6 +14,5 @@
         public string Name { get; set; }
 
         public virtual ICollection<Car> Cars { get; set; }
-
     }
 }

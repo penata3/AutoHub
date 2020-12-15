@@ -1,32 +1,28 @@
 ﻿namespace AutoHub.Web.ViewModels.Vehicles
 {
+    using AutoHub.Data.Models.Enums;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-
-    public class AddVehicleInputModel
+    public class AddCarInputModel
     {
-        [Display(Name = "Category")]
-        public int CategoryId { get; set; }
-
-        public IEnumerable<KeyValuePair<string, string>> CategoriesItems { get; set; }
+        public string Title { get; set; }
 
         [Required]
         public int Price { get; set; }
-
 
         [Required]
         [Range(1, int.MaxValue)]
         public decimal Milage { get; set; }
 
-
-        [DisplayFormat(DataFormatString = "{dd/MM/yyyy}")]
-        public DateTime ManufactureDate { get; set; }
+        public string ManufactureDate { get; set; }
 
         public int MakeId { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> MakesItems { get; set; }
+
+        public string ModelAsString { get; set; }
 
         [Required]
         [MinLength(10)]
@@ -35,12 +31,15 @@
 
         public int UserId { get; set; }
 
-        public int? DealerShipId { get; set; }
-
         public int ColorId { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> Colors { get; set; }
+
+        public int CoupeId { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> CoupeTypes { get; set; }
+
+        public CarCondition Conditon { get; set; }
+
     }
 }
-
-

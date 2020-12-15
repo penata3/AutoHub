@@ -36,8 +36,6 @@
 
         public DbSet<Review> Reviews { get; set; }
 
-        public DbSet<Condition> Conditions { get; set; }
-
         public DbSet<Coupe> Coupes { get; set; }
 
         public DbSet<GearBox> GearBoxes { get; set; }
@@ -47,11 +45,12 @@
         public DbSet<Addition> Additions { get; set; }
 
         public DbSet<CarAddition> CarAdditions { get; set; }
-        
+
         public DbSet<Region> Regions { get; set; }
 
         public DbSet<Town> Towns { get; set; }
 
+        public DbSet<Fuel> Fuels { get; set; }
 
 
         public override int SaveChanges() => this.SaveChanges(true);

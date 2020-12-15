@@ -1,53 +1,71 @@
-﻿@model AddVehicleInputModel
+﻿@model AddCarInputModel
+
 
 @{
     ViewData["Title"] = "Add Vehicle";
     var makesItems = this.Model.MakesItems.Select(x => new SelectListItem(x.Value, x.Key));
     var colors = this.Model.Colors.Select(x => new SelectListItem(x.Value, x.Key));
+    var coupes = this.Model.CoupeTypes.Select(x => new SelectListItem(x.Value, x.Key));
+
 }
 <style>
-    input,select {
-        margin-bottom:10px;
+
+    input, select {
+        margin-bottom: 10px;
     }
 
     .btn-primary {
-    margin-top:10px;
+        margin-top: 10px;
     }
 </style>
 
 <h1 class="mt-5 mb-5">Publish your own free  advert</h1>
 
-<form method="post" >
+<form method="post">
 
     <div class="row">
-   
+        <div class="col-md-8">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+
+        <div class="col-md-4">
+            <label asp-for="Conditon"></label>
+            <select asp-for="Conditon" class="form-control"
+                    asp-items="@Html.GetEnumSelectList<CarCondition>()">
+            </select>
+            <span asp-validation-for="Conditon"></span>
+        </div>
+    </div>
+
+    <div class="row">
+
         <div class="col-md-4">
             <label asp-for="MakeId"></label>
             <select asp-for="MakeId" class="form-control" asp-items="makesItems"></select>
             <span asp-validation-for="MakeId" class="text-danger"></span>
         </div>
         <div class="col-md-4">
-            <label asp-for="Price"></label>
-            <input asp-for="Price" class="form-control" placeholder="0" />
-            <span asp-validation-for="Price"></span>
+            <label asp-for="ModelAsString"></label>
+            <input asp-for="ModelAsString" class="form-control" />
+            <span asp-validation-for="ModelAsString" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="CoupeId"></label>
+            <select asp-for="CoupeId" class="form-control" asp-items="coupes"></select>
+            <span asp-validation-for="CoupeId" class="text-danger"></span>
         </div>
     </div>
 
     <div class="row">
-        
-
-
-
         <div class="col-md-4">
             <label asp-for="Milage"></label>
             <input asp-for="Milage" class="form-control" placeholder="0" />
             <span asp-validation-for="Milage"></span>
         </div>
-    </div>
-
-    <div class="row">
-
-
 
         <div class="col-md-4">
             <label asp-for="ManufactureDate"></label>
@@ -60,6 +78,16 @@
             <select asp-for="ColorId" class="form-control" asp-items="colors"></select>
             <span asp-validation-for="ColorId" class="text-danger"></span>
         </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" class="form-control" placeholder="0" />
+            <span asp-validation-for="Price"></span>
+        </div>
+
     </div>
 
 
@@ -71,13 +99,6 @@
 
 
     <button class="btn btn-primary">Publish</button>
-
-
-
-
-
-
-
 
 </form>
 

@@ -27,9 +27,13 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
-                              new ConditionsSeeder(),
                               new RegionsAndTownsSeeder(),
                               new MakeModelsSeeder(),
+                              new FuelSeeder(),
+                              new ColorSeeder(),
+                              new CoupesSeeder(),
+                              new GearBoxesSeeder(),
+                              new AdditionsSeeder(),
                           };
 
             foreach (var seeder in seeders)
