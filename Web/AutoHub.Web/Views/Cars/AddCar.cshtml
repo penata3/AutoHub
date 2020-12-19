@@ -29,15 +29,7 @@
             <input asp-for="Title" class="form-control" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
-
-
-        <div class="col-md-4">
-            <label asp-for="Conditon"></label>
-            <select asp-for="Conditon" class="form-control"
-                    asp-items="@Html.GetEnumSelectList<CarCondition>()">
-            </select>
-            <span asp-validation-for="Conditon"></span>
-        </div>
+ 
     </div>
 
     <div class="row">

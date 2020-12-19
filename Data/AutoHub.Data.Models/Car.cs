@@ -4,7 +4,6 @@
     using System.Collections.Generic;
 
     using AutoHub.Data.Common.Models;
-    using AutoHub.Data.Models.Enums;
 
     public class Car : BaseDeletableModel<int>
     {
@@ -20,6 +19,10 @@
 
         public virtual Make Make { get; set; }
 
+        public int ModelId { get; set; }
+
+        public virtual Model Model { get; set; }
+
         public int Price { get; set; }
 
         public int CoupeId { get; set; }
@@ -32,7 +35,9 @@
 
         public decimal Milage { get; set; }
 
-        public CarCondition Condition { get; set; }
+        public int ConditionId { get; set; }
+
+        public virtual Condition Condition { get; set; }
 
         public DateTime ManufactureDate { get; set; }
 
@@ -46,6 +51,8 @@
 
         public virtual ApplicationUser AddedByUser { get; set; }
 
+        public string? TechDataUrl { get; set; }
+
         public int? DealerShipId { get; set; }
 
         public virtual DealerShip DealerShip { get; set; }
@@ -58,11 +65,15 @@
 
         public virtual Town Town { get; set; }
 
+        public int HorsePower { get; set; }
+
         public virtual IEnumerable<Image> Images { get; set; }
 
         public int FuelId { get; set; }
 
         public virtual Fuel Fuel { get; set; }
+
+        public string OriginalUrl { get; set; }
 
         public virtual IEnumerable<CarAddition> Additions { get; set; }
     }

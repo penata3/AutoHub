@@ -18,7 +18,7 @@
                 return;
             }
 
-            var jsonAsString = File.ReadAllText(@"C:\Users\HP\OneDrive\Desktop\AutoHub\AutoHub\Data\AutoHub.Data\Seeding\towns.json");
+            var jsonAsString = File.ReadAllText(@"C:\Users\HP\OneDrive\Desktop\AutoHub\AutoHub\Data\AutoHub.Data\Seeding\JsonFiles\towns.json");
 
             var json = JsonConvert.DeserializeObject<TownRegionDto[]>(jsonAsString);
 

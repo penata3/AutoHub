@@ -19,7 +19,7 @@
                 return;
             }
 
-            var jsonAsString = File.ReadAllText(@"C:\Users\HP\OneDrive\Desktop\AutoHub\AutoHub\Data\AutoHub.Data\Seeding\car-models.json");
+            var jsonAsString = File.ReadAllText(@"C:\Users\HP\OneDrive\Desktop\AutoHub\AutoHub\Data\AutoHub.Data\Seeding\JsonFiles\car-models.json");
 
             var jsonData = JsonConvert.DeserializeObject<MakeModelsDto[]>(jsonAsString);
             var dictionary = new Dictionary<string, List<string>>();
@@ -50,9 +50,6 @@
 
                 await dbContext.SaveChangesAsync();
             }
-
-
-
         }
     }
 }

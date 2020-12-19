@@ -1,6 +1,5 @@
 ﻿namespace AutoHub.Web.ViewModels.Vehicles
 {
-    using AutoHub.Data.Models.Enums;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -39,7 +38,6 @@
 
         public IEnumerable<KeyValuePair<string, string>> CoupeTypes { get; set; }
 
-        public CarCondition Conditon { get; set; }
 
     }
 }

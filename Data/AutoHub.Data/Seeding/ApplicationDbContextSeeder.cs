@@ -34,6 +34,9 @@
                               new CoupesSeeder(),
                               new GearBoxesSeeder(),
                               new AdditionsSeeder(),
+                              new ReviewsSeeder(),
+                              new ConditionsSeeder(),
+                              new CarsSeeder(),
                           };
 
             foreach (var seeder in seeders)
