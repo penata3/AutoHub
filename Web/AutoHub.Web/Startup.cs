@@ -9,6 +9,7 @@
     using AutoHub.Data.Repositories;
     using AutoHub.Data.Seeding;
     using AutoHub.Services.Data;
+    using AutoHub.Services.Data.Implementations;
     using AutoHub.Services.Mapping;
     using AutoHub.Services.Messaging;
     using AutoHub.Web.ViewModels;
@@ -68,6 +69,10 @@
             services.AddTransient<IColorService, ColorsService>();
             services.AddTransient<ICoupesService, CoupesService>();
             services.AddTransient<IModelsService, ModelsService>();
+            services.AddTransient<IConditionsService, ConditionsService>();
+            services.AddTransient<IGearBoxesService, GearBoxesService>();
+            services.AddTransient<IRegionsServices, RegionsService>();
+            services.AddTransient<IFuelsServices, FuelsServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,6 +5,5 @@
     public interface IModelsService
     {
         IEnumerable<KeyValuePair<string, string>> GetAllModels();
-
     }
 }

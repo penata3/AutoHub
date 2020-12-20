@@ -1,15 +1,17 @@
 ﻿@model AddCarInputModel
 
-
 @{
     ViewData["Title"] = "Add Vehicle";
     var makesItems = this.Model.MakesItems.Select(x => new SelectListItem(x.Value, x.Key));
     var colors = this.Model.Colors.Select(x => new SelectListItem(x.Value, x.Key));
     var coupes = this.Model.CoupeTypes.Select(x => new SelectListItem(x.Value, x.Key));
+    var conditions = this.Model.Conditions.Select(x => new SelectListItem(x.Value, x.Key));
+    var gearBoxes = this.Model.GearBoxes.Select(x => new SelectListItem(x.Value, x.Key));
+    var regions = this.Model.Regions.Select(x => new SelectListItem(x.Value, x.Key));
+    var fuels = this.Model.Fuels.Select(x => new SelectListItem(x.Value, x.Key));
 
 }
 <style>
-
     input, select {
         margin-bottom: 10px;
     }
@@ -29,7 +31,13 @@
             <input asp-for="Title" class="form-control" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
- 
+
+        <div class="col-md-4">
+            <label asp-for="ConditionId"></label>
+            <select asp-for="ConditionId" class="form-control" asp-items="conditions"></select>
+            <span asp-validation-for="ConditionId" class="text-danger"></span>
+        </div>
+
     </div>
 
     <div class="row">
@@ -78,6 +86,19 @@
             <label asp-for="Price"></label>
             <input asp-for="Price" class="form-control" placeholder="0" />
             <span asp-validation-for="Price"></span>
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="RegionId"></label>
+            <select asp-for="RegionId" class="form-control" asp-items="regions"></select>
+            <span asp-validation-for="RegionId" class="text-danger"></span>
+        </div>
+
+
+        <div class="col-md-4">
+            <label asp-for="FuelId"></label>
+            <select asp-for="FuelId" class="form-control" asp-items="fuels"></select>
+            <span asp-validation-for="FuelId" class="text-danger"></span>
         </div>
 
     </div>

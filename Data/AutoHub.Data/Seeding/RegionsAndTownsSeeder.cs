@@ -5,6 +5,7 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+
     using AutoHub.Data.Models;
     using AutoHub.Data.Seeding.RegionTownsDto;
     using Newtonsoft.Json;
@@ -46,7 +47,6 @@
                 }
 
                 await dbContext.SaveChangesAsync();
-
             }
         }
     }

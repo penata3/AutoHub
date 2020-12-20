@@ -1,8 +1,8 @@
 ﻿namespace AutoHub.Data.Models
 {
-    using AutoHub.Data.Common.Models;
     using System.Collections.Generic;
 
+    using AutoHub.Data.Common.Models;
 
     public class Fuel : BaseDeletableModel<int>
     {
