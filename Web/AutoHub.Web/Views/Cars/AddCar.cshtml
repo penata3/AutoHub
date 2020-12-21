@@ -65,13 +65,13 @@
         <div class="col-md-4">
             <label asp-for="Milage"></label>
             <input asp-for="Milage" class="form-control" placeholder="0" />
-            <span asp-validation-for="Milage"></span>
+            <span asp-validation-for="Milage" class="text-danger"></span>
         </div>
 
         <div class="col-md-4">
             <label asp-for="ManufactureDate"></label>
             <input asp-for="ManufactureDate" class="form-control" placeholder="Year of manifacture" />
-            <span asp-validation-for="ManufactureDate"></span>
+            <span asp-validation-for="ManufactureDate" class="text-danger"></span>
         </div>
 
         <div class="col-md-4">
@@ -98,7 +98,7 @@
         <div class="col-md-4">
             <label asp-for="TownAsString"></label>
             <input asp-for="TownAsString" placeholder="Town Name" class="form-control" />
-            <span asp-validation-for="TownAsString"></span>
+            <span asp-validation-for="TownAsString" class="text-danger"></span>
         </div>
 
     </div>
@@ -133,9 +133,9 @@
 
     <div class="row">
         <div class="col-md-12">
-            <label asp-for="Description"></label>
+            
             <input type="submit" class="btn btn-primary" />
-            <span asp-validation-for="Description"></span>
+           
         </div>
     </div>
 

@@ -48,7 +48,7 @@
         }
 
 
-        public IActionResult All(int id = 1) 
+        public IActionResult All(int id = 1)
         {
             var viewModel = new CarsListViewModel()
             {
