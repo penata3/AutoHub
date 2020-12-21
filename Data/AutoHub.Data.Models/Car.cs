@@ -13,7 +13,7 @@
             this.Additions = new HashSet<CarAddition>();
         }
 
-        public string Name { get; set; }
+        public string Title { get; set; }
 
         public int MakeId { get; set; }
 
@@ -47,11 +47,11 @@
 
         public string Description { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         public virtual ApplicationUser AddedByUser { get; set; }
 
-        public string? TechDataUrl { get; set; }
+        public string TechDataUrl { get; set; }
 
         public int? DealerShipId { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿namespace AutoHub.Web.Controllers
 {
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using AutoHub.Services.Data;
@@ -34,7 +35,9 @@
                 await this.carsService.AddAllSelectListValuesForCarInputModel(model);
             }
 
-            await this.carsService.CreateAsync(model);
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            await this.carsService.CreateAsync(model, userId);
 
             return this.RedirectToAction("ThankYou");
         }
@@ -42,6 +45,18 @@
         public IActionResult ThankYou()
         {
             return this.View();
+        }
+
+
+        public IActionResult All(int id = 1) 
+        {
+            var viewModel = new CarsListViewModel()
+            {
+                PageNumber = id,
+                Cars = this.carsService.GetAllCars<CarInListViewModel>(id, 12),
+            };
+
+            return this.View(viewModel);
         }
     }
 }
