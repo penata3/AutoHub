@@ -945,7 +945,7 @@ namespace AutoHub.Data.Migrations
 
             modelBuilder.Entity("AutoHub.Data.Models.Town", b =>
                 {
-                    b.HasOne("AutoHub.Data.Models.Region", null)
+                    b.HasOne("AutoHub.Data.Models.Region", "Region")
                         .WithMany("Towns")
                         .HasForeignKey("RegionId")
                         .OnDelete(DeleteBehavior.Restrict)

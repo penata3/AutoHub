@@ -9,6 +9,7 @@
     var gearBoxes = this.Model.GearBoxes.Select(x => new SelectListItem(x.Value, x.Key));
     var regions = this.Model.Regions.Select(x => new SelectListItem(x.Value, x.Key));
     var fuels = this.Model.Fuels.Select(x => new SelectListItem(x.Value, x.Key));
+    var additions = this.Model.Additions.Select(x => new SelectListItem(x.Value, x.Key));
 
 }
 <style>
@@ -69,7 +70,7 @@
 
         <div class="col-md-4">
             <label asp-for="ManufactureDate"></label>
-            <input asp-for="ManufactureDate" class="form-control" />
+            <input asp-for="ManufactureDate" class="form-control" placeholder="Year of manifacture" />
             <span asp-validation-for="ManufactureDate"></span>
         </div>
 
@@ -90,28 +91,57 @@
 
         <div class="col-md-4">
             <label asp-for="RegionId"></label>
-            <select asp-for="RegionId" class="form-control" asp-items="regions"></select>
+            <select asp-for="RegionId" class="form-control" asp-items="regions" id="Region"></select>
             <span asp-validation-for="RegionId" class="text-danger"></span>
         </div>
 
-
         <div class="col-md-4">
+            <label asp-for="TownAsString"></label>
+            <input asp-for="TownAsString" placeholder="Town Name" class="form-control" />
+            <span asp-validation-for="TownAsString"></span>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label asp-for="TechDataUrl"></label>
+            <input asp-for="TechDataUrl" class="form-control" />
+            <span asp-validation-for="TechDataUrl" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
             <label asp-for="FuelId"></label>
             <select asp-for="FuelId" class="form-control" asp-items="fuels"></select>
             <span asp-validation-for="FuelId" class="text-danger"></span>
         </div>
 
+        <div class="col-md-3">
+            <label asp-for="GearBoxId"></label>
+            <select asp-for="GearBoxId" class="form-control" asp-items="gearBoxes" id="Region"></select>
+            <span asp-validation-for="GearBoxId" class="text-danger"></span>
+        </div>
     </div>
 
 
-    <div>
-        <label asp-for="Description"></label>
-        <textarea asp-for="Description" class="form-control"></textarea>
-        <span asp-validation-for="Description"></span>
+    <div class="row">
+        <div class="col-md-12">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description"></span>
+        </div>
     </div>
 
-
-    <button class="btn btn-primary">Publish</button>
+    <div class="row">
+        <div class="col-md-12">
+            <label asp-for="Description"></label>
+            <input type="submit" class="btn btn-primary" />
+            <span asp-validation-for="Description"></span>
+        </div>
+    </div>
 
 </form>
+
+
+
+
 

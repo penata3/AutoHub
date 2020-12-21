@@ -1,58 +1,47 @@
 ﻿namespace AutoHub.Web.Controllers
 {
+    using System.Threading.Tasks;
+
     using AutoHub.Services.Data;
-    using AutoHub.Web.ViewModels.Vehicles;
+    using AutoHub.Web.ViewModels.Cars;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
     public class CarsController : Controller
     {
-        private readonly IMakeService makeService;
-        private readonly IColorService colorService;
-        private readonly ICoupesService coupesService;
-        private readonly IConditionsService conditionsService;
-        private readonly IGearBoxesService gearBoxesService;
-        private readonly IRegionsServices regionsServices;
-        private readonly IFuelsServices fuelsServices;
 
-        public CarsController(
-            IMakeService makeService,
-            IColorService colorService,
-            ICoupesService coupesService,
-            IConditionsService conditionsService,
-            IGearBoxesService gearBoxesService,
-            IRegionsServices regionsServices,
-            IFuelsServices fuelsServices)
+        private readonly ICarsService carsService;
+
+        public CarsController(ICarsService carsService)
         {
-            this.makeService = makeService;
-            this.colorService = colorService;
-            this.coupesService = coupesService;
-            this.conditionsService = conditionsService;
-            this.gearBoxesService = gearBoxesService;
-            this.regionsServices = regionsServices;
-            this.fuelsServices = fuelsServices;
+            this.carsService = carsService;
         }
 
         [Authorize]
         public async Task<IActionResult> AddCar()
         {
-            var viewModel = new AddCarInputModel();
-            viewModel.MakesItems = this.makeService.GetAllMakes();
-            viewModel.Colors = this.colorService.GetAllColors();
-            viewModel.CoupeTypes = this.coupesService.GetAllCoupes();
-            viewModel.Conditions = await this.conditionsService.GetAllConditionsAsync();
-            viewModel.GearBoxes = await this.gearBoxesService.GetAllGearBoxesAsync();
-            viewModel.Regions = await this.regionsServices.GetAllRegionsAsync();
-            viewModel.Fuels = await this.fuelsServices.GetAllFuelTypesAsync();
-            return this.View(viewModel);
+            var input = new AddCarInputModel();
+            await this.carsService.AddAllSelectListValuesForCarInputModel(input);
+            return this.View(input);
         }
 
         [HttpPost]
         [Authorize]
-        public IActionResult AddCar(AddCarInputModel model)
+        public async Task<IActionResult> AddCar(AddCarInputModel model)
         {
-            return this.Json(model);
+            if (!this.ModelState.IsValid)
+            {
+                await this.carsService.AddAllSelectListValuesForCarInputModel(model);
+            }
+
+            await this.carsService.CreateAsync(model);
+
+            return this.RedirectToAction("ThankYou");
+        }
+
+        public IActionResult ThankYou()
+        {
+            return this.View();
         }
     }
 }
