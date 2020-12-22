@@ -24,7 +24,7 @@
 
 <h1 class="mt-5 mb-5">Publish your own free  advert</h1>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
 
     <div class="row">
         <div class="col-md-8">
@@ -35,7 +35,7 @@
 
         <div class="col-md-4">
             <label asp-for="ConditionId"></label>
-            <select asp-for="ConditionId" class="form-control" asp-items="conditions"></select>
+            <select asp-for="ConditionId" class="form-control " asp-items="conditions"></select>
             <span asp-validation-for="ConditionId" class="text-danger"></span>
         </div>
 
@@ -131,11 +131,17 @@
         </div>
     </div>
 
+    <div class="col-md-6">
+        <label asp-for="Images"></label>
+        <input asp-for="Images" class="form-control" />
+        <span asp-validation-for="Images" class="text-danger"></span>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
-            
+
             <input type="submit" class="btn btn-primary" />
-           
+
         </div>
     </div>
 

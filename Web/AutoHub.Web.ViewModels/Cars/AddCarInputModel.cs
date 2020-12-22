@@ -5,6 +5,8 @@
     using System.ComponentModel.DataAnnotations;
 
     using AutoHub.Data.Models;
+    using AutoHub.Web.ViewModels.ValidationAttributes;
+    using Microsoft.AspNetCore.Http;
 
     public class AddCarInputModel
     {
@@ -28,8 +30,6 @@
         [Display(Name = "Make")]
         public int MakeId { get; set; }
 
-        public IEnumerable<KeyValuePair<string, string>> MakesItems { get; set; }
-
         [Required]
         [Display(Name = "Model")]
         public string ModelAsString { get; set; }
@@ -44,28 +44,18 @@
         [Display(Name = "Color")]
         public int ColorId { get; set; }
 
-        public IEnumerable<KeyValuePair<string, string>> Colors { get; set; }
-
         [Display(Name = "Coupe Type")]
         public int CoupeId { get; set; }
-
-        public IEnumerable<KeyValuePair<string, string>> CoupeTypes { get; set; }
-
+       
         public string TechDataUrl { get; set; }
 
         [Display(Name = "Condition")]
         public int ConditionId { get; set; }
 
-        public IEnumerable<KeyValuePair<string, string>> Conditions { get; set; }
-
         public int GearBoxId { get; set; }
-
-        public IEnumerable<KeyValuePair<string, string>> GearBoxes { get; set; }
 
         [Display(Name = "Region")]
         public int RegionId { get; set; }
-
-        public IEnumerable<KeyValuePair<string, string>> Regions { get; set; }
 
         [Required]
         [MinLength(3)]
@@ -75,10 +65,25 @@
         [Display(Name = "Fuel Type")]
         public int FuelId { get; set; }
 
-        public IEnumerable<KeyValuePair<string, string>> Fuels { get; set; }
-
         public int AdditionId { get; set; }
 
+        [AllowedExtensionsAttribute]
+        public IEnumerable<IFormFile> Images { get; set; }
+
         public IEnumerable<KeyValuePair<string, string>> Additions { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> Fuels { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> Regions { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> GearBoxes { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> Conditions { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> CoupeTypes { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> Colors { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> MakesItems { get; set; }
     }
 }

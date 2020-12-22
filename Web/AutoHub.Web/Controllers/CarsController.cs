@@ -6,15 +6,20 @@
     using AutoHub.Services.Data;
     using AutoHub.Web.ViewModels.Cars;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
 
     public class CarsController : Controller
     {
         private readonly ICarsService carsService;
+        private readonly IWebHostEnvironment environment;
 
-        public CarsController(ICarsService carsService)
+        public CarsController(
+            ICarsService carsService,
+            IWebHostEnvironment environment)
         {
             this.carsService = carsService;
+            this.environment = environment;
         }
 
         [Authorize]
@@ -36,7 +41,10 @@
 
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            await this.carsService.CreateAsync(model, userId);
+            var imagePath = this.environment.WebRootPath;
+
+
+            await this.carsService.CreateAsync(model, userId, imagePath);
 
             return this.RedirectToAction("ThankYou");
         }

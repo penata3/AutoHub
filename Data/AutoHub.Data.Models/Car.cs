@@ -67,7 +67,7 @@
 
         public int HorsePower { get; set; }
 
-        public virtual IEnumerable<Image> Images { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
 
         public int FuelId { get; set; }
 
@@ -75,6 +75,6 @@
 
         public string OriginalUrl { get; set; }
 
-        public virtual IEnumerable<CarAddition> Additions { get; set; }
+        public virtual ICollection<CarAddition> Additions { get; set; }
     }
 }
