@@ -10,7 +10,6 @@
 
     public class CarsController : Controller
     {
-
         private readonly ICarsService carsService;
 
         public CarsController(ICarsService carsService)
@@ -47,13 +46,16 @@
             return this.View();
         }
 
-
         public IActionResult All(int id = 1)
         {
+            const int ItemsPerPage = 8;
+
             var viewModel = new CarsListViewModel()
             {
                 PageNumber = id,
-                Cars = this.carsService.GetAllCars<CarInListViewModel>(id, 12),
+                Cars = this.carsService.GetAllCars<CarInListViewModel>(id, ItemsPerPage),
+                ItemsCount = this.carsService.GetCount(),
+                ItemsPerPage = ItemsPerPage,
             };
 
             return this.View(viewModel);
