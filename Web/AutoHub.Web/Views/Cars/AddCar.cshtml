@@ -9,11 +9,10 @@
     var gearBoxes = this.Model.GearBoxes.Select(x => new SelectListItem(x.Value, x.Key));
     var regions = this.Model.Regions.Select(x => new SelectListItem(x.Value, x.Key));
     var fuels = this.Model.Fuels.Select(x => new SelectListItem(x.Value, x.Key));
-    var additions = this.Model.Additions.Select(x => new SelectListItem(x.Value, x.Key));
 
 }
 <style>
-    input, select {
+    .form-control {
         margin-bottom: 10px;
     }
 
@@ -131,22 +130,35 @@
         </div>
     </div>
 
-    <div class="col-md-6">
-        <label asp-for="Images"></label>
-        <input asp-for="Images" class="form-control" />
-        <span asp-validation-for="Images" class="text-danger"></span>
+    <div class="row">
+
+        <div class="col-md-6">
+            <label asp-for="Images"></label>
+            <input asp-for="Images" class="form-control" />
+            <span asp-validation-for="Images" class="text-danger"></span>
+
+        </div> <div class="col-md-6 align-self-md-center">
+            <input type="submit" class="btn btn-primary" />
+        </div>
+
     </div>
+
 
     <div class="row">
-        <div class="col-md-12">
 
-            <input type="submit" class="btn btn-primary" />
-
+        @for (int i = 0; i < Model.Additions.Count(); i++)
+        {
+        <div class="col-md-4">
+            <label asp-for="@Model.Additions">@Model.Additions[i].Name</label>
+            <input type="hidden" asp-for="@Model.Additions[i].Id" />
+            <input type="checkbox" asp-for="@Model.Additions[i].IsCheked" />
         </div>
+        }  
+
     </div>
 
-</form>
 
+</form>
 
 
 

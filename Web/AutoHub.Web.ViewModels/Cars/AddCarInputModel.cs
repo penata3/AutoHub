@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using AutoHub.Data.Models;
+    using AutoHub.Web.ViewModels.Additions;
     using AutoHub.Web.ViewModels.ValidationAttributes;
     using Microsoft.AspNetCore.Http;
 
@@ -70,7 +71,7 @@
         [AllowedExtensionsAttribute]
         public IEnumerable<IFormFile> Images { get; set; }
 
-        public IEnumerable<KeyValuePair<string, string>> Additions { get; set; }
+        public AdditionViewModel[] Additions { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> Fuels { get; set; }
 
@@ -85,5 +86,8 @@
         public IEnumerable<KeyValuePair<string, string>> Colors { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> MakesItems { get; set; }
+
+
+
     }
 }

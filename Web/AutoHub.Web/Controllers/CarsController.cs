@@ -1,5 +1,7 @@
 ﻿namespace AutoHub.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -47,6 +49,8 @@
             await this.carsService.CreateAsync(model, userId, imagePath);
 
             return this.RedirectToAction("ThankYou");
+
+            //return this.Json(model.Additions.Where(x => x.IsCheked == true));
         }
 
         public IActionResult ThankYou()
@@ -67,6 +71,12 @@
             };
 
             return this.View(viewModel);
+        }
+
+
+        public IActionResult ById()
+        {
+            return this.View();
         }
     }
 }

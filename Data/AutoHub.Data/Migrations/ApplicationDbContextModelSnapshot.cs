@@ -15,16 +15,16 @@ namespace AutoHub.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.1");
 
             modelBuilder.Entity("AutoHub.Data.Models.Addition", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -70,12 +70,12 @@ namespace AutoHub.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
@@ -83,7 +83,7 @@ namespace AutoHub.Data.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
+                        .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
@@ -108,8 +108,8 @@ namespace AutoHub.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
@@ -127,12 +127,12 @@ namespace AutoHub.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -150,19 +150,19 @@ namespace AutoHub.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
+                        .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
@@ -173,7 +173,7 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("AddedByUserId")
                         .HasColumnType("nvarchar(450)");
@@ -281,7 +281,7 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int>("AdditionId")
                         .HasColumnType("int");
@@ -303,7 +303,7 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -332,7 +332,7 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -361,7 +361,7 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -390,7 +390,7 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -435,7 +435,7 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -464,7 +464,7 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -538,7 +538,7 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -567,7 +567,7 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -601,7 +601,7 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -630,7 +630,7 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -665,7 +665,7 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -697,7 +697,7 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -731,7 +731,7 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -755,7 +755,7 @@ namespace AutoHub.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -889,6 +889,28 @@ namespace AutoHub.Data.Migrations
                     b.HasOne("AutoHub.Data.Models.Town", "Town")
                         .WithMany()
                         .HasForeignKey("TownId");
+
+                    b.Navigation("AddedByUser");
+
+                    b.Navigation("Color");
+
+                    b.Navigation("Condition");
+
+                    b.Navigation("Coupe");
+
+                    b.Navigation("DealerShip");
+
+                    b.Navigation("Fuel");
+
+                    b.Navigation("GearBox");
+
+                    b.Navigation("Make");
+
+                    b.Navigation("Model");
+
+                    b.Navigation("Region");
+
+                    b.Navigation("Town");
                 });
 
             modelBuilder.Entity("AutoHub.Data.Models.CarAddition", b =>
@@ -904,6 +926,10 @@ namespace AutoHub.Data.Migrations
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Addition");
+
+                    b.Navigation("Car");
                 });
 
             modelBuilder.Entity("AutoHub.Data.Models.DealerShip", b =>
@@ -917,6 +943,10 @@ namespace AutoHub.Data.Migrations
                     b.HasOne("AutoHub.Data.Models.Town", "Town")
                         .WithMany()
                         .HasForeignKey("TownId");
+
+                    b.Navigation("Region");
+
+                    b.Navigation("Town");
                 });
 
             modelBuilder.Entity("AutoHub.Data.Models.Image", b =>
@@ -932,6 +962,12 @@ namespace AutoHub.Data.Migrations
                     b.HasOne("AutoHub.Data.Models.Review", "Review")
                         .WithMany("Images")
                         .HasForeignKey("ReviewId");
+
+                    b.Navigation("AddedByUser");
+
+                    b.Navigation("Car");
+
+                    b.Navigation("Review");
                 });
 
             modelBuilder.Entity("AutoHub.Data.Models.Model", b =>
@@ -941,6 +977,8 @@ namespace AutoHub.Data.Migrations
                         .HasForeignKey("MakeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Make");
                 });
 
             modelBuilder.Entity("AutoHub.Data.Models.Town", b =>
@@ -950,6 +988,8 @@ namespace AutoHub.Data.Migrations
                         .HasForeignKey("RegionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Region");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1001,6 +1041,67 @@ namespace AutoHub.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.Addition", b =>
+                {
+                    b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Claims");
+
+                    b.Navigation("Logins");
+
+                    b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.Car", b =>
+                {
+                    b.Navigation("Additions");
+
+                    b.Navigation("Images");
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.Condition", b =>
+                {
+                    b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.Coupe", b =>
+                {
+                    b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.DealerShip", b =>
+                {
+                    b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.Fuel", b =>
+                {
+                    b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.GearBox", b =>
+                {
+                    b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.Make", b =>
+                {
+                    b.Navigation("Models");
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.Region", b =>
+                {
+                    b.Navigation("Towns");
+                });
+
+            modelBuilder.Entity("AutoHub.Data.Models.Review", b =>
+                {
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }
