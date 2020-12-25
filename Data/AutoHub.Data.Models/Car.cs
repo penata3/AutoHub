@@ -22,7 +22,7 @@
         public int ModelId { get; set; }
 
         public virtual Model Model { get; set; }
-
+        
         public int Price { get; set; }
 
         public int CoupeId { get; set; }

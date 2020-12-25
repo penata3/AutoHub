@@ -40,4 +40,10 @@
     <ProjectReference Include="..\AutoHub.Web.Infrastructure\AutoHub.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\AutoHub.Web.ViewModels\AutoHub.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\css\site.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

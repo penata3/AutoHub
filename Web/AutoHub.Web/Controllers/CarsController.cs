@@ -42,10 +42,7 @@
             }
 
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-
             var imagePath = this.environment.WebRootPath;
-
-
             await this.carsService.CreateAsync(model, userId, imagePath);
 
             return this.RedirectToAction("ThankYou");
@@ -73,10 +70,10 @@
             return this.View(viewModel);
         }
 
-
-        public IActionResult ById()
+        public IActionResult ById(int id)
         {
-            return this.View();
+            var carModel = this.carsService.GetById<SingleCarViewModel>(id);
+            return this.View(carModel);
         }
     }
 }
