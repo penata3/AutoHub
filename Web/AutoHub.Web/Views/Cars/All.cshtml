@@ -1,0 +1,43 @@
+﻿@model AutoHub.Web.ViewModels.Cars.CarsListViewModel
+
+@{
+    this.ViewData["Title"] = "All Cars";
+}
+
+<style>
+    .card {
+        margin-top: 50px;
+    }
+
+    .card-paragraps-container {
+        display: flex;
+        justify-content: space-around;
+    }
+</style>
+
+
+<h2>All cars page @Model.PageNumber </h2>
+
+<div class="row">
+    @foreach (var car in Model.Cars)
+    {
+
+        <div class="card col-md-5 offset-1" style="width: 18rem;">
+            <img src="@car.ImageUrl" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><a asp-action="ById" asp-route-id="@car.Id">@car.Title</a></h5>
+                <div class="card-paragraps-container">
+                    <p class="card-text">@car.ManufactureDate.Year година</p>
+                    <p class="card-text">  @car.FuelName</p>
+                </div>
+                <a class="btn btn-primary">@car.Price лева</a>
+            </div>
+        </div>
+    }
+</div>
+
+<br />
+
+<partial name="_PagingPartial" model="@Model"/>
+
+
