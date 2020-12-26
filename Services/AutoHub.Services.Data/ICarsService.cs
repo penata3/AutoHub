@@ -11,10 +11,14 @@
 
         Task AddAllSelectListValuesForCarInputModel(AddCarInputModel input);
 
-        IEnumerable<T> GetAllCars<T>(int page, int itemsPerPage = 10);
+        IEnumerable<T> GetAllCars<T>(int page, int itemsPerPage);
 
         int GetCount();
 
+        int GetCounForCoupeType(string coupeType);
+
         T GetById<T>(int id);
+
+        IEnumerable<T> GetAllByCoupeType<T>(int page, int itemsPerPage, string coupeType);
     }
 }

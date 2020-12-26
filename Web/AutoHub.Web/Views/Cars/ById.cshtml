@@ -8,13 +8,65 @@
     .bootom-row {
         margin-top: 50px;
     }
-    i {
-        margin-right:25px;
+    .media-body {
+        margin-left: 25px;
     }
 </style>
 
 <div class="single-recipe-layout1">
-    <div class="ctg-name">@Model.CoupeName</div>
+    @if (Model.CoupeName == "Хечбек")
+    {
+        <div class="ctg-name"><a asp-controller="HatchBacks" asp-action="All">@Model.CoupeName</a></div>
+    }
+
+    @if (Model.CoupeName == "Ван")
+    {
+        <div class="ctg-name"><a asp-controller="Vans" asp-action="All">@Model.CoupeName</a></div>
+    }
+
+    @if (Model.CoupeName == "Джип")
+    {
+        <div class="ctg-name"><a asp-controller="Jeeps" asp-action="All">@Model.CoupeName</a></div>
+    }
+
+
+    @if (Model.CoupeName == "Кабрио")
+    {
+        <div class="ctg-name"><a asp-controller="Cabriolets" asp-action="All">@Model.CoupeName</a></div>
+    }
+
+    @if (Model.CoupeName == "Комби")
+    {
+        <div class="ctg-name"><a asp-controller="StationWagons" asp-action="All">@Model.CoupeName</a></div>
+    }
+
+    @if (Model.CoupeName == "Купе")
+    {
+        <div class="ctg-name"><a asp-controller="Coupes" asp-action="All">@Model.CoupeName</a></div>
+    }
+
+
+    @if (Model.CoupeName == "Миниван")
+    {
+        <div class="ctg-name"><a asp-controller="MiniVans" asp-action="All">@Model.CoupeName</a></div>
+    }
+
+
+    @if (Model.CoupeName == "Пикап")
+    {
+        <div class="ctg-name"><a asp-controller="PickUpTrucks" asp-action="All">@Model.CoupeName</a></div>
+    }
+
+    @if (Model.CoupeName == "Седан")
+    {
+        <div class="ctg-name"><a asp-controller="Sedans" asp-action="All">@Model.CoupeName</a></div>
+    }
+
+    @if (Model.CoupeName == "Стреч Лимузина")
+    {
+        <div class="ctg-name"><a asp-controller="Limosines" asp-action="All">@Model.CoupeName</a></div>
+    }
+
     <h2 class="item-title">@this.ViewData["Title"]</h2>
     <div class="row mb-4">
         <div class="col-xl-9 col-12">

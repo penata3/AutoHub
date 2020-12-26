@@ -138,7 +138,19 @@
             await this.carsRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAllCars<T>(int page, int itemsPerPage = 10)
+        public IEnumerable<T> GetAllByCoupeType<T>(int page, int itemsPerPage, string coupeType)
+        {
+            return this.carsRepository.AllAsNoTracking()
+                .Where(x => x.Coupe.Name == coupeType)
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
+                .To<T>()
+                .ToList();
+        }
+
+
+
+        public IEnumerable<T> GetAllCars<T>(int page, int itemsPerPage )
         {
             return this.carsRepository.AllAsNoTracking()
                  .OrderByDescending(x => x.Id)
@@ -154,6 +166,11 @@
                 .FirstOrDefault();
 
             return car;
+        }
+
+        public int GetCounForCoupeType(string coupeType)
+        {
+            return this.carsRepository.AllAsNoTracking().Where(x => x.Coupe.Name == coupeType).Count();
         }
 
         public int GetCount()
