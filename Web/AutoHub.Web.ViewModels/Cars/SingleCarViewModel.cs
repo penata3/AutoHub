@@ -10,6 +10,8 @@
 
     public class SingleCarViewModel : IMapFrom<Car>, IHaveCustomMappings
     {
+        public int Id { get; set; }
+
         public string Title { get; set; }
 
         public string MakeName { get; set; }
@@ -50,16 +52,23 @@
 
         public DateTime CreatedOn { get; set; }
 
+        public double AverageVote { get; set; }
+
         public IEnumerable<AdditionsForSingleCarViewModel> Additions { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
+
             configuration.CreateMap<Car, SingleCarViewModel>()
-            .ForMember(x => x.ImageUrl, opt =>
-            opt.MapFrom(x =>
-            x.Images.FirstOrDefault().RemoteImageUrl != null ?
-            x.Images.FirstOrDefault().RemoteImageUrl :
-            "/cars/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
+               .ForMember(x => x.AverageVote, opt =>
+               opt.MapFrom(x => x.Votes.Count() == 0 ? 0 : x.Votes.Average(v => v.Value)))
+
+               .ForMember(x => x.ImageUrl, opt =>
+                   opt.MapFrom(x =>
+                       x.Images.FirstOrDefault().RemoteImageUrl != null ?
+                       x.Images.FirstOrDefault().RemoteImageUrl :
+                       "/cars/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
+
         }
     }
 }

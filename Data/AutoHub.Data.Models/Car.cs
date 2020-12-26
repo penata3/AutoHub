@@ -11,6 +11,7 @@
         {
             this.Images = new HashSet<Image>();
             this.Additions = new HashSet<CarAddition>();
+            this.Votes = new HashSet<Vote>();
         }
 
         public string Title { get; set; }
@@ -47,7 +48,7 @@
 
         public string Description { get; set; }
 
-        public string UserId { get; set; }
+        public string AddedByUserId { get; set; }
 
         public virtual ApplicationUser AddedByUser { get; set; }
 
@@ -67,8 +68,6 @@
 
         public int HorsePower { get; set; }
 
-        public virtual ICollection<Image> Images { get; set; }
-
         public int FuelId { get; set; }
 
         public virtual Fuel Fuel { get; set; }
@@ -76,5 +75,9 @@
         public string OriginalUrl { get; set; }
 
         public virtual ICollection<CarAddition> Additions { get; set; }
+
+        public virtual ICollection<Image> Images { get; set; }
+
+        public virtual ICollection<Vote> Votes { get; set; }
     }
 }

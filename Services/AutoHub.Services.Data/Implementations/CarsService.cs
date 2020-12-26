@@ -99,7 +99,7 @@
             car.FuelId = input.FuelId;
             car.GearBoxId = input.GearBoxId;
             car.Description = input.Description;
-            car.UserId = userId;
+            car.AddedByUserId = userId;
 
             Directory.CreateDirectory($"{imagePath}/cars/");
 

@@ -17,7 +17,7 @@ namespace AutoHub.Data.Migrations
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -431,7 +431,6 @@ namespace AutoHub.Data.Migrations
                     ManufactureDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ColorId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AddedByUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     TechDataUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DealerShipId = table.Column<int>(type: "int", nullable: true),
@@ -576,6 +575,35 @@ namespace AutoHub.Data.Migrations
                         name: "FK_Images_Reviews_ReviewId",
                         column: x => x.ReviewId,
                         principalTable: "Reviews",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Votes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CarId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Value = table.Column<byte>(type: "tinyint", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Votes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Votes_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Votes_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -803,6 +831,16 @@ namespace AutoHub.Data.Migrations
                 name: "IX_Towns_RegionId",
                 table: "Towns",
                 column: "RegionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Votes_CarId",
+                table: "Votes",
+                column: "CarId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Votes_UserId",
+                table: "Votes",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -832,16 +870,19 @@ namespace AutoHub.Data.Migrations
                 name: "Settings");
 
             migrationBuilder.DropTable(
+                name: "Votes");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Additions");
 
             migrationBuilder.DropTable(
-                name: "Cars");
+                name: "Reviews");
 
             migrationBuilder.DropTable(
-                name: "Reviews");
+                name: "Cars");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

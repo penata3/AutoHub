@@ -244,9 +244,6 @@ namespace AutoHub.Data.Migrations
                     b.Property<int?>("TownId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AddedByUserId");
@@ -726,6 +723,37 @@ namespace AutoHub.Data.Migrations
                     b.ToTable("Towns");
                 });
 
+            modelBuilder.Entity("AutoHub.Data.Models.Vote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<byte>("Value")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Votes");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -992,6 +1020,23 @@ namespace AutoHub.Data.Migrations
                     b.Navigation("Region");
                 });
 
+            modelBuilder.Entity("AutoHub.Data.Models.Vote", b =>
+                {
+                    b.HasOne("AutoHub.Data.Models.Car", "Car")
+                        .WithMany("Votes")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AutoHub.Data.Models.ApplicationUser", "User")
+                        .WithMany("Votes")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Car");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("AutoHub.Data.Models.ApplicationRole", null)
@@ -1055,6 +1100,8 @@ namespace AutoHub.Data.Migrations
                     b.Navigation("Logins");
 
                     b.Navigation("Roles");
+
+                    b.Navigation("Votes");
                 });
 
             modelBuilder.Entity("AutoHub.Data.Models.Car", b =>
@@ -1062,6 +1109,8 @@ namespace AutoHub.Data.Migrations
                     b.Navigation("Additions");
 
                     b.Navigation("Images");
+
+                    b.Navigation("Votes");
                 });
 
             modelBuilder.Entity("AutoHub.Data.Models.Condition", b =>

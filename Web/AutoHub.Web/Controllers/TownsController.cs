@@ -20,7 +20,9 @@ namespace AutoHub.Web.Controllers
         [HttpGet("api/towns/{regionId}")]
         public IEnumerable<Town> Towns(int regionId)
         {
-            return this.db.Towns.Where(t => t.RegionId == regionId).ToList();
+         
+               return this.db.Towns.Where(t => t.RegionId == regionId).ToList();
+
         }
     }
 }
