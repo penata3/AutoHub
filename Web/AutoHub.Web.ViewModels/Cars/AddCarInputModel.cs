@@ -22,18 +22,15 @@
         [Range(1, int.MaxValue)]
         public decimal Milage { get; set; }
 
-        [Required]
-
         [Display(Name = "Year of manifacture")]
         public string ManufactureDate { get; set; }
-
 
         [Display(Name = "Make")]
         public int MakeId { get; set; }
 
         [Required]
-        [Display(Name = "Model")]
-        public string ModelAsString { get; set; }
+        [Display(Name ="Model")]
+        public int ModelId { get; set; }
 
         [Required]
         [MinLength(10)]
@@ -56,14 +53,15 @@
         public int GearBoxId { get; set; }
 
         [Display(Name = "Region")]
+        [Required]
         public int RegionId { get; set; }
 
+        [Display(Name = "Town")]
         [Required]
-        [MinLength(3)]
-        [Display(Name = "Town Name")]
-        public string TownAsString { get; set; }
+        public int TownId { get; set; }
 
         [Display(Name = "Fuel Type")]
+        [Required]
         public int FuelId { get; set; }
 
         public int AdditionId { get; set; }

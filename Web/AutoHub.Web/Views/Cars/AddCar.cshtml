@@ -47,11 +47,19 @@
             <select asp-for="MakeId" class="form-control" asp-items="makesItems"></select>
             <span asp-validation-for="MakeId" class="text-danger"></span>
         </div>
+
+
         <div class="col-md-4">
-            <label asp-for="ModelAsString"></label>
-            <input asp-for="ModelAsString" class="form-control" />
-            <span asp-validation-for="ModelAsString" class="text-danger"></span>
+            <label asp-for="ModelId"></label>
+            <select name="ModelId" id="ModelId" class="form-control"></select>
+            <span asp-validation-for="ModelId" class="text-danger"></span>
         </div>
+
+        @*<div class="col-md-4">
+                <label asp-for="ModelAsString"></label>
+                <input asp-for="ModelAsString" class="form-control" />
+                <span asp-validation-for="ModelAsString" class="text-danger"></span>
+            </div>*@
 
         <div class="col-md-4">
             <label asp-for="CoupeId"></label>
@@ -90,15 +98,25 @@
 
         <div class="col-md-4">
             <label asp-for="RegionId"></label>
-            <select asp-for="RegionId" class="form-control" asp-items="regions" id="Region"></select>
+            <select asp-for="RegionId" class="form-control" asp-items="regions"></select>
             <span asp-validation-for="RegionId" class="text-danger"></span>
         </div>
 
+
+
         <div class="col-md-4">
+            <label asp-for="TownId"></label>
+            <select name="TownId" id="TownId" class="form-control"></select>
+            <span asp-validation-for="TownId" class="text-danger"></span>
+        </div>
+
+
+
+        @*<div class="col-md-4">
             <label asp-for="TownAsString"></label>
             <input asp-for="TownAsString" placeholder="Town Name" class="form-control" />
             <span asp-validation-for="TownAsString" class="text-danger"></span>
-        </div>
+        </div>*@
 
     </div>
 
@@ -143,22 +161,57 @@
 
     </div>
 
-
     <div class="row">
 
         @for (int i = 0; i < Model.Additions.Count(); i++)
         {
-        <div class="col-md-4">
-            <label asp-for="@Model.Additions">@Model.Additions[i].Name</label>
-            <input type="hidden" asp-for="@Model.Additions[i].Id" />
-            <input type="checkbox" asp-for="@Model.Additions[i].IsCheked" />
-        </div>
-        }  
+            <div class="col-md-4">
+                <label asp-for="@Model.Additions">@Model.Additions[i].Name</label>
+                <input type="hidden" asp-for="@Model.Additions[i].Id" />
+                <input type="checkbox" asp-for="@Model.Additions[i].IsCheked" />
+            </div>
+        }
 
     </div>
 
-
 </form>
+
+
+@section Scripts {
+
+    <script>
+        document.getElementById('RegionId').addEventListener('change', (e) => {
+            const modelSelectElement = document.getElementById('TownId');
+            modelSelectElement.innerHTML = "<option disabled value=''>Select Car Model</option>";
+            fetch(`/regiontowns/getTowns?Id=${e.target.value}`)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    Array.prototype.forEach.call(data, function (item, i) {
+                        document.getElementById('TownId').innerHTML += `<option value="${item.id}">${item.name}</option>`
+                    });
+                });
+        });
+    </script>
+
+    <script>
+        document.getElementById('MakeId').addEventListener('change', (e) => {
+            const modelSelectElement = document.getElementById('ModelId');
+            modelSelectElement.innerHTML = "<option disabled value=''>Select Car Model</option>";
+            fetch(`/carmodels/getModels?Id=${e.target.value}`)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    Array.prototype.forEach.call(data, function (item, i) {
+                        document.getElementById('ModelId').innerHTML += `<option value="${item.id}">${item.name}</option>`
+                    });
+                });
+        });
+    </script>
+
+}
 
 
 

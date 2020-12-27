@@ -1,11 +1,12 @@
 ﻿namespace AutoHub.Web.Controllers
 {
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
     using AutoHub.Services.Data;
     using AutoHub.Web.ViewModels.Votes;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using System.Security.Claims;
-    using System.Threading.Tasks;
 
     [ApiController]
     [Route("api/[controller]")]

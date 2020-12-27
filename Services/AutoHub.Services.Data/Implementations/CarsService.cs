@@ -13,7 +13,6 @@
 
     public class CarsService : ICarsService
     {
-        private readonly IModelsService modelsService;
         private readonly IMakeService makeService;
         private readonly IColorService colorService;
         private readonly ICoupesService coupesService;
@@ -22,7 +21,6 @@
         private readonly IRegionsServices regionsServices;
         private readonly IFuelsServices fuelsServices;
         private readonly IAdditionsService additionsService;
-        private readonly ITonwsService tonwsService;
         private readonly IDeletableEntityRepository<Car> carsRepository;
         private readonly IDeletableEntityRepository<Addition> additionsRepository;
 
@@ -40,7 +38,6 @@
             IDeletableEntityRepository<Car> carsRepository,
             IDeletableEntityRepository<Addition> additionsRepository)
         {
-            this.modelsService = modelsService;
             this.makeService = makeService;
             this.colorService = colorService;
             this.coupesService = coupesService;
@@ -49,7 +46,6 @@
             this.regionsServices = regionsServices;
             this.fuelsServices = fuelsServices;
             this.additionsService = additionsService;
-            this.tonwsService = tonwsService;
             this.carsRepository = carsRepository;
             this.additionsRepository = additionsRepository;
         }
@@ -73,33 +69,21 @@
                 Title = input.Title,
                 ConditionId = input.ConditionId,
                 MakeId = input.MakeId,
+                ModelId = input.ModelId,
+                CoupeId = input.CoupeId,
+                Milage = input.Milage,
+                ManufactureDate = DateTime.Parse("Jan 1, " + input.ManufactureDate),
+                ColorId = input.ColorId,
+                Price = input.Price,
+                RegionId = input.RegionId,
+                TownId = input.TownId,
+                TechDataUrl = input.TechDataUrl,
+                FuelId = input.FuelId,
+                GearBoxId = input.GearBoxId,
+                Description = input.Description,
+                AddedByUserId = userId,
+
             };
-
-            if (this.modelsService.GetModelByName(input.ModelAsString) == null)
-            {
-                await this.modelsService.CreateModel(input.ModelAsString, input.MakeId);
-            }
-
-            car.ModelId = this.modelsService.GetModelByName(input.ModelAsString).Id;
-
-            car.CoupeId = input.CoupeId;
-            car.Milage = input.Milage;
-            car.ManufactureDate = DateTime.Parse("Jan 1, " + input.ManufactureDate);
-            car.ColorId = input.ColorId;
-            car.Price = input.Price;
-            car.RegionId = input.RegionId;
-
-            if (this.tonwsService.GetTownByNameAndRegionId(input.TownAsString, input.RegionId) == null)
-            {
-                await this.tonwsService.Create(input.TownAsString, input.RegionId);
-            }
-
-            car.TownId = this.tonwsService.GetTownByNameAndRegionId(input.TownAsString, input.RegionId).Id;
-            car.TechDataUrl = input.TechDataUrl;
-            car.FuelId = input.FuelId;
-            car.GearBoxId = input.GearBoxId;
-            car.Description = input.Description;
-            car.AddedByUserId = userId;
 
             Directory.CreateDirectory($"{imagePath}/cars/");
 
@@ -131,7 +115,7 @@
                         AdditionId = addition.Id,
                     });
                 }
-              
+
             }
 
             await this.carsRepository.AddAsync(car);
