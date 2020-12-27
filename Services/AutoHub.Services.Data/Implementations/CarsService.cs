@@ -141,6 +141,15 @@
                  .ToList();
         }
 
+        public IEnumerable<T> GetAllByMakeName<T>(int page, int itemsPerPage, string makeName)
+        {
+            return this.carsRepository.AllAsNoTracking()
+                .Where(x => x.Make.Name == makeName)
+                .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
+                .To<T>()
+                .ToList();
+        }
+
         public IEnumerable<T> GetAllCars<T>(int page, int itemsPerPage)
         {
             return this.carsRepository.AllAsNoTracking()
@@ -156,6 +165,12 @@
                 .To<T>()
                 .FirstOrDefault();
 
+            var carToUpdate = this.carsRepository.All().Where(c => c.Id == id).FirstOrDefault();
+
+            carToUpdate.Views++;
+
+            this.carsRepository.SaveChangesAsync();
+
             return car;
         }
 
@@ -167,6 +182,11 @@
         public int GetCount()
         {
             return this.carsRepository.AllAsNoTracking().Count();
+        }
+
+        public int GetCountForCarsPerMake(string makeName)
+        {
+            return this.carsRepository.AllAsNoTracking().Where(x => x.Make.Name == makeName).Count();
         }
 
         public int GetCountForFuelType(string fuelType)

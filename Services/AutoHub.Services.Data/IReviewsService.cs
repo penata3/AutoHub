@@ -1,9 +1,14 @@
-﻿using System.Collections.Generic;
-
-namespace AutoHub.Services.Data
+﻿namespace AutoHub.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public interface IReviewsService
     {
-        IEnumerable<T> GetAllReviews<T>();
+        IEnumerable<T> GetAllReviews<T>(int page, int itemsPerPage);
+
+        int GetCount();
+
+        T GetReviewById<T>(int id);
     }
 }

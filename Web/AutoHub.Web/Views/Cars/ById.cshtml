@@ -2,12 +2,14 @@
 
 @{
     ViewData["Title"] = Model.Title;
+    var views = Model.Views + 1;
 }
 
 <style>
     .bootom-row {
         margin-top: 50px;
     }
+
     .media-body {
         margin-left: 25px;
     }
@@ -15,7 +17,7 @@
 
 <div class="single-recipe-layout1">
 
-    <div class="ctg-name"><a  asp-route-data="@Model.CoupeName" asp-controller="Cars" asp-action="AllByCoupeType">@Model.CoupeName</a></div>
+    <div class="ctg-name"><a asp-route-data="@Model.CoupeName" asp-controller="Cars" asp-action="AllByCoupeType">@Model.CoupeName</a></div>
     <h2 class="item-title">@this.ViewData["Title"]</h2>
     <div class="row mb-4">
         <div class="col-xl-9 col-12">
@@ -46,6 +48,20 @@
                     </ul>
                 </li>
 
+                <li class="single-meta">
+                    <i class="far fa-eye"></i>
+
+                    @if (views == 1)
+                    {
+                        <span>Viewed @views time</span>
+                    }
+                    else
+                    {
+                        <span>Viewed @views times</span>
+                    }
+
+                </li>
+
             </ul>
         </div>
     </div>
@@ -59,11 +75,11 @@
                 <div class="feature-wrap">
                     <div class="media">
                         <div class="feature-icon">
-                            <i class="far fa-clock"></i>
+                            <i class="fas fa-car"></i>
                         </div>
                         <div class="media-body space-sm">
                             <div class="feature-title">Make</div>
-                            <div class="feature-sub-title">@Model.MakeName</div>
+                            <div class="feature-sub-title"><a asp-controller="Cars" asp-action="AllByMakeName" asp-route-data="@Model.MakeName">@Model.MakeName</a></div>
                         </div>
                     </div>
                 </div>
@@ -85,12 +101,12 @@
                 <div class="feature-wrap">
                     <div class="media">
                         <div class="feature-icon">
-                            <i class="fas fa-users"></i>
+                            <i class="fas fa-gas-pump"></i>
                         </div>
                         <div class="media-body space-sm">
-                            <div class="feature-title">Condition</div>
+                            <div class="feature-title">Fuel Type</div>
                             <div class="feature-sub-title">
-                                @Model.ConditionName
+                                <a asp-action="AllByFuelType" asp-controller="Cars" asp-route-data="@Model.FuelName">@Model.FuelName</a>
                                 <span></span>
                             </div>
                         </div>
@@ -101,7 +117,7 @@
                 <div class="feature-wrap">
                     <div class="media">
                         <div class="feature-icon">
-                            <i class="fa fa-list-ol"></i>
+                            <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div class="media-body space-sm">
                             <div class="feature-title">Region</div>
@@ -129,8 +145,8 @@
                     </tr>
 
                     <tr class="odd">
-                        <th>Fuel Type</th>
-                        <td><a asp-controller="Cars" asp-action="AllByFuelType" asp-route-data="@Model.FuelName">@Model.FuelName</a></td>
+                        <th>Condition</th>
+                        <td>@Model.ConditionName</td>
                         <th class="secColumn">Horse Power</th>
                         <td class="secColumn">@Model.HorsePower</td>
                     </tr>

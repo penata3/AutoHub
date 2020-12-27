@@ -1,14 +1,15 @@
 ﻿namespace AutoHub.Web.ViewModels.Reviews
 {
+    using System.Linq;
+
     using AutoHub.Data.Models;
     using AutoHub.Services.Mapping;
     using AutoMapper;
-    using AutoHub.Data.Models;
-    using System.Linq;
-
 
     public class ReviewInListViewModel : IMapFrom<Review>, IHaveCustomMappings
     {
+        public int Id { get; set; }
+
         public string Title { get; set; }
 
         public string Description { get; set; }

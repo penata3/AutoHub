@@ -1,6 +1,7 @@
 ﻿namespace AutoHub.Web.Controllers
 {
     using AutoHub.Services.Data;
+    using AutoHub.Web.ViewModels.Reviews;
     using Microsoft.AspNetCore.Mvc;
 
     public class ReviewsController : Controller
@@ -13,10 +14,26 @@
         }
 
         [HttpGet]
-        public IActionResult All()
+        public IActionResult AllReviews(int id = 1)
         {
-            //var model = this.
-            return this.View();
+            const int ItemsPerPage = 10;
+
+            var model = new ReviewListViewModel()
+            {
+                PageNumber = id,
+                ItemsPerPage = ItemsPerPage,
+                Reviews = this.reviewsService.GetAllReviews<ReviewInListViewModel>(id, ItemsPerPage),
+                ItemsCount = this.reviewsService.GetCount(),
+            };
+
+            return this.View(model);
+        }
+
+
+        public IActionResult ReviewById(int id)
+        {
+            var viewModel = this.reviewsService.GetReviewById<SingleReviewViewModel>(id);
+            return this.View(viewModel);
         }
     }
 }

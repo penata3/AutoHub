@@ -1,0 +1,31 @@
+﻿@model AutoHub.Web.ViewModels.Reviews.ReviewListViewModel
+
+<h1>Авто ревюта на Филип от Bri4ka</h1>
+
+<style>
+    .box {
+        border-radius: 5px;
+        border: 1px solid gray;
+      
+    }
+</style>
+
+<hr />
+
+
+@foreach (var review in Model.Reviews)
+{
+<div class="box mb-4 p-4">
+    <div class="media">
+        <img class="mr-3" src="@review.ImageUrl" alt="@review.Title">
+        <div class="media-body">
+            <h2 class="mt-0  text-primary"><a asp-action="ReviewById" asp-controller="Reviews" asp-route-id="@review.Id">@review.Title</a></h2>
+            @review.Description
+        </div>
+    </div>
+</div>
+}
+
+<hr />
+
+<partial name="_PagingPartial" model="@Model" />

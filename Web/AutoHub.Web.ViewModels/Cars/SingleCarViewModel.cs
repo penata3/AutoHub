@@ -50,6 +50,8 @@
 
         public decimal Milage { get; set; }
 
+        public int Views { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public double AverageVote { get; set; }

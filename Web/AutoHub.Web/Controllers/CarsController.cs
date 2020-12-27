@@ -107,6 +107,23 @@
             };
             return this.View(carListViewModel);
         }
+
+        public IActionResult AllByMakeName(string data, int id = 1)
+        {
+            const int ItemsPerPage = 8;
+            var makeName = data;
+
+            var viewModel = new CarsListViewModel()
+            {
+                PageNumber = id,
+                ItemsPerPage = ItemsPerPage,
+                Cars = this.carsService.GetAllByMakeName<CarInListViewModel>(id, ItemsPerPage, makeName),
+                ItemsCount = this.carsService.GetCountForCarsPerMake(makeName),
+            };
+
+            return this.View(viewModel);
+            
+        }
     }
 }
     

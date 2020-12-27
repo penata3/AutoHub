@@ -16,12 +16,17 @@
         int GetCount();
 
         int GetCounForCoupeType(string coupeType);
+
         int GetCountForFuelType(string fuelType);
+
+        int GetCountForCarsPerMake(string makeName);
 
         T GetById<T>(int id);
 
         IEnumerable<T> GetAllByCoupeType<T>(int page, int itemsPerPage, string coupeType);
 
         IEnumerable<T> GetAllByFuelType<T>(int page, int itemsPerPage, string fuelType);
+
+        IEnumerable<T> GetAllByMakeName<T>(int page, int itemsPerPage, string makeName);
     }
 }

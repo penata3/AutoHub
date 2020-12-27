@@ -1021,14 +1021,7 @@ ul {
 	margin-right: 0;
 }
 
-.single-recipe-layout1 .entry-meta .single-meta a {
-	color: #909090;
-	-webkit-transition: all 0.3s ease-out;
-	-moz-transition: all 0.3s ease-out;
-	-ms-transition: all 0.3s ease-out;
-	-o-transition: all 0.3s ease-out;
-	transition: all 0.3s ease-out;
-}
+
 
 .single-recipe-layout1 .entry-meta .single-meta a span {
 	color: #111111;
@@ -2276,7 +2269,7 @@ ul {
 }
 
 .single-recipe-layout2 .entry-meta .single-meta a {
-	color: #909090;
+	
 	-webkit-transition: all 0.3s ease-out;
 	-moz-transition: all 0.3s ease-out;
 	-ms-transition: all 0.3s ease-out;
@@ -2285,30 +2278,12 @@ ul {
 }
 
 .single-recipe-layout2 .entry-meta .single-meta a span {
-	color: #111111;
+	
 	-webkit-transition: all 0.3s ease-out;
 	-moz-transition: all 0.3s ease-out;
 	-ms-transition: all 0.3s ease-out;
 	-o-transition: all 0.3s ease-out;
 	transition: all 0.3s ease-out;
-}
-
-.single-recipe-layout2 .entry-meta .single-meta a i {
-	margin-right: 5px;
-	color: #ff4a52;
-	font-size: 14px;
-}
-
-.single-recipe-layout2 .entry-meta .single-meta a:hover {
-	color: #ff4a52;
-}
-
-.single-recipe-layout2 .entry-meta .single-meta a:hover span {
-	color: #ff4a52;
-}
-
-.single-recipe-layout2 .entry-meta .single-meta .item-rating li {
-	display: inline-block;
 }
 
 .single-recipe-layout2 .entry-meta .single-meta .item-rating li i {
