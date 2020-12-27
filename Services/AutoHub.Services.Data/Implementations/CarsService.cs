@@ -148,9 +148,16 @@
                 .ToList();
         }
 
+        public IEnumerable<T> GetAllByFuelType<T>(int page, int itemsPerPage, string fuelType)
+        {
+            return this.carsRepository.AllAsNoTracking()
+                .Where(x => x.Fuel.Name == fuelType)
+                 .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
+                 .To<T>()
+                 .ToList();
+        }
 
-
-        public IEnumerable<T> GetAllCars<T>(int page, int itemsPerPage )
+        public IEnumerable<T> GetAllCars<T>(int page, int itemsPerPage)
         {
             return this.carsRepository.AllAsNoTracking()
                  .OrderByDescending(x => x.Id)
@@ -176,6 +183,11 @@
         public int GetCount()
         {
             return this.carsRepository.AllAsNoTracking().Count();
+        }
+
+        public int GetCountForFuelType(string fuelType)
+        {
+            return this.carsRepository.AllAsNoTracking().Where(x => x.Fuel.Name == fuelType).Count();
         }
     }
 }

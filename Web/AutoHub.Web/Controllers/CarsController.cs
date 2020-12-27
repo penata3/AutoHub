@@ -75,5 +75,38 @@
             var carModel = this.carsService.GetById<SingleCarViewModel>(id);
             return this.View(carModel);
         }
+
+        public IActionResult AllByCoupeType(string data, int id = 1)
+        {
+            const int ItemsPerPage = 8;
+            var coupeType = data;
+
+            var carListViewModel = new CarsListViewModel()
+            {
+                PageNumber = id,
+                ItemsPerPage = ItemsPerPage,
+                Cars = this.carsService.GetAllByCoupeType<CarInListViewModel>(id, ItemsPerPage, coupeType),
+                ItemsCount = this.carsService.GetCounForCoupeType(data),
+            };
+            return this.View(carListViewModel);
+        }
+
+
+        public IActionResult AllByFuelType(string data, int id = 1)
+        {
+            const int ItemsPerPage = 8;
+
+            var fuelType = data;
+
+            var carListViewModel = new CarsListViewModel()
+            {
+                PageNumber = id,
+                ItemsPerPage = ItemsPerPage,
+                Cars = this.carsService.GetAllByFuelType<CarInListViewModel>(id, ItemsPerPage, fuelType),
+                ItemsCount = this.carsService.GetCountForFuelType(data),
+            };
+            return this.View(carListViewModel);
+        }
     }
 }
+    

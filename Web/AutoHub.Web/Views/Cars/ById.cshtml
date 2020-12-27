@@ -14,59 +14,8 @@
 </style>
 
 <div class="single-recipe-layout1">
-    @if (Model.CoupeName == "Хечбек")
-    {
-        <div class="ctg-name"><a asp-controller="HatchBacks" asp-action="All">@Model.CoupeName</a></div>
-    }
 
-    @if (Model.CoupeName == "Ван")
-    {
-        <div class="ctg-name"><a asp-controller="Vans" asp-action="All">@Model.CoupeName</a></div>
-    }
-
-    @if (Model.CoupeName == "Джип")
-    {
-        <div class="ctg-name"><a asp-controller="Jeeps" asp-action="All">@Model.CoupeName</a></div>
-    }
-
-
-    @if (Model.CoupeName == "Кабрио")
-    {
-        <div class="ctg-name"><a asp-controller="Cabriolets" asp-action="All">@Model.CoupeName</a></div>
-    }
-
-    @if (Model.CoupeName == "Комби")
-    {
-        <div class="ctg-name"><a asp-controller="StationWagons" asp-action="All">@Model.CoupeName</a></div>
-    }
-
-    @if (Model.CoupeName == "Купе")
-    {
-        <div class="ctg-name"><a asp-controller="Coupes" asp-action="All">@Model.CoupeName</a></div>
-    }
-
-
-    @if (Model.CoupeName == "Миниван")
-    {
-        <div class="ctg-name"><a asp-controller="MiniVans" asp-action="All">@Model.CoupeName</a></div>
-    }
-
-
-    @if (Model.CoupeName == "Пикап")
-    {
-        <div class="ctg-name"><a asp-controller="PickUpTrucks" asp-action="All">@Model.CoupeName</a></div>
-    }
-
-    @if (Model.CoupeName == "Седан")
-    {
-        <div class="ctg-name"><a asp-controller="Sedans" asp-action="All">@Model.CoupeName</a></div>
-    }
-
-    @if (Model.CoupeName == "Стреч Лимузина")
-    {
-        <div class="ctg-name"><a asp-controller="Limosines" asp-action="All">@Model.CoupeName</a></div>
-    }
-
+    <div class="ctg-name"><a  asp-route-data="@Model.CoupeName" asp-controller="Cars" asp-action="AllByCoupeType">@Model.CoupeName</a></div>
     <h2 class="item-title">@this.ViewData["Title"]</h2>
     <div class="row mb-4">
         <div class="col-xl-9 col-12">
@@ -174,14 +123,14 @@
 
                     <tr>
                         <th>Coupe Type</th>
-                        <td>@Model.CoupeName</td>
+                        <td asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="@Model.CoupeName">@Model.CoupeName </td>
                         <th class="secColumn">Year of production</th>
                         <td class="secColumn">@Model.ManufactureDate.Year</td>
                     </tr>
 
                     <tr class="odd">
                         <th>Fuel Type</th>
-                        <td><a href='/obiavi/avtomobili-dzhipove/bmw/535/benzinov'>@Model.FuelName</a></td>
+                        <td><a asp-controller="Cars" asp-action="AllByFuelType" asp-route-data="@Model.FuelName">@Model.FuelName</a></td>
                         <th class="secColumn">Horse Power</th>
                         <td class="secColumn">@Model.HorsePower</td>
                     </tr>
