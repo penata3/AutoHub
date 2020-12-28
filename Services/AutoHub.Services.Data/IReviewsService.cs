@@ -9,7 +9,11 @@
     {
         IEnumerable<T> GetAllReviews<T>(int page, int itemsPerPage);
 
+        IEnumerable<T> GetAllReviewsWithDeleted<T>(int page, int itemsPerPage);
+
         int GetCount();
+
+        int GetCountWithDeleted();
 
         T GetReviewById<T>(int id);
 

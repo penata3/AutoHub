@@ -14,7 +14,7 @@
 
         public string Description { get; set; }
 
-        public string VieoUrl { get; set; }
+        public string VideoUrl { get; set; }
 
         public string ImageUrl { get; set; }
 

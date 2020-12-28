@@ -20,7 +20,7 @@
             this.reviewsRepository = reviewsRepository;
         }
 
-        public  async Task CreateAsync(AddReviewInputModel model, string imagePath,string userId)
+        public async Task CreateAsync(AddReviewInputModel model, string imagePath,string userId)
         {
             var review = new Review()
             {
@@ -63,9 +63,25 @@
             return reviews;
         }
 
+
+        public IEnumerable<T> GetAllReviewsWithDeleted<T>(int page, int itemsPerPage)
+        {
+            var reviews = this.reviewsRepository.AllWithDeleted()
+                .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
+                .To<T>()
+                .ToList();
+
+            return reviews;
+        }
+
         public int GetCount()
         {
             return this.reviewsRepository.AllAsNoTracking().Count();
+        }
+
+        public int GetCountWithDeleted()
+        {
+            return this.reviewsRepository.AllWithDeleted().Count();
         }
 
         public T GetReviewById<T>(int id)

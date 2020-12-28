@@ -35,9 +35,23 @@
         }
 
         // GET: Administration/Reviews
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id = 1)
         {
-            return this.View(await this.reviewsRepository.AllWithDeleted().ToListAsync());
+            const int ItemsPerPage = 10;
+            
+            var model = new ReviewListForAdminViewModel()
+            {
+                PageNumber = id,
+                ItemsPerPage = ItemsPerPage,
+                Reviews = this.reviewService.GetAllReviewsWithDeleted<ReviewInListForAdminViewModel>(id, ItemsPerPage),
+                ItemsCount = this.reviewService.GetCountWithDeleted(),
+            };
+
+           // return this.View(await this.reviewsRepository.AllWithDeleted().ToListAsync());
+
+            return this.View(model);
+
+
         }
 
         // GET: Administration/Reviews/Details/5
@@ -48,7 +62,7 @@
                 return this.NotFound();
             }
 
-            var review = await this.reviewsRepository.AllAsNoTracking()
+            var review = await this.reviewsRepository.AllWithDeleted()
                 .Include(x => x.Images)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (review == null)
