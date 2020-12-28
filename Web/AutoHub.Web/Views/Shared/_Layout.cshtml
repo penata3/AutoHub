@@ -26,7 +26,7 @@
                         <ul class="navbar-nav flex-grow-1">
                             <li>
                                 <div class="dropdown">
-                                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Cars
                                     </button>
 
@@ -35,6 +35,29 @@
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="AddCar">Add Car</a>
 
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="All">All Cars</a>
+
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="dropdown">
+                                    <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Categoryes
+                                    </button>
+
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Купе">Coupes</a>    
+                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Стреч лимузина">Limosines</a>
+                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Седан">Sedans</a>
+                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Пикап">PickUp Trucks</a>
+                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Миниван">MinVans</a>
+                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Комби">Wagons</a>
+                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Кабрио">Convertible</a>
+                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Джип">Jeeps</a>
+                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Ван">Vans</a>
+                                        
 
                                     </div>
                                 </div>

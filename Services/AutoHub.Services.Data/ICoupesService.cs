@@ -1,9 +1,10 @@
 ﻿namespace AutoHub.Services.Data
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface ICoupesService
     {
-        IEnumerable<KeyValuePair<string, string>> GetAllCoupes();
+        Task<IEnumerable<KeyValuePair<string, string>>> GetAllCoupes();
     }
 }

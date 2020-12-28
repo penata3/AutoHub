@@ -2,9 +2,10 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using AutoHub.Data.Common.Repositories;
     using AutoHub.Data.Models;
+    using Microsoft.EntityFrameworkCore;
 
     public class CoupesService : ICoupesService
     {
@@ -15,13 +16,18 @@
             this.coupesRepository = coupesRepository;
         }
 
-        public IEnumerable<KeyValuePair<string, string>> GetAllCoupes()
+        public async Task<IEnumerable<KeyValuePair<string, string>>> GetAllCoupes()
         {
-            return this.coupesRepository.All().Select(c => new
+            var coupes = new List<KeyValuePair<string, string>>();
+
+            coupes = await this.coupesRepository.All().Select(c => new
             {
                 c.Id,
                 c.Name,
-            }).ToList().Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
+            })
+            .Select(c => new KeyValuePair<string, string>(c.Id.ToString(), c.Name)).ToListAsync();
+
+            return coupes;
         }
     }
 }

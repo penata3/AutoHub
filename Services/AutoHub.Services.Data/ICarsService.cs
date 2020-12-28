@@ -11,6 +11,8 @@
 
         Task AddAllSelectListValuesForCarInputModel(AddCarInputModel input);
 
+        Task AddAllSelectListValuesForCarEditInputModel(EditCarInputModel input);
+
         IEnumerable<T> GetAllCars<T>(int page, int itemsPerPage);
 
         int GetCount();
@@ -21,6 +23,8 @@
 
         int GetCountForCarsPerMake(string makeName);
 
+        void IncreaseView(int id);
+
         T GetById<T>(int id);
 
         IEnumerable<T> GetAllByCoupeType<T>(int page, int itemsPerPage, string coupeType);
@@ -28,5 +32,7 @@
         IEnumerable<T> GetAllByFuelType<T>(int page, int itemsPerPage, string fuelType);
 
         IEnumerable<T> GetAllByMakeName<T>(int page, int itemsPerPage, string makeName);
+
+        Task UpdateAsync(int id, EditCarInputModel model);
     }
 }

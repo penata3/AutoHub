@@ -17,13 +17,16 @@
             this.makesRepository = makesRepository;
         }
 
-        public IEnumerable<KeyValuePair<string, string>> GetAllMakes()
+        public async Task<IEnumerable<KeyValuePair<string, string>>> GetAllMakes()
         {
-            return this.makesRepository.All().Select(c => new
+            var makes = new List<KeyValuePair<string, string>>();
+            makes = await this.makesRepository.All().Select(c => new
             {
                 c.Id,
                 c.Name,
-            }).ToList().Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
+            }).Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name)).ToListAsync();
+
+            return makes;
         }
 
         public async Task<IEnumerable<MakeViewModel>> GetMakeWithModelsAsync(int id)

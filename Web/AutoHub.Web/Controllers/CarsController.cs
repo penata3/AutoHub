@@ -15,13 +15,16 @@
     {
         private readonly ICarsService carsService;
         private readonly IWebHostEnvironment environment;
+        private readonly IMakeService makeService;
 
         public CarsController(
             ICarsService carsService,
-            IWebHostEnvironment environment)
+            IWebHostEnvironment environment,
+            IMakeService makeService)
         {
             this.carsService = carsService;
             this.environment = environment;
+            this.makeService = makeService;
         }
 
         [Authorize]
@@ -91,7 +94,6 @@
             return this.View(carListViewModel);
         }
 
-
         public IActionResult AllByFuelType(string data, int id = 1)
         {
             const int ItemsPerPage = 8;
@@ -122,8 +124,31 @@
             };
 
             return this.View(viewModel);
-            
+
         }
+
+        [Authorize]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var model = this.carsService.GetById<EditCarInputModel>(id);
+            await this.carsService.AddAllSelectListValuesForCarEditInputModel(model);
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, EditCarInputModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                await this.carsService.AddAllSelectListValuesForCarEditInputModel(model);
+                return this.View(model);
+            }
+
+            await this.carsService.UpdateAsync(id, model);
+            return this.RedirectToAction(nameof(this.ById), new { id });
+
+        }
+
     }
 }
-    

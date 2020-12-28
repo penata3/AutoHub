@@ -2,9 +2,10 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using AutoHub.Data.Common.Repositories;
     using AutoHub.Data.Models;
+    using Microsoft.EntityFrameworkCore;
 
     public class ColorsService : IColorService
     {
@@ -15,13 +16,18 @@
             this.colorsRepository = colorsRepository;
         }
 
-        public IEnumerable<KeyValuePair<string, string>> GetAllColors()
+        public async Task<IEnumerable<KeyValuePair<string, string>>> GetAllColors()
         {
-            return this.colorsRepository.AllAsNoTracking().Select(c => new
+            var colors = new List<KeyValuePair<string, string>>();
+
+            colors = await this.colorsRepository.AllAsNoTracking().Select(c => new
             {
                 c.Id,
                 c.Name,
-            }).ToList().Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
+            }).Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name)).ToListAsync();
+
+
+            return colors;
         }
     }
 }

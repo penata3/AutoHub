@@ -52,6 +52,8 @@
 
         public int Views { get; set; }
 
+        public string AddedByUserId { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public double AverageVote { get; set; }

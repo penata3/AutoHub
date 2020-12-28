@@ -6,7 +6,7 @@
 
     public interface IMakeService
     {
-        IEnumerable<KeyValuePair<string, string>> GetAllMakes();
+        Task<IEnumerable<KeyValuePair<string, string>>> GetAllMakes();
 
         Task<IEnumerable<MakeViewModel>> GetMakeWithModelsAsync(int id);
     }

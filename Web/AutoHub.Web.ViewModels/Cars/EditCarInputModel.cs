@@ -3,17 +3,16 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
     using AutoHub.Data.Models;
+    using AutoHub.Services.Mapping;
     using AutoHub.Web.ViewModels.Additions;
     using AutoHub.Web.ViewModels.ValidationAttributes;
     using Microsoft.AspNetCore.Http;
-    using System.ComponentModel.DataAnnotations;
 
-
-
-    public class AddCarInputModel
+    public class EditCarInputModel : IMapFrom<Car>
     {
+        public int Id { get; set; }
+
         [Required]
         [MinLength(5)]
         public string Title { get; set; }
@@ -33,15 +32,13 @@
         public int MakeId { get; set; }
 
         [Required]
-        [Display(Name ="Model")]
+        [Display(Name = "Model")]
         public int ModelId { get; set; }
 
         [Required]
         [MinLength(10)]
         [MaxLength(200)]
         public string Description { get; set; }
-
-        public int UserId { get; set; }
 
         [Display(Name = "Color")]
         public int ColorId { get; set; }
@@ -73,12 +70,9 @@
         [Display(Name = "Horse Power")]
         public int HorsePower { get; set; }
 
-        public int AdditionId { get; set; }
+        //public int AdditionId { get; set; }
 
-        [AllowedExtensionsAttribute]
-        public IEnumerable<IFormFile> Images { get; set; }
-
-        public AdditionViewModel[] Additions { get; set; }
+        //public AdditionViewModel[] Additions { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> Fuels { get; set; }
 

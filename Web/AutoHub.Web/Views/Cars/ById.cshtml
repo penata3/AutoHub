@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = Model.Title;
-    var views = Model.Views + 1;
 }
 
 <style>
@@ -51,17 +50,19 @@
                 <li class="single-meta">
                     <i class="far fa-eye"></i>
 
-                    @if (views == 1)
+                    @if (Model.Views == 1)
                     {
-                        <span>Viewed @views time</span>
+                        <span>Viewed @Model.Views time</span>
                     }
+
                     else
                     {
-                        <span>Viewed @views times</span>
+                <span>Viewed @Model.Views    times</span>
                     }
 
                 </li>
 
+              
             </ul>
         </div>
     </div>

@@ -1,7 +1,9 @@
-﻿@model AddCarInputModel
+﻿@model AutoHub.Web.ViewModels.Cars.EditCarInputModel
+
+
 
 @{
-    ViewData["Title"] = "Add Vehicle";
+    ViewData["Title"] = "Edit Car";
     var makesItems = this.Model.MakesItems.Select(x => new SelectListItem(x.Value, x.Key));
     var colors = this.Model.Colors.Select(x => new SelectListItem(x.Value, x.Key));
     var coupes = this.Model.CoupeTypes.Select(x => new SelectListItem(x.Value, x.Key));
@@ -23,8 +25,6 @@
             <input asp-for="Title" class="form-control" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
-
-   
     </div>
 
     <div class="row">
@@ -68,7 +68,7 @@
             <span asp-validation-for="ManufactureDate" class="text-danger"></span>
         </div>
 
- 
+
         <div class="col-md-4">
             <label asp-for="ConditionId"></label>
             <select asp-for="ConditionId" class="form-control " asp-items="conditions"></select>
@@ -129,13 +129,6 @@
     </div>
     <div class="row">
 
-        <div class="col-md-6">
-            <label asp-for="Images"></label>
-            <input asp-for="Images" class="form-control" />
-            <span asp-validation-for="Images" class="text-danger"></span>
-        </div>
-
-
         <div class="col-md-3">
             <label asp-for="HorsePower"></label>
             <input asp-for="HorsePower" class="form-control" placeholder="0" />
@@ -159,18 +152,9 @@
     </div>
 
 
-    <div class="row">
 
-        @for (int i = 0; i < Model.Additions.Count(); i++)
-        {
-            <div class="col-md-4">
-                <label asp-for="@Model.Additions">@Model.Additions[i].Name</label>
-                <input type="hidden" asp-for="@Model.Additions[i].Id" />
-                <input type="checkbox" asp-for="@Model.Additions[i].IsCheked" />
-            </div>
-        }
-
-    </div>
+    <hr />
+    <input type="hidden" asp-for="Id" />
 
 
     <div class="col-md-6  align-self-md-center ">
@@ -215,7 +199,3 @@
     </script>
 
 }
-
-
-
-

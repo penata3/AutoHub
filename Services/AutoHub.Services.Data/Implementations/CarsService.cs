@@ -52,14 +52,26 @@
 
         public async Task AddAllSelectListValuesForCarInputModel(AddCarInputModel input)
         {
-            input.MakesItems = this.makeService.GetAllMakes();
-            input.Colors = this.colorService.GetAllColors();
-            input.CoupeTypes = this.coupesService.GetAllCoupes();
+            input.MakesItems = await this.makeService.GetAllMakes();
+            input.Colors = await this.colorService.GetAllColors();
+            input.CoupeTypes = await this.coupesService.GetAllCoupes();
             input.Conditions = await this.conditionsService.GetAllConditionsAsync();
             input.GearBoxes = await this.gearBoxesService.GetAllGearBoxesAsync();
             input.Regions = await this.regionsServices.GetAllRegionsAsync();
             input.Fuels = await this.fuelsServices.GetAllFuelTypesAsync();
             input.Additions = this.additionsService.GetAllAditions();
+        }
+
+        public async Task AddAllSelectListValuesForCarEditInputModel(EditCarInputModel input)
+        {
+            input.MakesItems = await this.makeService.GetAllMakes();
+            input.Colors = await this.colorService.GetAllColors();
+            input.CoupeTypes = await this.coupesService.GetAllCoupes();
+            input.Conditions = await this.conditionsService.GetAllConditionsAsync();
+            input.GearBoxes = await this.gearBoxesService.GetAllGearBoxesAsync();
+            input.Regions = await this.regionsServices.GetAllRegionsAsync();
+            input.Fuels = await this.fuelsServices.GetAllFuelTypesAsync();
+            // input.Additions = this.additionsService.GetAllAditions();
         }
 
         public async Task CreateAsync(AddCarInputModel input, string userId, string imagePath)
@@ -72,7 +84,7 @@
                 ModelId = input.ModelId,
                 CoupeId = input.CoupeId,
                 Milage = input.Milage,
-                ManufactureDate = DateTime.Parse("Jan 1, " + input.ManufactureDate),
+                ManufactureDate = input.ManufactureDate,
                 ColorId = input.ColorId,
                 Price = input.Price,
                 RegionId = input.RegionId,
@@ -151,6 +163,8 @@
                 .ToList();
         }
 
+
+
         public IEnumerable<T> GetAllCars<T>(int page, int itemsPerPage)
         {
             return this.carsRepository.AllAsNoTracking()
@@ -160,19 +174,15 @@
                  .ToList();
         }
 
-        public T GetById<T>(int id)
+        public  T GetById<T>(int id)
         {
+
             var car = this.carsRepository.AllAsNoTracking().Where(c => c.Id == id)
                 .To<T>()
                 .FirstOrDefault();
 
-            var carToUpdate = this.carsRepository.All().Where(c => c.Id == id).FirstOrDefault();
-
-            carToUpdate.Views++;
-
-            this.carsRepository.SaveChangesAsync();
-
             return car;
+
         }
 
         public int GetCounForCoupeType(string coupeType)
@@ -193,6 +203,42 @@
         public int GetCountForFuelType(string fuelType)
         {
             return this.carsRepository.AllAsNoTracking().Where(x => x.Fuel.Name == fuelType).Count();
+        }
+
+        public async Task UpdateAsync(int id, EditCarInputModel model)
+        {
+            var car = this.carsRepository.All().FirstOrDefault(c => c.Id == id);
+
+            car.Title = model.Title;
+            car.Price = model.Price;
+            car.Milage = model.Milage;
+            car.ManufactureDate = model.ManufactureDate;
+            car.MakeId = model.MakeId;
+            car.ModelId = model.ModelId;
+            car.Description = model.Description;
+            car.ColorId = model.ColorId;
+            car.CoupeId = model.CoupeId;
+            car.TechDataUrl = model.TechDataUrl;
+            car.ConditionId = model.ConditionId;
+            car.GearBoxId = model.GearBoxId;
+            car.RegionId = model.RegionId;
+            car.TownId = model.TownId;
+            car.FuelId = model.FuelId;
+            car.HorsePower = model.HorsePower;
+
+            await this.carsRepository.SaveChangesAsync();
+
+
+            //Color,coupe,techData,ConditionId,GearBoxId,RegionId,TownId,FuelId,HorsePower,
+        }
+
+        public void IncreaseView(int id)
+        {
+
+            var carToUpdate = this.carsRepository.All().Where(c => c.Id == id).FirstOrDefault();
+            carToUpdate.Views++;
+            
+             this.carsRepository.SaveChangesAsync();
         }
     }
 }
