@@ -1,7 +1,7 @@
 ﻿namespace AutoHub.Web
 {
     using System.Reflection;
-
+    using AutoHub.Common;
     using AutoHub.Data;
     using AutoHub.Data.Common;
     using AutoHub.Data.Common.Repositories;
@@ -17,6 +17,7 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -96,6 +97,25 @@
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 dbContext.Database.Migrate();
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+            }
+            var userManager = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            if (!userManager.Users.AnyAsync(x => x.Email == "ppenchev1@gmail.com").GetAwaiter().GetResult())
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = "Admin",
+                    Email = "ppenchev1@gmail.com",
+                    EmailConfirmed = true,
+
+                };
+
+                var result = userManager.CreateAsync(user, "Admin11109988").GetAwaiter().GetResult();
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, GlobalConstants.AdministratorRoleName);
+                }
             }
 
             if (env.IsDevelopment())

@@ -22,7 +22,10 @@
         {
             configuration.CreateMap<Review, ReviewInListViewModel>()
                 .ForMember(x => x.ImageUrl, opt =>
-                opt.MapFrom(x => x.Images.FirstOrDefault().RemoteImageUrl));
+                opt.MapFrom(x => x.Images.FirstOrDefault().RemoteImageUrl != null ?
+                x.Images.FirstOrDefault().RemoteImageUrl :
+                 "/reviews/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
+
         }
     }
 }

@@ -82,6 +82,7 @@
                 GearBoxId = input.GearBoxId,
                 Description = input.Description,
                 AddedByUserId = userId,
+                HorsePower = input.HorsePower,
 
             };
 

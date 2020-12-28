@@ -112,11 +112,12 @@
 
 
 
+
         @*<div class="col-md-4">
-            <label asp-for="TownAsString"></label>
-            <input asp-for="TownAsString" placeholder="Town Name" class="form-control" />
-            <span asp-validation-for="TownAsString" class="text-danger"></span>
-        </div>*@
+                <label asp-for="TownAsString"></label>
+                <input asp-for="TownAsString" placeholder="Town Name" class="form-control" />
+                <span asp-validation-for="TownAsString" class="text-danger"></span>
+            </div>*@
 
     </div>
 
@@ -138,7 +139,23 @@
             <span asp-validation-for="GearBoxId" class="text-danger"></span>
         </div>
     </div>
+    <div class="row">
 
+        <div class="col-md-6">
+            <label asp-for="Images"></label>
+            <input asp-for="Images" class="form-control" />
+            <span asp-validation-for="Images" class="text-danger"></span>
+        </div>
+
+
+        <div class="col-md-3">
+            <label asp-for="HorsePower"></label>
+            <input asp-for="HorsePower" class="form-control" placeholder="0" />
+            <span asp-validation-for="HorsePower" class="text-danger"></span>
+        </div>
+
+
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -148,18 +165,8 @@
         </div>
     </div>
 
-    <div class="row">
 
-        <div class="col-md-6">
-            <label asp-for="Images"></label>
-            <input asp-for="Images" class="form-control" />
-            <span asp-validation-for="Images" class="text-danger"></span>
 
-        </div> <div class="col-md-6 align-self-md-center">
-            <input type="submit" class="btn btn-primary" />
-        </div>
-
-    </div>
 
     <div class="row">
 
@@ -172,6 +179,11 @@
             </div>
         }
 
+    </div>
+
+
+    <div class="col-md-6  align-self-md-center ">
+        <input type="submit" class="btn btn-primary" />
     </div>
 
 </form>

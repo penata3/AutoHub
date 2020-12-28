@@ -2,6 +2,7 @@
 {
     using AutoHub.Data.Models;
     using AutoHub.Services.Mapping;
+    using AutoMapper;
 
     public class SingleReviewViewModel : IMapFrom<Review>
     {
@@ -12,5 +13,7 @@
         public string Description { get; set; }
 
         public string VideoUrl { get; set; }
+
+      
     }
 }

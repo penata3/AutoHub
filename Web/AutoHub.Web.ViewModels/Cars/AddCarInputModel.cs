@@ -8,6 +8,9 @@
     using AutoHub.Web.ViewModels.Additions;
     using AutoHub.Web.ViewModels.ValidationAttributes;
     using Microsoft.AspNetCore.Http;
+    using System.ComponentModel.DataAnnotations;
+
+
 
     public class AddCarInputModel
     {
@@ -44,7 +47,8 @@
 
         [Display(Name = "Coupe Type")]
         public int CoupeId { get; set; }
-       
+
+        [System.ComponentModel.DataAnnotations.Url]
         public string TechDataUrl { get; set; }
 
         [Display(Name = "Condition")]
@@ -63,6 +67,10 @@
         [Display(Name = "Fuel Type")]
         [Required]
         public int FuelId { get; set; }
+
+        [Required]
+        [Display(Name = "Horse Power")]
+        public int HorsePower { get; set; }
 
         public int AdditionId { get; set; }
 
@@ -84,8 +92,6 @@
         public IEnumerable<KeyValuePair<string, string>> Colors { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> MakesItems { get; set; }
-
-
 
     }
 }
