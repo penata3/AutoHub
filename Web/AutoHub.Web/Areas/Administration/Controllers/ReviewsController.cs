@@ -38,13 +38,14 @@
         public async Task<IActionResult> Index(int id = 1)
         {
             const int ItemsPerPage = 10;
-            
+
             var model = new ReviewListForAdminViewModel()
             {
                 PageNumber = id,
                 ItemsPerPage = ItemsPerPage,
                 Reviews = this.reviewService.GetAllReviewsWithDeleted<ReviewInListForAdminViewModel>(id, ItemsPerPage),
                 ItemsCount = this.reviewService.GetCountWithDeleted(),
+                ActionName = "Index",
             };
 
            // return this.View(await this.reviewsRepository.AllWithDeleted().ToListAsync());

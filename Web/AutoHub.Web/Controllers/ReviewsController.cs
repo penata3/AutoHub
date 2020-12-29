@@ -24,6 +24,7 @@
                 ItemsPerPage = ItemsPerPage,
                 Reviews = this.reviewsService.GetAllReviews<ReviewInListViewModel>(id, ItemsPerPage),
                 ItemsCount = this.reviewsService.GetCount(),
+                ActionName = nameof(this.AllReviews),
             };
 
             return this.View(model);

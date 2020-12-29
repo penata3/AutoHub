@@ -62,6 +62,9 @@
             input.Additions = this.additionsService.GetAllAditions();
         }
 
+
+        // TODO: REFACTOR
+
         public async Task AddAllSelectListValuesForCarEditInputModel(EditCarInputModel input)
         {
             input.MakesItems = await this.makeService.GetAllMakes();
@@ -95,7 +98,6 @@
                 Description = input.Description,
                 AddedByUserId = userId,
                 HorsePower = input.HorsePower,
-
             };
 
             Directory.CreateDirectory($"{imagePath}/cars/");
@@ -174,15 +176,13 @@
                  .ToList();
         }
 
-        public  T GetById<T>(int id)
+        public T GetById<T>(int id)
         {
-
             var car = this.carsRepository.AllAsNoTracking().Where(c => c.Id == id)
                 .To<T>()
                 .FirstOrDefault();
 
             return car;
-
         }
 
         public int GetCounForCoupeType(string coupeType)
@@ -239,6 +239,15 @@
             carToUpdate.Views++;
             
              this.carsRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetLatestFiveCars<T>()
+        {
+            return this.carsRepository.AllAsNoTracking()
+                 .OrderByDescending(x => x.CreatedOn)
+                 .Take(5)
+                 .To<T>()
+                 .ToList();
         }
     }
 }

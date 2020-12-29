@@ -34,5 +34,8 @@
         IEnumerable<T> GetAllByMakeName<T>(int page, int itemsPerPage, string makeName);
 
         Task UpdateAsync(int id, EditCarInputModel model);
+
+
+        IEnumerable<T> GetLatestFiveCars<T>();
     }
 }

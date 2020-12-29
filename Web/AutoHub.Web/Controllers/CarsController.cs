@@ -53,7 +53,7 @@
             //return this.Json(model.Additions.Where(x => x.IsCheked == true));
         }
 
-        public IActionResult ThankYou()
+        public IActionResult ThankYou() 
         {
             return this.View();
         }
@@ -68,7 +68,9 @@
                 Cars = this.carsService.GetAllCars<CarInListViewModel>(id, ItemsPerPage),
                 ItemsCount = this.carsService.GetCount(),
                 ItemsPerPage = ItemsPerPage,
+                ActionName = nameof(this.All),
             };
+
 
             return this.View(viewModel);
         }
@@ -129,7 +131,7 @@
 
         [Authorize]
         public async Task<IActionResult> Edit(int id)
-        {
+         {
             var model = this.carsService.GetById<EditCarInputModel>(id);
             await this.carsService.AddAllSelectListValuesForCarEditInputModel(model);
             return this.View(model);

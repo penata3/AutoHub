@@ -84,6 +84,15 @@
             return this.reviewsRepository.AllWithDeleted().Count();
         }
 
+        public IEnumerable<T> GetLatestFiveReviews<T>()
+        {
+            return this.reviewsRepository.AllAsNoTracking()
+                .OrderByDescending(x => x.CreatedOn)
+                .Take(5)
+                .To<T>()
+                .ToList();
+        }
+
         public T GetReviewById<T>(int id)
         {
             return this.reviewsRepository.AllAsNoTracking().Where(r => r.Id == id)

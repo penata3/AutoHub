@@ -1,29 +1,68 @@
-﻿@using AutoHub.Common
+﻿@model AutoHub.Web.ViewModels.Home.LatestCarsAndReviewsList
+
+@using AutoHub.Common
 @{
     this.ViewData["Title"] = "Home Page";
+
 }
 
-<style>
-    /*iframe {
-        width : 1120px;
-        height : 600px;
-        margin: 0 auto;
-    }*/
-</style>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
+
+    <section class="row">
+        <div class="col-md-5 ">
+            <h2>Top 5 latest cars</h2>
+            <ul class="list-unstyled">
+                @foreach (var car in Model.Cars)
+                {
+                    <li class="media mb-4">
+ 
+                            <img class="mr-3 " width="300" ; src="@car.ImageUrl" alt="@car.Title">
+                           
+
+                            <div class="media-body">
+                                <h5 class="mt-0 mb-1"><a asp-controller="Cars" asp-action="ById" asp-route-id="@car.Id">@car.Title</a></h5>
+
+                                <span>@car.Description<a asp-controller="Cars" asp-action="ById" asp-route-id="@car.Id">...</a></span>
+                                <a class="btn btn-primary" asp-controller="Cars" asp-action="ById" asp-route-id="@car.Id">@car.Price лева</a>
+                            </div>
+
+                    </li>
+                }
+
+        </div>
+
+        <div class="col-md-2">
+
+        </div>
+
+
+        <div class="col-md-5 ">
+            <ul class="list-unstyled">
+                <h2 >Top 5 latest reviews</h2>
+                @foreach (var review in Model.Reviews)
+                {
+                    <li class="media mb-4">
+
+                        <a asp-controller="Reviews" asp-action="ReviewById" asp-route-id="@review.Id">
+                            <img class="mr-3 " width="270" ; src="@review.ImageUrl" alt="@review.Title">
+                        </a>
+
+
+                        <div class="media-body">
+                            <h5 class="mt-0 mb-1"><a asp-controller="Reviews" asp-action="ReviewById" asp-route-id="@review.Id">@review.Title</a></h5>
+                            <p>
+                                <span>@review.SortDescription <a asp-controller="Reviews" asp-action="ReviewById" asp-route-id="@review.Id">...</a></span>
+                            </p>
+                        </div>
+                    </li>
+
+                }
+
 </div>
 
-<div class="embed-responsive embed-responsive-16by9">
-    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/yylk7IlYvj8"></iframe>
-</div>
-
-
-@*<iframe   class="embed-responsive embed-responsive-21by9" src="https://www.youtube.com/embed/yylk7IlYvj8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>*@
-
-<a href="https://www.youtube.com/embed/yylk7IlYvj8">
-    <img src="https://img.youtube.com/vi/yylk7IlYvj8/hqdefault.jpg" />
-</a>
-
+    </section>

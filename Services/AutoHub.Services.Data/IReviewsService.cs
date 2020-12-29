@@ -11,6 +11,8 @@
 
         IEnumerable<T> GetAllReviewsWithDeleted<T>(int page, int itemsPerPage);
 
+        IEnumerable<T> GetLatestFiveReviews<T>();
+
         int GetCount();
 
         int GetCountWithDeleted();

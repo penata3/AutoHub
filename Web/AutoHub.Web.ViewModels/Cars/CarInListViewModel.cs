@@ -21,6 +21,8 @@
 
         public string FuelName { get; set; }
 
+        public string Description { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Car, CarInListViewModel>()
@@ -28,7 +30,9 @@
             opt.MapFrom(x =>
             x.Images.FirstOrDefault().RemoteImageUrl != null ?
             x.Images.FirstOrDefault().RemoteImageUrl :
-            "/cars/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
+            "/cars/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension))
+            .ForMember(x => x.Description, opt =>
+            opt.MapFrom(x => x.Description.Substring(0, 50)));
         }
     }
 }
