@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using AutoHub.Common;
     using AutoHub.Services.Data;
+    using AutoHub.Services.Messaging;
     using AutoHub.Web.ViewModels.Cars;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
@@ -18,7 +19,8 @@
         public CarsController(
             ICarsService carsService,
             IWebHostEnvironment environment,
-            IMakeService makeService)
+            IMakeService makeService,
+            IEmailSender emailSender)
         {
             this.carsService = carsService;
             this.environment = environment;
@@ -68,7 +70,6 @@
                 ItemsPerPage = ItemsPerPage,
                 ActionName = nameof(this.All),
             };
-
 
             return this.View(viewModel);
         }
@@ -160,6 +161,20 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
+        [HttpGet]
+        [Authorize]
+        public IActionResult ContactUs()
+        {
+            return this.View();
+        }
+        
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> SendEmail(int id)
+        {
+            var car = this.carsService.GetById<CarInListViewModel>(id);
+            return null;
+        }
 
 
 

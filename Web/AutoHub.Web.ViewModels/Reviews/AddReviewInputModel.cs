@@ -8,11 +8,11 @@
     public class AddReviewInputModel
     {
         [Required]
-        [MaxLength(5)]
+        [MinLength(5)]
         public string Title { get; set; }
 
         [Required]
-        [MaxLength(10)]
+        [MinLength(10)]
         public string Description { get; set; }
 
         [Url]
