@@ -58,6 +58,8 @@
 
         public double AverageVote { get; set; }
 
+        public ImageViewModel[] Images { get; set; }
+
         public IEnumerable<AdditionsForSingleCarViewModel> Additions { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
@@ -72,6 +74,7 @@
                        x.Images.FirstOrDefault().RemoteImageUrl != null ?
                        x.Images.FirstOrDefault().RemoteImageUrl :
                        "/cars/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
+           
 
         }
     }

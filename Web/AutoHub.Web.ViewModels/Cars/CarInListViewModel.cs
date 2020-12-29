@@ -1,6 +1,7 @@
 ﻿namespace AutoHub.Web.ViewModels.Cars
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     using AutoHub.Data.Models;
@@ -19,6 +20,8 @@
 
         public string ImageUrl { get; set; }
 
+
+
         public string FuelName { get; set; }
 
         public string Description { get; set; }
@@ -30,9 +33,8 @@
             opt.MapFrom(x =>
             x.Images.FirstOrDefault().RemoteImageUrl != null ?
             x.Images.FirstOrDefault().RemoteImageUrl :
-            "/cars/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension))
-            .ForMember(x => x.Description, opt =>
-            opt.MapFrom(x => x.Description.Substring(0, 50)));
+            "/cars/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
+           
         }
     }
 }

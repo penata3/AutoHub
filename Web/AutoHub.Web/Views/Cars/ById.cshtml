@@ -57,18 +57,41 @@
 
                     else
                     {
-                <span>Viewed @Model.Views    times</span>
+                        <span>Viewed @Model.Views    times</span>
                     }
 
                 </li>
 
-              
+
             </ul>
         </div>
     </div>
-    <div class="item-figure">
-        <img class="img-fluid w-100" src="@Model.ImageUrl" alt="@Model.Title" />
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @{
+                var first = true;
+            }
+            @foreach (var item in Model.Images)
+            {
+                <div class="carousel-item @(first?Html.Raw("active"):Html.Raw(""))">
+                    <img class="d-block w-100" src="@item.ImageUrl" alt="@Model.Title">
+                </div>
+                first = false;
+            }
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+           data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+           data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
+       
+    
 
     <div class="item-feature">
         <ul>
