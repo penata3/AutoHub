@@ -20,9 +20,9 @@
 
         public string ImageUrl { get; set; }
 
-
-
         public string FuelName { get; set; }
+
+        public string ShortDescription { get; set; }
 
         public string Description { get; set; }
 
@@ -33,7 +33,9 @@
             opt.MapFrom(x =>
             x.Images.FirstOrDefault().RemoteImageUrl != null ?
             x.Images.FirstOrDefault().RemoteImageUrl :
-            "/cars/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
+            "/cars/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension))
+            .ForMember(x => x.ShortDescription,opt =>
+            opt.MapFrom(x => x.Description.Substring(0, 50)));
            
         }
     }
