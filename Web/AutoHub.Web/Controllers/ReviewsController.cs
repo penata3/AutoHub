@@ -1,8 +1,11 @@
 ﻿namespace AutoHub.Web.Controllers
 {
+    using AutoHub.Common;
     using AutoHub.Services.Data;
     using AutoHub.Web.ViewModels.Reviews;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
 
     public class ReviewsController : Controller
     {
@@ -35,6 +38,13 @@
         {
             var viewModel = this.reviewsService.GetReviewById<SingleReviewViewModel>(id);
             return this.View(viewModel);
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.reviewsService.Delete(id);
+            return this.RedirectToAction(nameof(this.AllReviews));
         }
     }
 }

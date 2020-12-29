@@ -1,19 +1,46 @@
 ﻿@model AutoHub.Web.ViewModels.Reviews.SingleReviewViewModel
 
 
+<div class="row">
     <a asp-controller="Reviews" asp-action="AllReviews">‹ Back to all reviews</a>
-    <hr />
+    @if (this.User.IsInRole("Administrator"))
+    {
+        <button class="btn btn-light ml-4 mr-4">
+            <a asp-area="Administration" asp-controller="Reviews" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        </button>
 
-    <div class="mt-10">
-        <div>
-            <h2 >@Model.Title </h2>
-        </div>
-        
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item mt-2" src="@Model.VideoUrl"></iframe>
-        </div>
+        <form method="post" asp-controller="Reviews" asp-action="Delete" id="deleteForm" asp-route-id="@Model.Id">
+        </form>
 
-        <p class="text-center mt-3 h3">
-            @Model.Description
-        </p>
+        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+    }
+</div>
+<hr />
+
+<div class="mt-10">
+    <div>
+        <h2>@Model.Title </h2>
     </div>
+
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item mt-2" src="@Model.VideoUrl"></iframe>
+    </div>
+
+    <p class="text-center mt-3 h3">
+        @Model.Description
+    </p>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Are you shoure you want to delete "@Model.Title"?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="deleteForm.submit()">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -33,7 +33,11 @@
 
         IEnumerable<T> GetAllByMakeName<T>(int page, int itemsPerPage, string makeName);
 
+        IEnumerable<T> GetAllByAdditions<T>(IEnumerable<int> aditionsIds);
+
         Task UpdateAsync(int id, EditCarInputModel model);
+
+        Task Delete(int id);
 
 
         IEnumerable<T> GetLatestFiveCars<T>();

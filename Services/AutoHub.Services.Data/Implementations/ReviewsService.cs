@@ -53,6 +53,15 @@
             await this.reviewsRepository.SaveChangesAsync();
         }
 
+        public async Task Delete(int id)
+        {
+            var review = this.reviewsRepository.AllAsNoTracking().Where(x => x.Id == id).FirstOrDefault();
+
+            this.reviewsRepository.Delete(review);
+            await this.reviewsRepository.SaveChangesAsync();
+
+        }
+
         public IEnumerable<T> GetAllReviews<T>(int page, int itemsPerPage)
         {
             var reviews = this.reviewsRepository.AllAsNoTracking()
@@ -86,7 +95,7 @@
 
         public IEnumerable<T> GetLatestFiveReviews<T>()
         {
-            return this.reviewsRepository.AllAsNoTracking()
+            return this.reviewsRepository.All()
                 .OrderByDescending(x => x.CreatedOn)
                 .Take(5)
                 .To<T>()

@@ -1,0 +1,44 @@
+﻿@model AutoHub.Web.ViewModels.Cars.CarsListViewModel
+
+@{ 
+    ViewData["Title"] = "Search";
+}
+
+
+<hr />
+<div class="row">
+
+    @foreach (var car in Model.Cars)
+    {
+
+        <div class="card col-md-5 offset-1 mt-5" style="width: 18rem;">
+            <img src="@car.ImageUrl" class="card-img-top" alt="...">
+
+            <div class="card-body">
+                <h5 class="card-title"><a asp-controller="Cars" asp-action="ById" asp-route-id="@car.Id">@car.Title</a></h5>
+                <div class="card-paragraps-container">
+
+                    <div class="row ml-3 mb-2">
+                        <i class="far fa-calendar-alt mr-2"></i>
+                        <p class="card-text">@car.ManufactureDate.Year година</p>
+                    </div>
+
+                    <div class="row ml-3">
+                        <i class="fas fa-gas-pump mr-2"></i>
+                        <p class="card-text">  @car.FuelName</p>
+                    </div>
+
+
+                </div>
+                <hr />
+
+                <a class="btn btn-primary">@car.Price лева</a>
+            </div>
+        </div>
+    }
+
+</div>
+
+<hr />
+
+

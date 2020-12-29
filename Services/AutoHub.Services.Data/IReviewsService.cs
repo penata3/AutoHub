@@ -20,5 +20,7 @@
         T GetReviewById<T>(int id);
 
         Task CreateAsync(AddReviewInputModel model, string imagePath, string userId);
+
+        Task Delete(int id);
     }
 }

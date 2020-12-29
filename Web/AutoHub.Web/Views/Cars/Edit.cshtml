@@ -17,7 +17,7 @@
 
 <h1 class="mt-5 mb-5">Publish your own free  advert</h1>
 
-<form method="post" enctype="multipart/form-data">
+<form method="post"  id="editForm"enctype="multipart/form-data">
 
     <div class="row">
         <div class="col-md-12">
@@ -42,11 +42,6 @@
             <span asp-validation-for="ModelId" class="text-danger"></span>
         </div>
 
-        @*<div class="col-md-4">
-                <label asp-for="ModelAsString"></label>
-                <input asp-for="ModelAsString" class="form-control" />
-                <span asp-validation-for="ModelAsString" class="text-danger"></span>
-            </div>*@
 
         <div class="col-md-4">
             <label asp-for="CoupeId"></label>
@@ -98,15 +93,6 @@
             <span asp-validation-for="TownId" class="text-danger"></span>
         </div>
 
-
-
-
-        @*<div class="col-md-4">
-                <label asp-for="TownAsString"></label>
-                <input asp-for="TownAsString" placeholder="Town Name" class="form-control" />
-                <span asp-validation-for="TownAsString" class="text-danger"></span>
-            </div>*@
-
     </div>
 
     <div class="row">
@@ -151,17 +137,34 @@
         </div>
     </div>
 
-
-
     <hr />
     <input type="hidden" asp-for="Id" />
-
-
-    <div class="col-md-6  align-self-md-center ">
-        <input type="submit" class="btn btn-primary" />
-    </div>
-
 </form>
+
+<button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalEdit">Save changes</button>
+
+<div class="modal" id="modalEdit" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Do you confirm this changes?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="editForm.submit()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 @section Scripts {

@@ -165,8 +165,6 @@
                 .ToList();
         }
 
-
-
         public IEnumerable<T> GetAllCars<T>(int page, int itemsPerPage)
         {
             return this.carsRepository.AllAsNoTracking()
@@ -237,17 +235,38 @@
 
             var carToUpdate = this.carsRepository.All().Where(c => c.Id == id).FirstOrDefault();
             carToUpdate.Views++;
-            
-             this.carsRepository.SaveChangesAsync();
+
+            this.carsRepository.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetLatestFiveCars<T>()
         {
-            return this.carsRepository.AllAsNoTracking()
+            return this.carsRepository.All()
                  .OrderByDescending(x => x.CreatedOn)
                  .Take(5)
                  .To<T>()
                  .ToList();
+        }
+
+        public async Task Delete(int id)
+        {
+            var car = this.carsRepository.AllAsNoTracking().Where(x => x.Id == id)
+                  .FirstOrDefault();
+
+            this.carsRepository.Delete(car);
+            await this.carsRepository.SaveChangesAsync();
+
+        }
+
+        public IEnumerable<T> GetAllByAdditions<T>(IEnumerable<int> aditionsIds)
+        {
+            var query = this.carsRepository.All().AsQueryable();
+            foreach (var aditionId in aditionsIds)
+            {
+                query = query.Where(x => x.Additions.Any(i => i.AdditionId == aditionId));
+            }
+
+            return query.To<T>().ToList();
         }
     }
 }

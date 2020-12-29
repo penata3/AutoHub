@@ -1,10 +1,8 @@
 ﻿namespace AutoHub.Web.Controllers
 {
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
-
+    using AutoHub.Common;
     using AutoHub.Services.Data;
     using AutoHub.Web.ViewModels.Cars;
     using Microsoft.AspNetCore.Authorization;
@@ -130,6 +128,7 @@
         }
 
         [Authorize]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(int id)
          {
             var model = this.carsService.GetById<EditCarInputModel>(id);
@@ -138,7 +137,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(int id, EditCarInputModel model)
         {
             if (!this.ModelState.IsValid)
@@ -151,6 +150,18 @@
             return this.RedirectToAction(nameof(this.ById), new { id });
 
         }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.carsService.Delete(id);
+
+            return this.RedirectToAction(nameof(this.All));
+        }
+
+
+
 
     }
 }

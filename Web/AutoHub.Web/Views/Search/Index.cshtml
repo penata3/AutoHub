@@ -1,0 +1,22 @@
+﻿@model AutoHub.Web.ViewModels.Search.AllAdditionsListViewModel
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h1 class="mb-6">Find your dream car by listing favorite additions</h1>
+
+<form class="mt-6" asp-action="List" method="get">
+    <div class="row">
+
+        @foreach (var adition in Model.Additions)
+        {
+            <div class="col-md-4">
+
+                <input id="adition_@adition.Id" type="checkbox" name="Additions" value="@adition.Id" />
+                <label asp-for="adition_@adition.Id">@adition.Name</label>
+            </div>
+        }
+    </div>
+
+    <button class="btn btn-success">Search </button>
+</form>
