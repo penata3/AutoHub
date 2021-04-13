@@ -24,7 +24,7 @@
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
 
-   
+
     </div>
 
     <div class="row">
@@ -68,7 +68,7 @@
             <span asp-validation-for="ManufactureDate" class="text-danger"></span>
         </div>
 
- 
+
         <div class="col-md-4">
             <label asp-for="ConditionId"></label>
             <select asp-for="ConditionId" class="form-control " asp-items="conditions"></select>
@@ -181,38 +181,31 @@
 
 
 @section Scripts {
-  
     <script>
-        document.getElementById('RegionId').addEventListener('change', (e) => {
-            const modelSelectElement = document.getElementById('TownId');
-            modelSelectElement.innerHTML = "<option disabled value=''>Select Car Model</option>";
-            fetch(`/regiontowns/getTowns?Id=${e.target.value}`)
-                .then((response) => {
-                    return response.json();
-                })
-                .then((data) => {
-                    Array.prototype.forEach.call(data, function (item, i) {
-                        document.getElementById('TownId').innerHTML += `<option value="${item.id}">${item.name}</option>`
-                    });
-                });
-        });
-    </script>
+                document.getElementById('RegionId').addEventListener('change', async (e) => {
+                    const townSelectElement = document.getElementById('TownId');
+                    townSelectElement.innerHTML = "<option disabled value=''>Select town</option>";
+                    const response = await fetch(`/regiontowns/getTowns?Id=${e.target.value}`);
+                    const data = await response.json();
 
-    <script>
-        document.getElementById('MakeId').addEventListener('change', (e) => {
-            const modelSelectElement = document.getElementById('ModelId');
-            modelSelectElement.innerHTML = "<option disabled value=''>Select Car Model</option>";
-            fetch(`/carmodels/getModels?Id=${e.target.value}`)
-                .then((response) => {
-                    return response.json();
-                })
-                .then((data) => {
-                    Array.prototype.forEach.call(data, function (item, i) {
-                        document.getElementById('ModelId').innerHTML += `<option value="${item.id}">${item.name}</option>`
+                    data.forEach(town => {
+                        townSelectElement.innerHTML += `<option value="${town.id}">${town.name}</option>`
                     });
                 });
-        });
-    </script>
+
+
+        document.getElementById('MakeId').addEventListener('change', async (e) => {
+            const modelSelectList = document.getElementById('ModelId');
+            modelSelectList.innerHTML = "<option disabled value=''>Select model</option>";
+
+            const response = await fetch(`/carmodels/getModels?Id=${e.target.value}`);
+            const data = await response.json();
+
+            [...data].forEach(model => {
+                modelSelectList.innerHTML += `<option value="${model.id}">${model.name}</option>`;
+            })
+        })
+        </script>
 
 }
 
