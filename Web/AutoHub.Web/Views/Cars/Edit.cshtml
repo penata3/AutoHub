@@ -168,37 +168,5 @@
 
 
 @section Scripts {
-
-    <script>
-        document.getElementById('RegionId').addEventListener('change', (e) => {
-            const modelSelectElement = document.getElementById('TownId');
-            modelSelectElement.innerHTML = "<option disabled value=''>Select Car Model</option>";
-            fetch(`/regiontowns/getTowns?Id=${e.target.value}`)
-                .then((response) => {
-                    return response.json();
-                })
-                .then((data) => {
-                    Array.prototype.forEach.call(data, function (item, i) {
-                        document.getElementById('TownId').innerHTML += `<option value="${item.id}">${item.name}</option>`
-                    });
-                });
-        });
-    </script>
-
-    <script>
-        document.getElementById('MakeId').addEventListener('change', (e) => {
-            const modelSelectElement = document.getElementById('ModelId');
-            modelSelectElement.innerHTML = "<option disabled value=''>Select Car Model</option>";
-            fetch(`/carmodels/getModels?Id=${e.target.value}`)
-                .then((response) => {
-                    return response.json();
-                })
-                .then((data) => {
-                    Array.prototype.forEach.call(data, function (item, i) {
-                        document.getElementById('ModelId').innerHTML += `<option value="${item.id}">${item.name}</option>`
-                    });
-                });
-        });
-    </script>
-
+    <script src="~/js/makeAndModelDropdown.js"></script>
 }

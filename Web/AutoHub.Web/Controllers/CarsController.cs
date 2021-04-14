@@ -2,9 +2,9 @@
 {
     using System.Security.Claims;
     using System.Threading.Tasks;
+
     using AutoHub.Common;
     using AutoHub.Services.Data;
-    using AutoHub.Services.Messaging;
     using AutoHub.Web.ViewModels.Cars;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
@@ -19,8 +19,7 @@
         public CarsController(
             ICarsService carsService,
             IWebHostEnvironment environment,
-            IMakeService makeService,
-            IEmailSender emailSender)
+            IMakeService makeService)
         {
             this.carsService = carsService;
             this.environment = environment;
@@ -49,8 +48,6 @@
             await this.carsService.CreateAsync(model, userId, imagePath);
 
             return this.RedirectToAction("ThankYou");
-
-            //return this.Json(model.Additions.Where(x => x.IsCheked == true));
         }
 
         public IActionResult ThankYou() 
@@ -125,7 +122,6 @@
             };
 
             return this.View(viewModel);
-
         }
 
         [Authorize]
@@ -167,16 +163,5 @@
         {
             return this.View();
         }
-        
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> SendEmail(int id)
-        {
-            var car = this.carsService.GetById<CarInListViewModel>(id);
-            return null;
-        }
-
-
-
     }
 }

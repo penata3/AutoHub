@@ -31,7 +31,10 @@
 
         <div class="col-md-4">
             <label asp-for="MakeId"></label>
-            <select asp-for="MakeId" class="form-control" asp-items="makesItems"></select>
+            <select asp-for="MakeId" class="form-control" asp-items="makesItems">
+                
+                <option disabled value=''>Select make</option>
+            </select>
             <span asp-validation-for="MakeId" class="text-danger"></span>
         </div>
 
@@ -86,7 +89,9 @@
 
         <div class="col-md-4">
             <label asp-for="RegionId"></label>
-            <select asp-for="RegionId" class="form-control" asp-items="regions"></select>
+            <select asp-for="RegionId" class="form-control" asp-items="regions">
+                <option disabled value=''>Select make</option>
+            </select>
             <span asp-validation-for="RegionId" class="text-danger"></span>
         </div>
 
@@ -181,32 +186,7 @@
 
 
 @section Scripts {
-    <script>
-                document.getElementById('RegionId').addEventListener('change', async (e) => {
-                    const townSelectElement = document.getElementById('TownId');
-                    townSelectElement.innerHTML = "<option disabled value=''>Select town</option>";
-                    const response = await fetch(`/regiontowns/getTowns?Id=${e.target.value}`);
-                    const data = await response.json();
-
-                    data.forEach(town => {
-                        townSelectElement.innerHTML += `<option value="${town.id}">${town.name}</option>`
-                    });
-                });
-
-
-        document.getElementById('MakeId').addEventListener('change', async (e) => {
-            const modelSelectList = document.getElementById('ModelId');
-            modelSelectList.innerHTML = "<option disabled value=''>Select model</option>";
-
-            const response = await fetch(`/carmodels/getModels?Id=${e.target.value}`);
-            const data = await response.json();
-
-            [...data].forEach(model => {
-                modelSelectList.innerHTML += `<option value="${model.id}">${model.name}</option>`;
-            })
-        })
-        </script>
-
+    <script src="~/js/makeAndModelDropdown.js"> </script>
 }
 
 

@@ -150,8 +150,10 @@
                         throw;
                     }
                 }
+
                 return this.RedirectToAction(nameof(this.Index));
             }
+
             return this.View(review);
         }
 
@@ -174,11 +176,12 @@
         }
 
         // POST: Administration/Reviews/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var review =  this.reviewsRepository.AllAsNoTracking().FirstOrDefault(x=> x.Id == id);
+            var review =  this.reviewsRepository.AllAsNoTracking().FirstOrDefault(x => x.Id == id);
             this.reviewsRepository.Delete(review);
             await this.reviewsRepository.SaveChangesAsync();
             return this.RedirectToAction(nameof(this.Index));
