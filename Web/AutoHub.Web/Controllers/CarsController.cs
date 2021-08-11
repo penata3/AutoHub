@@ -145,7 +145,6 @@
 
             await this.carsService.UpdateAsync(id, model);
             return this.RedirectToAction(nameof(this.ById), new { id });
-
         }
 
         [HttpPost]

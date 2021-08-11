@@ -1,7 +1,6 @@
 ﻿namespace AutoHub.Web.ViewModels.Cars
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
 
     using AutoHub.Data.Models;
@@ -36,7 +35,6 @@
             "/cars/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension))
             .ForMember(x => x.ShortDescription,opt =>
             opt.MapFrom(x => x.Description.Substring(0, 50)));
-           
         }
     }
 }

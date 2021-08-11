@@ -1,14 +1,10 @@
 ﻿@model AutoHub.Web.ViewModels.Cars.CarsListViewModel
 
-
-
-
 <hr />
 <div class="row">
    
         @foreach (var car in Model.Cars)
         {
-
             <div class="card col-md-5 offset-1 mt-5" style="width: 18rem;">
                 <img src="@car.ImageUrl" class="card-img-top" alt="...">
               

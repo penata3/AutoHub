@@ -25,5 +25,6 @@
         public int NextPageNumber => this.PageNumber + 1;
 
         public string ActionName { get; set; }
+
     }
 }
