@@ -11,7 +11,19 @@
     var fuels = this.Model.Fuels.Select(x => new SelectListItem(x.Value, x.Key));
 
 }
+<style>
 
+    .aditionsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-size: 14px;
+    }
+
+    .hidden {
+        display: none;
+    }
+    
+</style>
 
 <h1 class="mt-5 mb-5">Publish your own free  advert</h1>
 
@@ -32,7 +44,7 @@
         <div class="col-md-4">
             <label asp-for="MakeId"></label>
             <select asp-for="MakeId" class="form-control" asp-items="makesItems">
-                
+
                 <option disabled value=''>Select make</option>
             </select>
             <span asp-validation-for="MakeId" class="text-danger"></span>
@@ -162,21 +174,34 @@
             <span asp-validation-for="Description"></span>
         </div>
     </div>
+    <div class="aditionsContainer">
+ 
+            @for (int i = 0; i < 20; i++)
+            {
+                <div class="adition">
+                    <label asp-for="@Model.Additions">@Model.Additions[i].Name</label>
+                    <input type="hidden" asp-for="@Model.Additions[i].Id" />
+                    <input type="checkbox" asp-for="@Model.Additions[i].IsCheked" class="checkbox" />
+                </div>
+            }
 
 
-    <div class="row">
 
-        @for (int i = 0; i < Model.Additions.Count(); i++)
+
+    <div class="containerToHide">
+        @for (int j = 20; j < Model.Additions.Count(); j++)
         {
-            <div class="col-md-4 form-group">
-                <label asp-for="@Model.Additions">@Model.Additions[i].Name</label>
-                <input type="hidden" asp-for="@Model.Additions[i].Id" />
-                <input type="checkbox" asp-for="@Model.Additions[i].IsCheked" class="checkbox" />
+            <div class="adition">
+                <label asp-for="@Model.Additions">@Model.Additions[j].Name</label>
+                <input type="hidden" asp-for="@Model.Additions[j].Id" />
+                <input type="checkbox" asp-for="@Model.Additions[j].IsCheked" class="checkbox" />
             </div>
         }
-
     </div>
 
+    </div>
+   
+    <button class="showMoreButton btn btn-primary">Show More!</button>
 
     <div class="col-md-6  align-self-md-center ">
         <input type="submit" class="btn btn-primary" />
@@ -187,6 +212,33 @@
 
 @section Scripts {
     <script src="~/js/makeAndModelDropdown.js"> </script>
+<script>
+
+    var showAdditions = false;
+
+    var containerToShow = this.document.getElementsByClassName('containerToHide')[0];
+    var btn = this.document.getElementsByClassName('showMoreButton')[0];
+
+    btn.addEventListener('click', (event) =>
+    {
+        event.preventDefault();
+
+        showAdditions = !showAdditions;
+
+        if (!showAdditions) {
+            console.log('Im here');
+            containerToShow.classList.remove('hidden');
+            btn.innerText = 'Hide'
+
+        } else
+        {
+            containerToShow.classList.add('hidden');
+            btn.innerText = 'Show More'
+
+        }
+    })
+
+</script>
 }
 
 

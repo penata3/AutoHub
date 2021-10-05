@@ -2,14 +2,11 @@
 {
     using System.Reflection;
 
-    using AutoHub.Data;
-    using AutoHub.Data.Seeding;
     using AutoHub.Services.Mapping;
     using AutoHub.Web.Extensions;
     using AutoHub.Web.ViewModels;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -33,27 +30,15 @@
             services.AddAntyForgery();
             services.AddRepositoryes();
             services.AddCustomApplictionServices(this.configuration);
-
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
-            // Seed data on application startup
-
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                dbContext.Database.Migrate();
-                new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
-            }
-
-
+            app.AddInitialDataSeed();
             app.AddInitialAdmin();
-
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

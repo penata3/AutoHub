@@ -62,7 +62,7 @@
             input.Additions = this.additionsService.GetAllAditions();
         }
 
-
+     
         // TODO: REFACTOR
 
         public async Task AddAllSelectListValuesForCarEditInputModel(EditCarInputModel input)
@@ -74,6 +74,7 @@
             input.GearBoxes = await this.gearBoxesService.GetAllGearBoxesAsync();
             input.Regions = await this.regionsServices.GetAllRegionsAsync();
             input.Fuels = await this.fuelsServices.GetAllFuelTypesAsync();
+
             // input.Additions = this.additionsService.GetAllAditions();
         }
 
@@ -267,6 +268,11 @@
             }
 
             return query.To<T>().ToList();
+        }
+
+        public Task AddSelectListValuesForCarCreateOrEditModel<T>(T input)
+        {
+            throw new NotImplementedException();
         }
     }
 }

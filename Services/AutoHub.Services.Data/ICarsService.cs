@@ -13,6 +13,8 @@
 
         Task AddAllSelectListValuesForCarEditInputModel(EditCarInputModel input);
 
+        Task AddSelectListValuesForCarCreateOrEditModel<T>(T input);
+
         IEnumerable<T> GetAllCars<T>(int page, int itemsPerPage);
 
         int GetCount();
@@ -38,7 +40,6 @@
         Task UpdateAsync(int id, EditCarInputModel model);
 
         Task Delete(int id);
-
 
         IEnumerable<T> GetLatestFiveCars<T>();
     }

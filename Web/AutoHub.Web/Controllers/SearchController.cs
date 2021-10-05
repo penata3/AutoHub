@@ -1,10 +1,10 @@
-﻿using AutoHub.Services.Data;
-using AutoHub.Web.ViewModels.Cars;
-using AutoHub.Web.ViewModels.Search;
-using Microsoft.AspNetCore.Mvc;
-
-namespace AutoHub.Web.Controllers
+﻿namespace AutoHub.Web.Controllers
 {
+    using AutoHub.Services.Data;
+    using AutoHub.Web.ViewModels.Cars;
+    using AutoHub.Web.ViewModels.Search;
+    using Microsoft.AspNetCore.Mvc;
+
     public class SearchController : Controller
     {
         private readonly IAdditionsService additionsService;

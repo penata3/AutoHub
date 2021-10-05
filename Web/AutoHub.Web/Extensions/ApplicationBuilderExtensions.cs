@@ -1,7 +1,9 @@
 ﻿namespace AutoHub.Web.Extensions
 {
     using AutoHub.Common;
+    using AutoHub.Data;
     using AutoHub.Data.Models;
+    using AutoHub.Data.Seeding;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -30,6 +32,18 @@
                 {
                     userManager.AddToRoleAsync(user, GlobalConstants.AdministratorRoleName);
                 }
+            }
+
+            return app;
+        }
+
+        public static IApplicationBuilder AddInitialDataSeed(this IApplicationBuilder app) 
+        {
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                dbContext.Database.Migrate();
+                new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
             return app;
