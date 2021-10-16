@@ -1,6 +1,7 @@
 ﻿document.getElementById('RegionId').addEventListener('click', async (e) => {
     const townSelectElement = document.getElementById('TownId');
     townSelectElement.innerHTML = "<option disabled value=''>Select town</option>";
+
     const response = await fetch(`/regiontowns/getTowns?Id=${e.target.value}`);
     const data = await response.json();
 

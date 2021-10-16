@@ -14,9 +14,10 @@
 <style>
 
     .aditionsContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    font-size: 14px;
+   
+    font-size: 12px;
+    display:grid;
+    grid-template-columns: 25% 25% 25% 25%;
     }
 
     .hidden {
@@ -27,6 +28,7 @@
 
 <h1 class="mt-5 mb-5">Publish your own free  advert</h1>
 
+
 <form method="post" enctype="multipart/form-data">
 
     <div class="row">
@@ -35,8 +37,6 @@
             <input asp-for="Title" class="form-control" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
-
-
     </div>
 
     <div class="row">
@@ -44,7 +44,6 @@
         <div class="col-md-4">
             <label asp-for="MakeId"></label>
             <select asp-for="MakeId" class="form-control" asp-items="makesItems">
-
                 <option disabled value=''>Select make</option>
             </select>
             <span asp-validation-for="MakeId" class="text-danger"></span>
@@ -95,14 +94,20 @@
     <div class="row">
         <div class="col-md-4">
             <label asp-for="Price"></label>
-            <input asp-for="Price" class="form-control" placeholder="0" />
+            
+            <p>
+                <i class="fa fa-camera-retro"></i>
+                <i class="fa-solid fa-euro-sign"></i>
+                <i class="fas fa-euro-sign"></i>
+            </p>
+            <input asp-for="Price" class="form-control" placeholder="price in euro" />
             <span asp-validation-for="Price"></span>
         </div>
 
         <div class="col-md-4">
             <label asp-for="RegionId"></label>
             <select asp-for="RegionId" class="form-control" asp-items="regions">
-                <option disabled value=''>Select make</option>
+                <option disabled value=''>Select region</option>
             </select>
             <span asp-validation-for="RegionId" class="text-danger"></span>
         </div>
@@ -115,14 +120,11 @@
             <span asp-validation-for="TownId" class="text-danger"></span>
         </div>
 
-
-
-
         @*<div class="col-md-4">
-                <label asp-for="TownAsString"></label>
-                <input asp-for="TownAsString" placeholder="Town Name" class="form-control" />
-                <span asp-validation-for="TownAsString" class="text-danger"></span>
-            </div>*@
+            <label asp-for="TownAsString"></label>
+            <input asp-for="TownAsString" placeholder="Town Name" class="form-control" />
+            <span asp-validation-for="TownAsString" class="text-danger"></span>
+        </div>*@
 
     </div>
 
@@ -144,14 +146,13 @@
             <span asp-validation-for="GearBoxId" class="text-danger"></span>
         </div>
     </div>
-    <div class="row">
 
+    <div class="row">
         <div class="col-md-6">
             <label asp-for="Images"></label>
             <input asp-for="Images" class="form-control" />
             <span asp-validation-for="Images" class="text-danger"></span>
         </div>
-
 
         <div class="col-md-3">
             <label asp-for="HorsePower"></label>
@@ -166,7 +167,6 @@
         </div>
 
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <label asp-for="Description"></label>
@@ -174,8 +174,9 @@
             <span asp-validation-for="Description"></span>
         </div>
     </div>
-    <div class="aditionsContainer">
+    <div class="aditions">
  
+        <div class="aditionsContainer">
             @for (int i = 0; i < 20; i++)
             {
                 <div class="adition">
@@ -184,11 +185,9 @@
                     <input type="checkbox" asp-for="@Model.Additions[i].IsCheked" class="checkbox" />
                 </div>
             }
+        </div>
 
-
-
-
-    <div class="containerToHide">
+    <div class="aditionsContainer containerToShow hidden">
         @for (int j = 20; j < Model.Additions.Count(); j++)
         {
             <div class="adition">
@@ -198,47 +197,20 @@
             </div>
         }
     </div>
+     
 
     </div>
-   
-    <button class="showMoreButton btn btn-primary">Show More!</button>
-
+    
+    <button class="showMoreButton btn btn-primary">Show more</button>
     <div class="col-md-6  align-self-md-center ">
         <input type="submit" class="btn btn-primary" />
     </div>
 
 </form>
 
-
 @section Scripts {
-    <script src="~/js/makeAndModelDropdown.js"> </script>
-<script>
-
-    var showAdditions = false;
-
-    var containerToShow = this.document.getElementsByClassName('containerToHide')[0];
-    var btn = this.document.getElementsByClassName('showMoreButton')[0];
-
-    btn.addEventListener('click', (event) =>
-    {
-        event.preventDefault();
-
-        showAdditions = !showAdditions;
-
-        if (!showAdditions) {
-            console.log('Im here');
-            containerToShow.classList.remove('hidden');
-            btn.innerText = 'Hide'
-
-        } else
-        {
-            containerToShow.classList.add('hidden');
-            btn.innerText = 'Show More'
-
-        }
-    })
-
-</script>
+    <script src="~/js/cascadeDropdowns.js"> </script>
+    <script src="~/js/showAdditionsForAddCarView.js"></script>
 }
 
 

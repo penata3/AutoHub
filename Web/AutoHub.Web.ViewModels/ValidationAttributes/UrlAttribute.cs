@@ -1,31 +1,26 @@
 ﻿namespace AutoHub.Web.ViewModels.ValidationAttributes
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Text;
     using System.Text.RegularExpressions;
 
     public class UrlAttribute : ValidationAttribute
     {
-        public UrlAttribute() { }
-
-        public override bool IsValid(object value)
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            //may want more here for https, etc
-            Regex regex = new Regex(@"(http://)?(www\.)?\w+\.(com|net|edu|org)");
-
             if (value == null)
             {
-                return false;
+                return new ValidationResult("Url is required");
             }
 
-            if (!regex.IsMatch(value.ToString())) 
+            Regex regex = new Regex(@"(http://)?(www\.)?\w+\.(com|net|edu|org)");
+
+            if (!regex.IsMatch(value.ToString()))
             {
-                return false;
+                return new ValidationResult("This is not valid ulr");
             }
 
-            return true;
+            return ValidationResult.Success;
+
         }
     }
 }

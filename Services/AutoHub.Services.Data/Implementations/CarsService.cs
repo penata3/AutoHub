@@ -262,6 +262,7 @@
         public IEnumerable<T> GetAllByAdditions<T>(IEnumerable<int> aditionsIds)
         {
             var query = this.carsRepository.All().AsQueryable();
+
             foreach (var aditionId in aditionsIds)
             {
                 query = query.Where(x => x.Additions.Any(i => i.AdditionId == aditionId));

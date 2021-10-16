@@ -41,6 +41,7 @@
             if (!this.ModelState.IsValid)
             {
                 await this.carsService.AddAllSelectListValuesForCarInputModel(model);
+                return this.View(model);
             }
 
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;

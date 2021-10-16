@@ -8,9 +8,8 @@
     using AutoHub.Web.ViewModels.Additions;
     using AutoHub.Web.ViewModels.ValidationAttributes;
     using Microsoft.AspNetCore.Http;
-    using System.ComponentModel.DataAnnotations;
 
-
+    using UrlAttribute = ValidationAttributes.UrlAttribute;
 
     public class AddCarInputModel
     {
@@ -49,7 +48,7 @@
         [Display(Name = "Coupe Type")]
         public int CoupeId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Url]
+        [UrlAttribute(ErrorMessage = "Invalid url")]
         public string TechDataUrl { get; set; }
 
         [Display(Name = "Condition")]
@@ -72,8 +71,6 @@
         [Required]
         [Display(Name = "Horse Power")]
         public int HorsePower { get; set; }
-
-        public int AdditionId { get; set; }
 
         [AllowedExtensionsAttribute]
         public IEnumerable<IFormFile> Images { get; set; }
