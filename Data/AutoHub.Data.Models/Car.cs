@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-
+    using System.ComponentModel.DataAnnotations;
     using AutoHub.Data.Common.Models;
 
     public class Car : BaseDeletableModel<int>
@@ -14,10 +14,13 @@
             this.Votes = new HashSet<Vote>();
         }
 
+        [Required]
         public string Title { get; set; }
 
+        [Required]
         public int MakeId { get; set; }
 
+        [Required]
         public virtual Make Make { get; set; }
 
         public int ModelId { get; set; }

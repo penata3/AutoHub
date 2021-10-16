@@ -4,11 +4,9 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using AutoHub.Data.Models;
     using AutoHub.Web.ViewModels.Additions;
     using AutoHub.Web.ViewModels.ValidationAttributes;
     using Microsoft.AspNetCore.Http;
-
     using UrlAttribute = ValidationAttributes.UrlAttribute;
 
     public class AddCarInputModel
@@ -26,6 +24,7 @@
 
         [Display(Name = "Year of manifacture")]
         [DataType(DataType.Date)]
+        [ValidYearAttribute]
         public DateTime ManufactureDate { get; set; }
 
         [Display(Name = "Make")]
@@ -48,7 +47,7 @@
         [Display(Name = "Coupe Type")]
         public int CoupeId { get; set; }
 
-        [UrlAttribute(ErrorMessage = "Invalid url")]
+        [Url(ErrorMessage = "Invalid url")]
         public string TechDataUrl { get; set; }
 
         [Display(Name = "Condition")]

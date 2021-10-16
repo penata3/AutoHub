@@ -20,6 +20,10 @@
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var files = value as IEnumerable<IFormFile>;
+            if (files == null) 
+            {
+               return new ValidationResult("At least one image is required!");
+            }
 
             foreach (var file in files)
             {
