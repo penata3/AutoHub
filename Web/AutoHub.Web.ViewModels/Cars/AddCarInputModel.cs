@@ -7,6 +7,7 @@
     using AutoHub.Web.ViewModels.Additions;
     using AutoHub.Web.ViewModels.ValidationAttributes;
     using Microsoft.AspNetCore.Http;
+
     using UrlAttribute = ValidationAttributes.UrlAttribute;
 
     public class AddCarInputModel
@@ -24,7 +25,7 @@
 
         [Display(Name = "Year of manifacture")]
         [DataType(DataType.Date)]
-        [ValidYearAttribute]
+        [YearValidator]
         public DateTime ManufactureDate { get; set; }
 
         [Display(Name = "Make")]
@@ -71,7 +72,7 @@
         [Display(Name = "Horse Power")]
         public int HorsePower { get; set; }
 
-        [AllowedExtensionsAttribute]
+        [FormFileValidator]
         public IEnumerable<IFormFile> Images { get; set; }
 
         public AdditionViewModel[] Additions { get; set; }

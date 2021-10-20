@@ -15,11 +15,17 @@
             this.makesService = makesService;
         }
 
-        public async Task<IActionResult> GetModels(int id = 1)
-        {                 
+        public async Task<IActionResult> GetModels(int id)
+        {
+            if (id != 0)
+            {
                 var data = await this.makesService.GetMakeWithModelsAsync(id);
                 var result = data.FirstOrDefault(x => x.Id == id).Models;
                 return this.Json(result);
+            };
+
+            return null;
+              
         }
     }
 }

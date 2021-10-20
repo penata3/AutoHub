@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class ValidYearAttribute : ValidationAttribute
+    public class YearValidatorAttribute : ValidationAttribute
     {
 
         private DateTime lowestDatePossible = new DateTime(1990, 1, 1);

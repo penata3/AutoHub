@@ -8,19 +8,16 @@
 
     using Microsoft.AspNetCore.Http;
 
-    public class AllowedExtensionsAttribute : ValidationAttribute
+    public class FormFileValidatorAttribute : ValidationAttribute
     {
         private readonly string[] extensions = new[] { ".jpg", ".png" };
-
-        public string GetErrorMessage()
-        {
-            return $"This photo extension is not allowed!";
-        }
+        private readonly int maxFileSize = 5 * 1024 * 1024;
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var files = value as IEnumerable<IFormFile>;
-            if (files == null) 
+
+            if (files == null)
             {
                return new ValidationResult("At least one image is required!");
             }
@@ -30,9 +27,16 @@
                 if (file != null)
                 {
                     var extension = Path.GetExtension(file.FileName);
+                    var fileSize = file.Length;
+
+                    if (fileSize > this.maxFileSize)
+                    {
+                        return new ValidationResult("File is too big");
+                    }
+
                     if (!this.extensions.Contains(extension.ToLower()))
                     {
-                        return new ValidationResult(this.GetErrorMessage());
+                        return new ValidationResult("This photo extension is not allowed!");
                     }
                 }
             }

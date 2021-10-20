@@ -9,12 +9,14 @@
     var gearBoxes = this.Model.GearBoxes.Select(x => new SelectListItem(x.Value, x.Key));
     var regions = this.Model.Regions.Select(x => new SelectListItem(x.Value, x.Key));
     var fuels = this.Model.Fuels.Select(x => new SelectListItem(x.Value, x.Key));
+    Model.ManufactureDate = DateTime.UtcNow;
+
+    
 
 }
 <style>
 
-    .aditionsContainer {
-   
+    .aditionsContainer {   
     font-size: 12px;
     display:grid;
     grid-template-columns: 25% 25% 25% 25%;
@@ -94,12 +96,6 @@
     <div class="row">
         <div class="col-md-4">
             <label asp-for="Price"></label>
-            
-            <p>
-                <i class="fa fa-camera-retro"></i>
-                <i class="fa-solid fa-euro-sign"></i>
-                <i class="fas fa-euro-sign"></i>
-            </p>
             <input asp-for="Price" class="form-control" placeholder="price in euro" />
             <span asp-validation-for="Price"></span>
         </div>
@@ -121,10 +117,10 @@
         </div>
 
         @*<div class="col-md-4">
-            <label asp-for="TownAsString"></label>
-            <input asp-for="TownAsString" placeholder="Town Name" class="form-control" />
-            <span asp-validation-for="TownAsString" class="text-danger"></span>
-        </div>*@
+                <label asp-for="TownAsString"></label>
+                <input asp-for="TownAsString" placeholder="Town Name" class="form-control" />
+                <span asp-validation-for="TownAsString" class="text-danger"></span>
+            </div>*@
 
     </div>
 
@@ -174,8 +170,11 @@
             <span asp-validation-for="Description"></span>
         </div>
     </div>
+
+    <hr />
+    <h5>Additions</h5>
     <div class="aditions">
- 
+
         <div class="aditionsContainer">
             @for (int i = 0; i < 20; i++)
             {
@@ -187,20 +186,20 @@
             }
         </div>
 
-    <div class="aditionsContainer containerToShow hidden">
-        @for (int j = 20; j < Model.Additions.Count(); j++)
-        {
-            <div class="adition">
-                <label asp-for="@Model.Additions">@Model.Additions[j].Name</label>
-                <input type="hidden" asp-for="@Model.Additions[j].Id" />
-                <input type="checkbox" asp-for="@Model.Additions[j].IsCheked" class="checkbox" />
-            </div>
-        }
-    </div>
-     
+        <div class="aditionsContainer containerToShow hidden">
+            @for (int j = 20; j < Model.Additions.Count(); j++)
+            {
+                <div class="adition">
+                    <label asp-for="@Model.Additions">@Model.Additions[j].Name</label>
+                    <input type="hidden" asp-for="@Model.Additions[j].Id" />
+                    <input type="checkbox" asp-for="@Model.Additions[j].IsCheked" class="checkbox" />
+                </div>
+            }
+        </div>
+
 
     </div>
-    
+
     <button class="showMoreButton btn btn-primary">Show more</button>
     <div class="col-md-6  align-self-md-center ">
         <input type="submit" class="btn btn-primary" />

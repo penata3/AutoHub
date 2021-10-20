@@ -1,24 +1,41 @@
-﻿document.getElementById('RegionId').addEventListener('click', async (e) => {
+﻿document.getElementById('RegionId').addEventListener('change', async (e) => {
     const townSelectElement = document.getElementById('TownId');
     townSelectElement.innerHTML = "<option disabled value=''>Select town</option>";
 
-    const response = await fetch(`/regiontowns/getTowns?Id=${e.target.value}`);
-    const data = await response.json();
+    var regionId = e.target.value;
 
-    data.forEach(town => {
-        townSelectElement.innerHTML += `<option value="${town.id}">${town.name}</option>`
-    });
+   
+
+    const response = await fetch(`/regiontowns/getTowns?Id=${regionId}`);
+        const data = await response.json();
+
+        data.forEach(town => {
+            townSelectElement.innerHTML += `<option value="${town.id}">${town.name}</option>`
+        });
+
 });
 
 
-document.getElementById('MakeId').addEventListener('click', async (e) => {
+document.getElementById('MakeId').addEventListener('change', async (e) => {
     const modelSelectList = document.getElementById('ModelId');
     modelSelectList.innerHTML = "<option disabled value=''>Select model</option>";
 
-    const response = await fetch(`/carmodels/getModels?Id=${e.target.value}`);
-    const data = await response.json();
+    //parse the event target value to see if it is validnumber
+    var parsedMakeId = parseInt(e.target.value);
 
-    data.forEach(model => {
-        modelSelectList.innerHTML += `<option value="${model.id}">${model.name}</option>`;
-    })
+
+    if (parsedMakeId) {
+
+           const response = await fetch(`/carmodels/getModels?Id=${e.target.value}`);
+         const data = await response.json();
+        data.forEach(model => {
+            modelSelectList.innerHTML += `<option value="${model.id}">${model.name}</option>`;
+      })
+    }
+
+ 
+
+  
+
+   
 })
