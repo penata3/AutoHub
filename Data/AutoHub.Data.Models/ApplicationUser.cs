@@ -29,6 +29,8 @@ namespace AutoHub.Data.Models
 
         public DateTime? DeletedOn { get; set; }
 
+        public DateTime? DateOfBirth { get; set; }
+
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
