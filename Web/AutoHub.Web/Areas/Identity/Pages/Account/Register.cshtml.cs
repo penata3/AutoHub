@@ -73,13 +73,13 @@
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            this.ReturnUrl = returnUrl;
-            this.ExternalLogins = (await this._signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+             this.ReturnUrl = returnUrl;
+             this.ExternalLogins = (await this._signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
+            returnUrl ??= this.Url.Content("~/");
 
             this.ExternalLogins = (await this._signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -116,7 +116,7 @@
                 }
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    this.ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 

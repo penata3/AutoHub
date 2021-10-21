@@ -3,43 +3,37 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-
     public class YearValidatorForUserRegistration : ValidationAttribute
     {
         private readonly int minimumAge;
-        private readonly DateTime minimumAllowedYearOfBirth = new DateTime(1990, 1, 1);
+        private readonly DateTime minumumYearOfBirth;
 
         public YearValidatorForUserRegistration(int minimumAge)
         {
             this.minimumAge = minimumAge;
+            this.minumumYearOfBirth = new DateTime(1900, 1, 1);
         }
-
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             DateTime date;
+
             if (DateTime.TryParse(value.ToString(), out date))
             {
-                if (date < this.minimumAllowedYearOfBirth)
+                if (date < this.minumumYearOfBirth)
                 {
-                    return new ValidationResult("I think you are too old to sell a car mate");
+                    return new ValidationResult("Are you seriousli that old?");
                 }
-                else if (date.AddYears(this.minimumAge) <= DateTime.Now)
+
+                if (date.AddYears(this.minimumAge) <= DateTime.Now)
                 {
                     return ValidationResult.Success;
                 }
 
-                else if (date.AddYears(this.minimumAge) > DateTime.Now)
-                {
-                    return new ValidationResult("You are not even born mate");
-                }
-                
+                return new ValidationResult($"Users under {this.minimumAge} are not allowed!");
             }
 
-            return new ValidationResult("You are too young to register in or sitee");
-            
+            return new ValidationResult("Invalid date format");
         }
-
-     
     }
 }
