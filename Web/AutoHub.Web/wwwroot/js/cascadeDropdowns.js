@@ -21,6 +21,7 @@ document.getElementById('MakeId').addEventListener('change', async (e) => {
     modelSelectList.innerHTML = "<option disabled value=''>Select model</option>";
 
     //parse the event target value to see if it is validnumber
+
     var parsedMakeId = parseInt(e.target.value);
 
 

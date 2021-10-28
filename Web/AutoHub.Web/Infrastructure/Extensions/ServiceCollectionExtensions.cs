@@ -48,6 +48,23 @@
             return services;
         }
 
+        public static IServiceCollection AddExternalLoginProviders(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddAuthentication()
+                .AddFacebook(opt =>
+                    {
+                        opt.AppId = configuration["Facebook:AppId"];
+                        opt.AppSecret = configuration["Facebook:AppSecret"];
+                    })
+               .AddGoogle(opt =>
+                    {
+                        opt.ClientId = configuration["Google:ClientId"];
+                        opt.ClientSecret = configuration["Google:ClientSecret"];
+                    });
+
+            return services;
+        }
+
 
         public static IServiceCollection AddAntyForgery(this IServiceCollection services)
         {
@@ -81,14 +98,14 @@
             return services;
         }
 
-        public static IServiceCollection AddIdentity(this IServiceCollection services) 
+        public static IServiceCollection AddIdentity(this IServiceCollection services)
         {
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
             return services;
         }
 
-        public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration) 
+        public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(
               options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));

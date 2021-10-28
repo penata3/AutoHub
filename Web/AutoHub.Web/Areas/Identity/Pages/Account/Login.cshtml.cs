@@ -12,6 +12,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
 
     [AllowAnonymous]
@@ -22,16 +23,19 @@
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<LoginModel> logger;
 
+
         public LoginModel(
             SignInManager<ApplicationUser> signInManager,
             ILogger<LoginModel> logger,
             UserManager<ApplicationUser> userManager,
-            ReCaptcha captchaService)
+            ReCaptcha captchaService,
+            IConfiguration configuration)
         {
             this.userManager = userManager;
             this.captchaService = captchaService;
             this.signInManager = signInManager;
             this.logger = logger;
+            this.CaptchaSiteKey = configuration["ReCaptcha:SiteKey"];
         }
 
         [BindProperty]
@@ -40,6 +44,8 @@
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         public string ReturnUrl { get; set; }
+
+        public string CaptchaSiteKey { get; }
 
         [TempData]
         public string ErrorMessage { get; set; }
@@ -54,6 +60,7 @@
             returnUrl ??= this.Url.Content("~/");
 
             // Clear the existing external cookie to ensure a clean login process
+
             await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -72,9 +79,17 @@
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
 
-                if (!this.Request.Form.ContainsKey("g-recaptcha-response")) return Page();
+                if (!this.Request.Form.ContainsKey("g-recaptcha-response"))
+                {
+                    return this.Page();
+                }
+
                 var captcha = this.Request.Form["g-recaptcha-response"].ToString();
-                if (!await this.captchaService.IsValid(captcha)) return Page();
+
+                if (!await this.captchaService.IsValid(captcha))
+                {
+                    return this.Page();
+                }
 
                 var result = await this.signInManager.PasswordSignInAsync(this.Input.Email, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)

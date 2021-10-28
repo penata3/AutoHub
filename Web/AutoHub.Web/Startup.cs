@@ -26,6 +26,8 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDatabase(this.configuration);
+
+            services.AddExternalLoginProviders(this.configuration);
             services.AddIdentity();
             services.ConfigureCookies();
             services.AppplyControllers();
