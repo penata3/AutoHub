@@ -1,11 +1,9 @@
 ﻿namespace AutoHub.Web
 {
-    using System;
     using System.Reflection;
 
     using AutoHub.Services.Mapping;
     using AutoHub.Web.Extensions;
-    using AutoHub.Web.Infrastructure;
     using AutoHub.Web.ViewModels;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -32,10 +30,7 @@
             services.ConfigureCookies();
             services.AppplyControllers();
             services.AddAntyForgery();
-            services.AddHttpClient<ReCaptcha>(x =>
-            {
-                x.BaseAddress = new Uri("https://www.google.com/recaptcha/api/siteverify");
-            });
+            services.AddReCaptcha();
             services.AddRepositoryes();
             services.AddCustomApplictionServices(this.configuration);
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
@@ -44,7 +39,6 @@
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
             app.AddInitialDataSeed();
             app.AddInitialAdmin();
             if (env.IsDevelopment())

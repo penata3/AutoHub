@@ -1,5 +1,7 @@
 ﻿namespace AutoHub.Web.Extensions
 {
+    using System;
+
     using AutoHub.Data;
     using AutoHub.Data.Common;
     using AutoHub.Data.Common.Repositories;
@@ -8,6 +10,7 @@
     using AutoHub.Services.Data;
     using AutoHub.Services.Data.Implementations;
     using AutoHub.Services.Messaging;
+    using AutoHub.Web.Infrastructure;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -19,9 +22,7 @@
     {
         public static IServiceCollection AddCustomApplictionServices(this IServiceCollection services, IConfiguration configuration)
         {
-
             services.AddTransient<IEmailSender>(x => new SendGridEmailSender(configuration["SendGrid:ApiKey"]));
-
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IMakeService, MakesService>();
             services.AddTransient<IColorService, ColorsService>();
@@ -65,12 +66,21 @@
             return services;
         }
 
-
         public static IServiceCollection AddAntyForgery(this IServiceCollection services)
         {
             services.AddAntiforgery(options =>
             {
                 options.HeaderName = "X-CSRF-TOKEN";
+            });
+
+            return services;
+        }
+
+        public static IServiceCollection AddReCaptcha(this IServiceCollection services)
+        {
+            services.AddHttpClient<ReCaptcha>(x =>
+            {
+                x.BaseAddress = new Uri("https://www.google.com/recaptcha/api/siteverify");
             });
 
             return services;

@@ -1,0 +1,32 @@
+﻿@model AutoHub.Web.ViewModels.Contacts.ContactFormViewModel
+
+
+
+
+
+
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Name">Your names</label>
+            <input asp-for="Name" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label asp-for="Email">Email address</label>
+            <input type="email" class="form-control" asp-for="Email" placeholder="name@example.com">
+        </div>
+        
+        <div class="form-group">
+            <label asp-for="Subject">Subject</label>
+            <input asp-for="Subject" type="text" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Message">Message</label>
+            <textarea asp-for="Message" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="col-md-6  align-self-md-center ">
+            <button type="submit" class="btn btn-primary">
+                Send
+            </button>
+        </div>
+    </form>

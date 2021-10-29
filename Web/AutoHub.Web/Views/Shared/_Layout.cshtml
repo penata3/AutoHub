@@ -48,15 +48,15 @@
 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Купе">Coupes</a>    
-                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Стреч лимузина">Limosines</a>
-                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Седан">Sedans</a>
-                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Пикап">PickUp Trucks</a>
-                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Миниван">MinVans</a>
-                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Комби">Wagons</a>
-                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Кабрио">Convertible</a>
-                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Джип">Jeeps</a>
-                                        <a class="nav-link text-dark" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Ван">Vans</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Купе">Coupes</a>    
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Стреч лимузина">Limosines</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Седан">Sedans</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Пикап">PickUp Trucks</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Миниван">MinVans</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Комби">Wagons</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Кабрио">Convertible</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Джип">Jeeps</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="Ван">Vans</a>
                                         
 
                                     </div>
@@ -70,6 +70,14 @@
                             <li>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Search" asp-action="Index">Search</a>
                             </li>
+
+                            @if (!this.User.IsInRole("Administrator"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Contacts" asp-action="Index">Contact Us</a>
+                                </li>
+                            }
+
 
                             <li>
 
@@ -91,7 +99,7 @@
             @*<div class="col-lg-8 g-mb-30 g-mb-0--lg">
                 @this.RenderBody()
             </div>*@
-            @this.RenderBody();
+            @this.RenderBody()
         </div>
     </div>
 
