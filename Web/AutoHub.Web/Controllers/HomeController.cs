@@ -6,31 +6,22 @@
     using AutoHub.Web.ViewModels;
     using AutoHub.Web.ViewModels.Cars;
     using AutoHub.Web.ViewModels.Home;
-    using AutoHub.Web.ViewModels.Reviews;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Configuration;
 
     public class HomeController : BaseController
     {
         private readonly ICarsService carsService;
-        private readonly IReviewsService reviewsService;
-        private readonly IConfiguration configuration;
 
-        public HomeController(
-            ICarsService carsService,
-            IReviewsService reviewsService,
-            IConfiguration configuration)
+        public HomeController(ICarsService carsService)
         {
             this.carsService = carsService;
-            this.reviewsService = reviewsService;
-            this.configuration = configuration;
         }
 
         public IActionResult Index()
         {
             var latestCarViewModel = new LatestCarsList()
             {
-                Cars = this.carsService.GetLatestFiveCars<CarInListViewModel>(),
+                Cars = this.carsService.GetLatestFiveCars<BasicCarViewModel>(),
             };
 
             return this.View(latestCarViewModel);

@@ -1,4 +1,5 @@
-﻿@model AutoHub.Web.ViewModels.Cars.SingleCarViewModel
+﻿@model AutoHub.Web.ViewModels.Cars.DetailsCarViewModel
+@inject IFormatorForViews formater
 
 @{
     ViewData["Title"] = Model.Title;
@@ -26,7 +27,7 @@
                     @Model.CreatedOn.ToShortDateString()
                 </li>
                 <li class="single-meta">
-                    <i class="fas fa-user"></i> by
+                    <i class="fas fa-user"></i> 
                     @if (string.IsNullOrWhiteSpace(Model.AddedByUserEmail))
                     {
                         <a href="@Model.OriginalUrl" target="_blank"> https://www.auto.bg/</a>
@@ -178,7 +179,7 @@
                 <tbody>
                     <tr class="odd">
                         <th>Price</th>
-                        <td>@Model.Price лв.</td>
+                        <td> @formater.FormatIntegerForDisplay(Model.Price) лв.</td>
                         <th></th>
                         <td></td>
                     </tr>
@@ -206,7 +207,7 @@
 
                     <tr class="odd">
                         <th>Milage</th>
-                        <td>@Model.Milage км</td>
+                        <td>@formater.FormatDecimalNumberForDisplay(Model.Milage) км</td>
 
                         @if (!String.IsNullOrEmpty(Model.TechDataUrl))
                         {

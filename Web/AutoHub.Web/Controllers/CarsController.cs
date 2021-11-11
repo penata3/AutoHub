@@ -63,18 +63,18 @@
             var viewModel = new CarsListViewModel()
             {
                 PageNumber = id,
-                Cars = this.carsService.GetAllCars<CarInListViewModel>(id, ItemsPerPage),
+                Cars = this.carsService.GetAllCars<SemiDetailedCarViewModel>(id, ItemsPerPage),
                 ItemsCount = this.carsService.GetCount(),
                 ItemsPerPage = ItemsPerPage,
                 ActionName = nameof(this.All),
             };
-
+            var niki = 5;  
             return this.View(viewModel);
         }
 
         public IActionResult ById(int id)
         {
-            var carModel = this.carsService.GetById<SingleCarViewModel>(id);
+            var carModel = this.carsService.GetById<DetailsCarViewModel>(id);
             return this.View(carModel);
         }
 
@@ -87,7 +87,7 @@
             {
                 PageNumber = id,
                 ItemsPerPage = ItemsPerPage,
-                Cars = this.carsService.GetAllByCoupeType<CarInListViewModel>(id, ItemsPerPage, coupeType),
+                Cars = this.carsService.GetAllByCoupeType<SemiDetailedCarViewModel>(id, ItemsPerPage, coupeType),
                 ItemsCount = this.carsService.GetCounForCoupeType(data),
             };
             return this.View(carListViewModel);
@@ -103,7 +103,7 @@
             {
                 PageNumber = id,
                 ItemsPerPage = ItemsPerPage,
-                Cars = this.carsService.GetAllByFuelType<CarInListViewModel>(id, ItemsPerPage, fuelType),
+                Cars = this.carsService.GetAllByFuelType<SemiDetailedCarViewModel>(id, ItemsPerPage, fuelType),
                 ItemsCount = this.carsService.GetCountForFuelType(data),
             };
             return this.View(carListViewModel);
@@ -118,7 +118,7 @@
             {
                 PageNumber = id,
                 ItemsPerPage = ItemsPerPage,
-                Cars = this.carsService.GetAllByMakeName<CarInListViewModel>(id, ItemsPerPage, makeName),
+                Cars = this.carsService.GetAllByMakeName<SemiDetailedCarViewModel>(id, ItemsPerPage, makeName),
                 ItemsCount = this.carsService.GetCountForCarsPerMake(makeName),
             };
 

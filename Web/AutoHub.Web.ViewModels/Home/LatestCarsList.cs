@@ -6,6 +6,6 @@
 
     public class LatestCarsList
     {
-        public IEnumerable<CarInListViewModel> Cars { get; set; }
+        public IEnumerable<BasicCarViewModel> Cars { get; set; }
     }
 }

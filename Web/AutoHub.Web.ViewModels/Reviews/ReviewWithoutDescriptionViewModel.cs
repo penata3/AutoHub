@@ -16,7 +16,7 @@
 
         public string ImageUrl { get; set; }
 
-        public void CreateMappings(IProfileExpression configuration)
+        public virtual void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Review, ReviewWithoutDescriptionViewModel>()
                 .ForMember(x => x.ImageUrl, opt =>

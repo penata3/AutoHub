@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
     using AutoHub.Data.Common.Models;
 
     public class Car : BaseDeletableModel<int>
@@ -26,7 +27,7 @@
         public int ModelId { get; set; }
 
         public virtual Model Model { get; set; }
-        
+
         public int Price { get; set; }
 
         public int CoupeId { get; set; }

@@ -3,11 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
     using AutoHub.Data.Models;
     using AutoHub.Services.Mapping;
-    using AutoHub.Web.ViewModels.Additions;
-    using AutoHub.Web.ViewModels.ValidationAttributes;
-    using Microsoft.AspNetCore.Http;
 
     public class EditCarInputModel : IMapFrom<Car>
     {
@@ -87,6 +85,5 @@
         public IEnumerable<KeyValuePair<string, string>> Colors { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> MakesItems { get; set; }
-
     }
 }

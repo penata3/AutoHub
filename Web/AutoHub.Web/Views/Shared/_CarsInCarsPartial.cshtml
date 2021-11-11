@@ -1,38 +1,58 @@
 ﻿@model AutoHub.Web.ViewModels.Cars.CarsListViewModel
 
 <hr />
-<div class="row">
-   
+@*<div class="row">   
         @foreach (var car in Model.Cars)
-        {
-            <div class="card col-md-5 offset-1 mt-5" style="width: 18rem;">
-                <img src="@car.ImageUrl" class="card-img-top" alt="...">
-              
-                <div class="card-body">
-                    <h5 class="card-title"><a asp-controller="Cars" asp-action="ById" asp-route-id="@car.Id">@car.Title</a></h5>
-                    <div class="card-paragraps-container">
-                        
-                            <div class="row ml-3 mb-2">
-                                <i class="far fa-calendar-alt mr-2"></i>
-                                <p class="card-text">@car.ManufactureDate.Year година</p>
-                            </div>
+        {    
+        <div class="card col-md-5 offset-1 mt-5" style="width: 18rem;">
+            <img src="@car.ImageUrl" class="card-img-top" alt="...">
 
-                            <div class="row ml-3">
-                                <i class="fas fa-gas-pump mr-2"></i>
-                                <p class="card-text">  @car.FuelName</p>
-                            </div>
-                  
-                       
+            <div class="card-body">
+                <h5 class="card-title"><a asp-controller="Cars" asp-action="ById" asp-route-id="@car.Id">@car.Title</a></h5>
+                <div class="card-paragraps-container">
+
+                    <div class="row ml-3 mb-2">
+                        <i class="far fa-calendar-alt mr-2"></i>
+                        <p class="card-text">@car.ManufactureDate.Year година</p>
                     </div>
-                    <hr />
 
-                    <a class="btn btn-primary">@car.Price лева</a>
+                    <div class="row ml-3">
+                        <i class="fas fa-gas-pump mr-2"></i>
+                        <p class="card-text">  @car.FuelName</p>
+                    </div>
+
+
                 </div>
+                <hr />
+
+                <a class="btn btn-primary">@car.Price лева</a>
             </div>
+        </div>
+    
         }
     
+</div>*@
+
+
+<div class="row">
+
+    <div class="card col-md-5">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+  
+    <div class="card col-md-5">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
 </div>
-
 <hr />
-
 <partial name="_PagingPartial" model="@Model" />

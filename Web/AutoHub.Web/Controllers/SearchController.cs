@@ -27,17 +27,15 @@
             return this.View(additionsList);
         }
 
-
         [HttpGet]
         public IActionResult List(ChekedAdditionsList input)
         {
             var model = new CarsListViewModel()
             {
-                Cars = this.carsService.GetAllByAdditions<CarInListViewModel>(input.Additions),
+                Cars = this.carsService.GetAllByAdditions<SemiDetailedCarViewModel>(input.Additions),
             };
 
             return this.View(model);
         }
-
     }
 }

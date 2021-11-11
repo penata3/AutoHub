@@ -3,6 +3,7 @@
     using System;
     using System.Net.Http;
     using System.Threading.Tasks;
+
     using Microsoft.Extensions.Configuration;
     using Newtonsoft.Json.Linq;
 
@@ -24,7 +25,7 @@
             try
             {
                 var postTask = await this.httpClient
-                    .PostAsync($"?secret={this.secretKey}&response={captcha}", new StringContent(""));
+                    .PostAsync($"?secret={this.secretKey}&response={captcha}", new StringContent(string.Empty));
                 var result = await postTask.Content.ReadAsStringAsync();
                 var resultObject = JObject.Parse(result);
                 dynamic success = resultObject["success"];

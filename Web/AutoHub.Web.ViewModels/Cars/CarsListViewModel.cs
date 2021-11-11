@@ -4,6 +4,6 @@
 
     public class CarsListViewModel : PaginationViewModel
     {
-        public IEnumerable<CarInListViewModel> Cars { get; set; }
+        public IEnumerable<SemiDetailedCarViewModel> Cars { get; set; }
     }
 }

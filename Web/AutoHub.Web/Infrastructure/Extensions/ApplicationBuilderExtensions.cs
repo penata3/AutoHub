@@ -11,9 +11,8 @@
 
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder AddInitialAdmin(this IApplicationBuilder app) 
+        public static IApplicationBuilder AddInitialAdmin(this IApplicationBuilder app)
         {
-
             var userManager = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             if (!userManager.Users.AnyAsync(x => x.Email == "ppenchev1@gmail.com").GetAwaiter().GetResult())
@@ -23,7 +22,6 @@
                     UserName = "Admin",
                     Email = "ppenchev1@gmail.com",
                     EmailConfirmed = true,
-
                 };
 
                 var result = userManager.CreateAsync(user, "Admin11109988").GetAwaiter().GetResult();
@@ -37,7 +35,7 @@
             return app;
         }
 
-        public static IApplicationBuilder AddInitialDataSeed(this IApplicationBuilder app) 
+        public static IApplicationBuilder AddInitialDataSeed(this IApplicationBuilder app)
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {

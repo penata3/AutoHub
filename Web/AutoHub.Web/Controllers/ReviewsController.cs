@@ -1,11 +1,12 @@
 ﻿namespace AutoHub.Web.Controllers
 {
+    using System.Threading.Tasks;
+
     using AutoHub.Common;
     using AutoHub.Services.Data;
     using AutoHub.Web.ViewModels.Reviews;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
     public class ReviewsController : Controller
     {
@@ -29,10 +30,8 @@
                 ItemsCount = this.reviewsService.GetCount(),
                 ActionName = nameof(this.AllReviews),
             };
-
             return this.View(model);
         }
-
 
         public IActionResult ReviewById(int id)
         {

@@ -35,7 +35,7 @@
         }
 
         // GET: Administration/Reviews
-        public async Task<IActionResult> Index(int id = 1)
+        public IActionResult Index(int id = 1)
         {
             const int ItemsPerPage = 10;
 
@@ -48,11 +48,7 @@
                 ActionName = "Index",
             };
 
-           // return this.View(await this.reviewsRepository.AllWithDeleted().ToListAsync());
-
-            return  this.View(model);
-
-
+            return this.View(model);
         }
 
         // GET: Administration/Reviews/Details/5
@@ -104,7 +100,7 @@
         }
 
         // GET: Administration/Reviews/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {

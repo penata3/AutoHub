@@ -37,6 +37,7 @@
             services.AddTransient<ITonwsService, TownsService>();
             services.AddTransient<IReviewsService, ReviewsService>();
             services.AddTransient<IVotesService, VotesService>();
+            services.AddTransient<IFormatorForViews, FormatorForViews>();
             return services;
         }
 
