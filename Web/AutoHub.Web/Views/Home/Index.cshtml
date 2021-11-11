@@ -1,10 +1,26 @@
-﻿@model AutoHub.Web.ViewModels.Home.LatestCarsAndReviewsList
+﻿@model AutoHub.Web.ViewModels.Home.LatestCarsList
 
 @using AutoHub.Common
 @{
     this.ViewData["Title"] = "Home Page";
-
 }
+
+<style>
+
+    .card img {
+        width:200px;
+        height: 200px;
+    }
+    .upperPart {
+        display: flex;
+    }
+
+    .cardSection {
+        display: flex;
+    }
+
+
+</style>
 
     <div class="text-center">
         <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
@@ -12,55 +28,64 @@
     </div>
 
     <section class="row">
-        <div class="col-md-5 ">
+        <div class="col-md-8">
             <h2>Top 5 latest cars</h2>
             <ul class="list-unstyled">
+
                 @foreach (var car in Model.Cars)
                 {
-                    <li class="media mb-4">
- 
-                            <img class="mr-3 " width="300" ; src="@car.ImageUrl" alt="@car.Title">
-                           
+                <li >
+                    <div class="card mb-4 p-2">
+                        <div class="upperPart p-0">
+                            <img class="card-img-top" src="@car.ImageUrl" alt="@car.Title">
+                            <div class="card-body">
+                                <h5 class="card-title"><a asp-controller="Cars" asp-action="ById" asp-route-id="@car.Id">@car.Title</a></h5>
+                                <hr />
+                                <section class="cardSection">
+                                    <div class="row ml-2 mr-5">
+                                        <i class="far fa-calendar-alt mr-2"></i>
+                                        <p class="card-text">@car.ManufactureDate.Year година</p>
+                                    </div>
 
-                            <div class="media-body">
-                                <h5 class="mt-0 mb-1"><a asp-controller="Cars" asp-action="ById" asp-route-id="@car.Id">@car.Title</a></h5>
+                                    <div class="row mr-5">
+                                        <i class="fas fa-gas-pump mr-2"></i>
+                                        <p class="card-text">  @car.FuelName</p>
+                                    </div>
 
-                                <span>@car.ShortDescription<a asp-controller="Cars" asp-action="ById" asp-route-id="@car.Id">...</a></span>
+
+                                    <div class="row">
+                                        <i class="fas fa-map-marker-alt mr-1"></i>
+                                        <p class="card-text">@car.TownName</p>
+                                    </div>
+                                   
+                                </section>
+                               
+                                <p class="card-text mb-3 mt-2"><small class="text-muted">Created: @car.CreatedOn</small></p>
                                 <a class="btn btn-primary" asp-controller="Cars" asp-action="ById" asp-route-id="@car.Id">@car.Price лева</a>
-                            </div>
 
-                    </li>
-                }
-
-        </div>
-
-        <div class="col-md-2">
-
-        </div>
-
-
-        <div class="col-md-4 ">
-            <ul class="list-unstyled">
-                <h2 >Top 5 latest reviews</h2>
-                @foreach (var review in Model.Reviews)
-                {
-                    <li class="media mb-4">
-
-                        <a asp-controller="Reviews" asp-action="ReviewById" asp-route-id="@review.Id">
-                            <img class="mr-3 " width="270" ; src="@review.ImageUrl" alt="@review.Title">
-                        </a>
-
-
-                        <div class="media-body">
-                            <h5 class="mt-0 mb-1"><a asp-controller="Reviews" asp-action="ReviewById" asp-route-id="@review.Id">@review.Title</a></h5>
-                            <p>
-                                <span>@review.SortDescription <a asp-controller="Reviews" asp-action="ReviewById" asp-route-id="@review.Id">...</a></span>
-                            </p>
+                            </div>                            
                         </div>
-                    </li>
+                    
+                    </div>
+                </li>
 
+                  
+                    @*<li class="media mb-4">
+
+                    <img class="mr-3 " width="300" ; src="@car.ImageUrl" alt="@car.Title">
+
+
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1"><a asp-controller="Cars" asp-action="ById" asp-route-id="@car.Id">@car.Title</a></h5>
+
+                        <span>@car.ShortDescription<a asp-controller="Cars" asp-action="ById" asp-route-id="@car.Id">...</a></span>
+                        <a class="btn btn-primary" asp-controller="Cars" asp-action="ById" asp-route-id="@car.Id">@car.Price лева</a>
+                    </div>
+
+            </li>*@
                 }
 
 </div>
+
 
     </section>

@@ -1,11 +1,12 @@
 ﻿namespace AutoHub.Services.Data.Implementations
 {
-    using System;
+
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Text;
+
     using System.Threading.Tasks;
+
     using AutoHub.Data.Common.Repositories;
     using AutoHub.Data.Models;
     using AutoHub.Services.Mapping;
@@ -46,7 +47,6 @@
                 var path = $"{imagePath}/reviews/{img.Id}.{extension}";
                 using Stream fileStream = new FileStream(path, FileMode.Create);
                 await image.CopyToAsync(fileStream);
-
             }
 
             await this.reviewsRepository.AddAsync(review);
@@ -59,7 +59,6 @@
 
             this.reviewsRepository.Delete(review);
             await this.reviewsRepository.SaveChangesAsync();
-
         }
 
         public IEnumerable<T> GetAllReviews<T>(int page, int itemsPerPage)
@@ -71,7 +70,6 @@
 
             return reviews;
         }
-
 
         public IEnumerable<T> GetAllReviewsWithDeleted<T>(int page, int itemsPerPage)
         {

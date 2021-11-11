@@ -22,10 +22,9 @@
                 var data = await this.makesService.GetMakeWithModelsAsync(id);
                 var result = data.FirstOrDefault(x => x.Id == id).Models;
                 return this.Json(result);
-            };
+            }
 
             return null;
-              
         }
     }
 }

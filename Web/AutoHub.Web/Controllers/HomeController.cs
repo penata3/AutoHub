@@ -1,7 +1,7 @@
 ﻿namespace AutoHub.Web.Controllers
 {
     using System.Diagnostics;
-    using System.Threading.Tasks;
+
     using AutoHub.Services.Data;
     using AutoHub.Web.ViewModels;
     using AutoHub.Web.ViewModels.Cars;
@@ -9,8 +9,6 @@
     using AutoHub.Web.ViewModels.Reviews;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
-    using SendGrid;
-    using SendGrid.Helpers.Mail;
 
     public class HomeController : BaseController
     {
@@ -30,16 +28,11 @@
 
         public IActionResult Index()
         {
-            var latestCarViewModel = new LatestCarsAndReviewsList()
+            var latestCarViewModel = new LatestCarsList()
             {
-                PageNumber = 1,
-                ItemsPerPage = 5,
                 Cars = this.carsService.GetLatestFiveCars<CarInListViewModel>(),
-                Reviews = this.reviewsService.GetLatestFiveReviews<ReviewInListViewModel>(),
-                ItemsCount = 5,
-                ActionName = nameof(this.Index),
-            };      
-            
+            };
+
             return this.View(latestCarViewModel);
         }
 
@@ -54,6 +47,5 @@
             return this.View(
                 new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
-
     }
 }

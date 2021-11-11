@@ -25,6 +25,10 @@
 
         public string Description { get; set; }
 
+        public DateTime CreatedOn { get; set; }
+
+        public string TownName { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Car, CarInListViewModel>()
