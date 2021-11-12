@@ -1,0 +1,30 @@
+﻿@model ReviewListViewModel
+
+
+<style>
+    .card .reviewImage {
+        width: 100%;
+    }
+</style>
+<h1 class="mt-5">
+    Top latest reviews
+</h1>
+<hr />
+@foreach (var review in Model.Reviews)
+{
+    <div class="card p-2 mb-3" style="width: 18rem;">
+
+        <a asp-action="ReviewById" asp-controller="Reviews" asp-route-id="@review.Id">
+            <img class="reviewImage card-img-top" src="@review.ImageUrl" alt="Card image cap">
+        </a>
+
+        <hr />
+        <a asp-action="ReviewById" asp-controller="Reviews" asp-route-id="@review.Id">@review.Title</a>
+    </div>
+}
+
+
+<article class="media g-mb-10">
+    <iframe src="https://forecabox.foreca.com/get/44840" width="300" height="250" marginwidth="0"
+            marginheight="0" frameborder="0" scrolling="no" allowtransparency="true" title="Времето"></iframe>
+</article>

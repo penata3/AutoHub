@@ -28,7 +28,7 @@
             }
             else if (priceAsString.Length == 7)
             {
-                result = $"{priceAsString.Substring(0, 1)}  {priceAsString.Substring(1, 3)}  {priceAsString.Substring(5, 3)}";
+                result = $"{priceAsString.Substring(0, 1)}  {priceAsString.Substring(1, 3)}  {priceAsString.Substring(4, 3)}";
             }
             else
             {

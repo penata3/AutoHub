@@ -21,8 +21,6 @@
 
         public string RegionName { get; set; }
 
-        public int HorsePower { get; set; }
-
         public string OriginalUrl { get; set; }
 
         public string ColorName { get; set; }

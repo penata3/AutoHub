@@ -13,6 +13,8 @@
 
         public string ShortDescription { get; set; }
 
+        public int HorsePower { get; set; }
+
         public override void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Car, SemiDetailedCarViewModel>()

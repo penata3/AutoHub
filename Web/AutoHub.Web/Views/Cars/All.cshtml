@@ -37,6 +37,12 @@
                 <h5 class="card-title"><a asp-controller="Cars" asp-action="ById" asp-route-id="@car.Id">@car.Title</a></h5>
                 <hr />
                 <section class="cardSection">
+
+                    <div class="row ml-2 mr-5">
+                        <i class="far fa-solid fa-copyright mr-2"></i>
+                        <p class="card-text">@car.MakeName</p>
+                    </div>
+
                     <div class="row ml-2 mr-5">
                         <i class="far fa-calendar-alt mr-2"></i>
                         <p class="card-text">@car.ManufactureDate.Year година</p>
@@ -50,11 +56,15 @@
                         <p class="card-text">@car.TownName</p>
                     </div>
 
+                    <div class="row ml-2 mr-5">
+                        <i class="far fa-thin fa-engine"></i>
+                        <p class="card-text">@car.HorsePower кс</p>
+                    </div>
+
                     <div class="row">
                         <i class="fas fa-solid fa-road mr-2"></i>
                         <p class="card-text"> @formator.FormatDecimalNumberForDisplay(car.Milage) км</p>
                     </div>
-
                 </section>
 
                 <p class="card-text mb-3 mt-2"><small class="text-muted">Created: @car.CreatedOn</small></p>
