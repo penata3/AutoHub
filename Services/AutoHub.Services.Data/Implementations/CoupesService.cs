@@ -26,7 +26,7 @@
                 c.Name,
             })
             .Select(c => new KeyValuePair<string, string>(c.Id.ToString(), c.Name)).ToListAsync();
-
+            coupes.Insert(0, new KeyValuePair<string, string>("Select coupe", null));
             return coupes;
         }
     }

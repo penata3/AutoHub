@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using AutoHub.Web.ViewModels.Cars;
+    using AutoHub.Web.ViewModels.Search;
 
     public interface ICarsService
     {
@@ -11,11 +12,23 @@
 
         Task AddAllSelectListValuesForCarInputModel(AddCarInputModel input);
 
+        Task AddSelectListValuesForAdvancedSearchModel(AdvancedSearchViewModel input);
+
         Task AddAllSelectListValuesForCarEditInputModel(EditCarInputModel input);
 
         Task AddSelectListValuesForCarCreateOrEditModel<T>(T input);
 
         IEnumerable<T> GetAllCars<T>(int page, int itemsPerPage);
+
+        IEnumerable<T> GetCarsFromPriceDescending<T>(int page, int itemsPerPage);
+
+        IEnumerable<T> GetCarsFromPriceAscenging<T>(int page, int itemsPerPage);
+
+        IEnumerable<T> GetAllCarsFromLatest<T>(int page, int itemsPerPage);
+
+        IEnumerable<T> GetAllCarsFromOldest<T>(int page, int itemsPerPage);
+
+        IEnumerable<T> GetAllBySearchingCriteria<T>(AdvancedSearchViewModel model);
 
         int GetCount();
 

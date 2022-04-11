@@ -24,7 +24,7 @@
             conditions = await this.conditionsRepository.AllAsNoTracking()
                 .OrderBy(c => c.Name)
                 .Select(c => new KeyValuePair<string, string>(c.Id.ToString(), c.Name)).ToListAsync();
-
+            conditions.Insert(0, new KeyValuePair<string, string>("Select condition", null));
             return conditions;
         }
     }

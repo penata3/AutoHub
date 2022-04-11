@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using AutoHub.Data.Common.Repositories;
     using AutoHub.Data.Models;
     using Microsoft.EntityFrameworkCore;
@@ -25,8 +26,7 @@
                 c.Id,
                 c.Name,
             }).Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name)).ToListAsync();
-
-
+            colors.Insert(0, new KeyValuePair<string, string>("Select color", null));
             return colors;
         }
     }

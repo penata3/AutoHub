@@ -1,5 +1,7 @@
 ﻿namespace AutoHub.Web.Controllers
 {
+    using System;
+    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -68,7 +70,6 @@
                 ItemsPerPage = ItemsPerPage,
                 ActionName = nameof(this.All),
             };
-            var niki = 5;  
             return this.View(viewModel);
         }
 
@@ -106,6 +107,8 @@
                 Cars = this.carsService.GetAllByFuelType<SemiDetailedCarViewModel>(id, ItemsPerPage, fuelType),
                 ItemsCount = this.carsService.GetCountForFuelType(data),
             };
+        ;
+
             return this.View(carListViewModel);
         }
 

@@ -4,79 +4,26 @@
 @{
     this.ViewData["Title"] = "All Cars";
 }
-<style>
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown button
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+</div>
 
-    .card img {
-        width: 200px;
-        height: 200px;
-    }
-
-    .upperPart {
-        display: flex;
-    }
-
-    .cardSection {
-        display: flex;
-    }
-
-    .fa-road {
-        position: relative;
-        top: 2px;
-    }
-</style>
-
+<div class="mt-5">
+    <partial name="_CarsInCarsPartial" model="@Model" />
+</div>
 <h2>All cars page @Model.PageNumber </h2>
 
-@foreach (var car in Model.Cars)
-{
+<hr />
+<partial name="_PagingPartial" model="@Model" />
 
-    <div class="card mb-4 p-2">
-        <div class="upperPart p-0">
-            <img src="@car.ImageUrl" alt="Alternate Text" />
-            <div class="card-body">
-                <h5 class="card-title"><a asp-controller="Cars" asp-action="ById" asp-route-id="@car.Id">@car.Title</a></h5>
-                <hr />
-                <section class="cardSection">
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
 
-                    <div class="row ml-2 mr-5">
-                        <i class="far fa-solid fa-copyright mr-2"></i>
-                        <p class="card-text">@car.MakeName</p>
-                    </div>
-
-                    <div class="row ml-2 mr-5">
-                        <i class="far fa-calendar-alt mr-2"></i>
-                        <p class="card-text">@car.ManufactureDate.Year година</p>
-                    </div>
-                    <div class="row mr-5">
-                        <i class="fas fa-gas-pump mr-2"></i>
-                        <p class="card-text">  @car.FuelName</p>
-                    </div>
-                    <div class="row mr-5">
-                        <i class="fas fa-map-marker-alt mr-2"></i>
-                        <p class="card-text">@car.TownName</p>
-                    </div>
-
-                    <div class="row ml-2 mr-5">
-                        <i class="far fa-thin fa-engine"></i>
-                        <p class="card-text">@car.HorsePower кс</p>
-                    </div>
-
-                    <div class="row">
-                        <i class="fas fa-solid fa-road mr-2"></i>
-                        <p class="card-text"> @formator.FormatDecimalNumberForDisplay(car.Milage) км</p>
-                    </div>
-                </section>
-
-                <p class="card-text mb-3 mt-2"><small class="text-muted">Created: @car.CreatedOn</small></p>
-
-                <a class="btn btn-primary" asp-controller="Cars" asp-action="ById" asp-route-id="@car.Id">@formator.FormatIntegerForDisplay(car.Price) лева</a>
-
-            </div>
-        </div>
-
-    </div>
-}
-    <hr />
-    <partial name="_PagingPartial" model="@Model" />
 
 

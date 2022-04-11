@@ -1,0 +1,91 @@
+﻿@model AdvancedSearchViewModel
+
+@{
+    var makesItems = this.Model.MakesItems.Select(x => new SelectListItem(x.Value, x.Key));
+    var fuels = this.Model.Fuels.Select(x => new SelectListItem(x.Value, x.Key));
+    fuels.ToList().Insert(0, new SelectListItem { Text = "--Select Customer--", Value = "" });
+    var regions = this.Model.Regions.Select(x => new SelectListItem(x.Value,x.Key));
+    var colors = this.Model.Colors.Select(x => new SelectListItem(x.Value, x.Key));
+    var gearBoxes = this.Model.GearBoxes.Select(x => new SelectListItem(x.Value, x.Key));
+}
+
+<form asp-action="List" method="get">
+    <div class="row">
+        <div class="col-md-4">
+            <label asp-for="MakeId"></label>
+            <select asp-for="MakeId" class="form-control" asp-items="makesItems">
+            </select>
+            <span asp-validation-for="MakeId" class="text-danger"></span>
+        </div>
+
+
+        <div class="col-md-4">
+            <label asp-for="ModelId"></label>
+            <select name="ModelId" id="ModelId" class="form-control"></select>
+            <span asp-validation-for="ModelId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <label asp-for="FuelId"></label>
+            <select asp-for="FuelId" class="form-control" asp-items="fuels">
+                <option disabled value=''>Select fuel</option>
+            </select>
+            <span asp-validation-for="FuelId" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="ColourId"></label>
+            <select asp-for="ColourId" class="form-control" asp-items="colors">
+                <option disabled value=''>Select colour</option>
+            </select>
+            <span asp-validation-for="ColourId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <label asp-for="RegionId"></label>
+            <select asp-for="RegionId" class="form-control" asp-items="regions">
+                <option disabled value=''>Select region</option>
+            </select>
+            <span asp-validation-for="RegionId" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="GearBoxId"></label>
+            <select asp-for="GearBoxId" class="form-control" asp-items="gearBoxes">
+                <option disabled value=''>Select gearbox</option>
+            </select>
+            <span asp-validation-for="GearBoxId" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <button class="btn btn-success">Search </button>
+    
+</form>
+
+@section Scripts {
+    <script>
+        document.getElementById('MakeId').addEventListener('change', async (e) => {
+            const modelSelectList = document.getElementById('ModelId');
+            //modelSelectList.innerHTML = "<option disabled value=''>Select model</option>";
+
+            //parse the event target value to see if it is validnumber
+
+            var parsedMakeId = parseInt(e.target.value);
+
+            if (parsedMakeId) {
+
+                const response = await fetch(`/carmodels/getModels?Id=${e.target.value}`);
+                const data = await response.json();
+                data.forEach(model => {
+                    modelSelectList.innerHTML += `<option value="${model.id}">${model.name}</option>`;
+                })
+            }
+
+        })
+    </script>
+}

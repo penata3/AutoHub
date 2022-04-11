@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace AutoHub.Web.ViewModels.Search
+﻿namespace AutoHub.Web.ViewModels.Search
 {
+    using System.Collections.Generic;
+
     public class ChekedAdditionsList
     {
         public IEnumerable<int> Additions { get; set; }

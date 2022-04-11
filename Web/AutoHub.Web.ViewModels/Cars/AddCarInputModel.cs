@@ -90,6 +90,5 @@
         public IEnumerable<KeyValuePair<string, string>> Colors { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> MakesItems { get; set; }
-
     }
 }

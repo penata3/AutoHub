@@ -10,6 +10,7 @@
     using AutoHub.Data.Models;
     using AutoHub.Services.Mapping;
     using AutoHub.Web.ViewModels.Cars;
+    using AutoHub.Web.ViewModels.Search;
 
     public class CarsService : ICarsService
     {
@@ -256,7 +257,6 @@
 
             this.carsRepository.Delete(car);
             await this.carsRepository.SaveChangesAsync();
-
         }
 
         public IEnumerable<T> GetAllByAdditions<T>(IEnumerable<int> aditionsIds)
@@ -274,6 +274,71 @@
         public Task AddSelectListValuesForCarCreateOrEditModel<T>(T input)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<T> GetCarsFromPriceDescending<T>(int page, int itemsPerPage)
+        {
+            return this.carsRepository.AllAsNoTracking()
+               .OrderByDescending(x => x.Price)
+               .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
+               .To<T>()
+               .ToList();
+        }
+
+
+        public IEnumerable<T> GetCarsFromPriceAscenging<T>(int page, int itemsPerPage)
+        {
+            return this.carsRepository.AllAsNoTracking()
+               .OrderBy(x => x.Price)
+               .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
+               .To<T>()
+               .ToList();
+        }
+
+        public IEnumerable<T> GetAllCarsFromLatest<T>(int page, int itemsPerPage)
+        {
+            return this.carsRepository.AllAsNoTracking()
+          .OrderBy(x => x.CreatedOn)
+          .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
+          .To<T>()
+          .ToList();
+        }
+
+        public IEnumerable<T> GetAllCarsFromOldest<T>(int page, int itemsPerPage)
+        {
+            return this.carsRepository.AllAsNoTracking()
+           .OrderByDescending(x => x.CreatedOn)
+           .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
+           .To<T>()
+           .ToList();
+        }
+
+        public async Task AddSelectListValuesForAdvancedSearchModel(AdvancedSearchViewModel input)
+        {
+            input.MakesItems = await this.makeService.GetAllMakes();
+            input.Colors = await this.colorService.GetAllColors();
+            input.GearBoxes = await this.gearBoxesService.GetAllGearBoxesAsync();
+            input.Regions = await this.regionsServices.GetAllRegionsAsync();
+            input.Fuels = await this.fuelsServices.GetAllFuelTypesAsync();
+        }
+
+        public IEnumerable<T> GetAllBySearchingCriteria<T>(AdvancedSearchViewModel model)
+        {
+            //var query = this.carsRepository.All().AsQueryable();
+
+            //query = query.Where(x => x.ModelId == model.ModelId && x.MakeId == model.ModelId
+            //&& x.ColorId == model.ColourId
+            //&& x.RegionId == model.RegionId
+            //&& x.FuelId == model.FuelId
+            //&& x.GearBoxId == model.GearBoxId);
+
+            //return query.To<T>().ToList();
+
+            return this.carsRepository.AllAsNoTracking().Where(x => x.ModelId == model.ModelId && x.MakeId == model.MakeId
+            && x.ColorId == model.ColourId
+            && x.RegionId == model.RegionId
+            && x.FuelId == model.FuelId
+            && x.GearBoxId == model.GearBoxId).To<T>().ToList();
         }
     }
 }

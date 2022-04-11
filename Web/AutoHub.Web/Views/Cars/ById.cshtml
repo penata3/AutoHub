@@ -13,6 +13,8 @@
     .media-body {
         margin-left: 25px;
     }
+
+    
 </style>
 
 <div class="single-recipe-layout1">
@@ -186,7 +188,11 @@
 
                     <tr>
                         <th>Coupe Type</th>
-                        <td asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="@Model.CoupeName">@Model.CoupeName </td>
+                        <td >
+                            <a asp-controller="Cars" asp-action="AllByCoupeType" asp-route-data="@Model.CoupeName" >
+                                @Model.CoupeName
+                            </a>
+                       </td>
                         <th class="secColumn">Year of production</th>
                         <td class="secColumn">@Model.ManufactureDate.Year</td>
                     </tr>

@@ -24,7 +24,7 @@
             fuels = await this.fuelsRepository.AllAsNoTracking()
                 .Select(f => new KeyValuePair<string, string>(f.Id.ToString(), f.Name))
                 .ToListAsync();
-
+            fuels.Insert(0, new KeyValuePair<string, string>("Select fuel", null));
             return fuels;
         }
     }

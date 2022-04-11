@@ -25,7 +25,7 @@
                 .OrderBy(x => x.Name)
                 .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name))
                 .ToListAsync();
-
+            gearBoxes.Insert(0, new KeyValuePair<string, string>("Select gearbox", null));
             return gearBoxes;
         }
     }

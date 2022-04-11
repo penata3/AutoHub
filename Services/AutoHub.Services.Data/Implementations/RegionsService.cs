@@ -26,7 +26,7 @@
                 .OrderBy(x => x.Name)
                 .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name))
                 .ToListAsync();
-
+            regions.Insert(0, new KeyValuePair<string, string>("Select regions", null));
             return regions;
         }
 
