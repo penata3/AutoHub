@@ -58,18 +58,47 @@
             return this.View();
         }
 
-        public IActionResult All(int id = 1)
+        public IActionResult All(int id = 1, string sortingOrder = "latest")
         {
             const int ItemsPerPage = 8;
 
             var viewModel = new CarsListViewModel()
             {
                 PageNumber = id,
-                Cars = this.carsService.GetAllCars<SemiDetailedCarViewModel>(id, ItemsPerPage),
                 ItemsCount = this.carsService.GetCount(),
                 ItemsPerPage = ItemsPerPage,
                 ActionName = nameof(this.All),
+                SortingOrder = sortingOrder,
             };
+
+            if (sortingOrder == "latest")
+            {
+                viewModel.Cars = this.carsService.GetAllCars<SemiDetailedCarViewModel>(id, ItemsPerPage);
+            }
+            else if (sortingOrder == "descending")
+            {
+                viewModel.Cars = this.carsService.GetCarsFromPriceDescending<SemiDetailedCarViewModel>(id, ItemsPerPage);
+            }
+            else if (sortingOrder == "ascending")
+            {
+                viewModel.Cars = this.carsService.GetCarsFromPriceAscenging<SemiDetailedCarViewModel>(id, ItemsPerPage);
+            }
+
+            //var viewModel = new CarListingViewModel();
+            ////viewModel.Cars = this.carsService.GetAllCars<SemiDetailedCarViewModel>();
+
+            //if (sortingOrder == "latest")
+            //{
+            //    viewModel.Cars = this.carsService.GetAllCars<SemiDetailedCarViewModel>();
+            //}
+            //else if (sortingOrder == "descending")
+            //{
+            //    viewModel.Cars = this.carsService.GetCarsFromPriceDescending<SemiDetailedCarViewModel>();
+            //}
+            //else if (sortingOrder == "ascending")
+            //{
+            //    viewModel.Cars = this.carsService.GetCarsFromPriceAscenging<SemiDetailedCarViewModel>();
+            //}
             return this.View(viewModel);
         }
 

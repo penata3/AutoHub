@@ -4,16 +4,28 @@
 @{
     this.ViewData["Title"] = "All Cars";
 }
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Dropdown button
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-    </div>
+@*<div class="col-md-4">
+    <label ></label>
+    <select id="filter" class="form-control">
+        <option disabled value=''>Order cars by</option>
+        <option value='latest'>Latest</option>
+        <option value='descending'>Price descending</option>
+        <option value='ascending'>Price ascending</option>
+    </select>
+</div>*@
+
+<div class="row">
+    <a asp-action="All" asp-route-sortingOrder="latest">Latest</a>
 </div>
+
+<div class="row">
+    <a asp-action="All" asp-route-sortingOrder="descending">Price descending</a>
+</div>
+
+<div class="row">
+    <a asp-action="All" asp-route-sortingOrder="ascending">Price ascending</a>
+</div>
+
 
 <div class="mt-5">
     <partial name="_CarsInCarsPartial" model="@Model" />
@@ -25,5 +37,16 @@
 
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
 
+
+<script>
+    var dropDown = document.getElementById("filter");
+
+    dropDown.addEventListener("change", async (e) => {
+        e.preventDefault();
+        console.log(e.target.value);
+
+       //const response = await fetch(`/carmodels/getModels?Id=${e.target.value}`);
+    })
+</script>
 
 

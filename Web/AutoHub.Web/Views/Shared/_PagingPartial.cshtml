@@ -4,7 +4,7 @@
     <ul class="pagination justify-content-center">
 
         <li class="page-item @if (Model.FirstPage == Model.PageNumber) { <text>disabled</text> }">
-            <a class="page-link" asp-for="@Model.ActionName" asp-route-id="@Model.FirstPage">&laquo;&laquo;</a>
+            <a class="page-link" asp-for="@Model.ActionName" asp-route-id="@Model.FirstPage"  asp-route-sortingOrder="@Model.SortingOrder" >&laquo;&laquo;</a>
         </li>
 
         <li class="page-item @if (!Model.HasPreviousPage) { <text>disabled</text> }">
@@ -14,27 +14,27 @@
         {
             if (i > 0)
             {
-                <li class="page-item"><a class="page-link" asp-action="@Model.ActionName" asp-route-id="@i">@i</a></li>
+                <li class="page-item"><a class="page-link" asp-action="@Model.ActionName" asp-route-id="@i" asp-route-sortingOrder="@Model.SortingOrder">@i</a></li>
             }
         }
 
         <li class="page-item">
-            <a class="page-link" asp-for="@Model.ActionName" asp-route-id="@Model.PageNumber">@Model.PageNumber</a>
+            <a class="page-link" asp-for="@Model.ActionName" asp-route-id="@Model.PageNumber" asp-route-sortingOrder="@Model.SortingOrder">@Model.PageNumber</a>
         </li>
 
         @for (int i = Model.PageNumber + 1; i <= Model.PageNumber + 4; i++)
         {
             if (i <= Model.PagesCount)
             {
-                <li class="page-item"><a class="page-link" asp-action="@Model.ActionName" asp-route-id="@i">@i</a></li>
+                <li class="page-item"><a class="page-link" asp-action="@Model.ActionName" asp-route-id="@i" asp-route-sortingOrder="@Model.SortingOrder">@i</a></li>
             }
         }
         <li class="page-item @if (!Model.HasNextPage) { <text>disabled</text> }">
-            <a class="page-link" asp-for="@Model.ActionName" asp-route-id="@Model.NextPageNumber">&raquo;</a>
+            <a class="page-link" asp-for="@Model.ActionName" asp-route-id="@Model.NextPageNumber" asp-route-sortingOrder="@Model.SortingOrder">&raquo;</a>
         </li>
 
         <li class="page-item @if (Model.PageNumber == Model.PagesCount || Model.ItemsCount < 1) { <text>disabled</text> }">
-            <a class="page-link" asp-for="@Model.ActionName" asp-route-id="@Model.PagesCount">&raquo;&raquo;</a>
+            <a class="page-link" asp-for="@Model.ActionName" asp-route-id="@Model.PagesCount" asp-route-sortingOrder="@Model.SortingOrder">&raquo;&raquo;</a>
         </li>
     </ul>
 </nav>

@@ -20,9 +20,15 @@
 
         IEnumerable<T> GetAllCars<T>(int page, int itemsPerPage);
 
+        IEnumerable<T> GetAllCars<T>();
+
         IEnumerable<T> GetCarsFromPriceDescending<T>(int page, int itemsPerPage);
 
         IEnumerable<T> GetCarsFromPriceAscenging<T>(int page, int itemsPerPage);
+
+        IEnumerable<T> GetCarsFromPriceDescending<T>();
+
+        IEnumerable<T> GetCarsFromPriceAscenging<T>();
 
         IEnumerable<T> GetAllCarsFromLatest<T>(int page, int itemsPerPage);
 

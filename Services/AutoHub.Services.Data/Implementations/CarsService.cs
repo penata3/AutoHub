@@ -63,7 +63,6 @@
             input.Additions = this.additionsService.GetAllAditions();
         }
 
-     
         // TODO: REFACTOR
 
         public async Task AddAllSelectListValuesForCarEditInputModel(EditCarInputModel input)
@@ -285,7 +284,6 @@
                .ToList();
         }
 
-
         public IEnumerable<T> GetCarsFromPriceAscenging<T>(int page, int itemsPerPage)
         {
             return this.carsRepository.AllAsNoTracking()
@@ -339,6 +337,30 @@
             && x.RegionId == model.RegionId
             && x.FuelId == model.FuelId
             && x.GearBoxId == model.GearBoxId).To<T>().ToList();
+        }
+
+        public IEnumerable<T> GetAllCars<T>()
+        {
+            return this.carsRepository.AllAsNoTracking()
+                 .OrderByDescending(x => x.Id)
+                 .To<T>()
+                 .ToList();
+        }
+
+        public IEnumerable<T> GetCarsFromPriceDescending<T>()
+        {
+            return this.carsRepository.AllAsNoTracking()
+            .OrderByDescending(x => x.Price)
+            .To<T>()
+            .ToList();
+        }
+
+        public IEnumerable<T> GetCarsFromPriceAscenging<T>()
+        {
+            return this.carsRepository.AllAsNoTracking()
+             .OrderBy(x => x.Price)
+             .To<T>()
+             .ToList();
         }
     }
 }

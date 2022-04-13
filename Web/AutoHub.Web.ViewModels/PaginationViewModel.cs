@@ -26,5 +26,7 @@
 
         public string ActionName { get; set; }
 
+        public string SortingOrder { get; set; }
+
     }
 }
