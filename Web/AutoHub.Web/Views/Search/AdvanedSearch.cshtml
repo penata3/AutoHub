@@ -71,7 +71,7 @@
     <script>
         document.getElementById('MakeId').addEventListener('change', async (e) => {
             const modelSelectList = document.getElementById('ModelId');
-            modelSelectList.innerHTML = "<option disabled value=''>Select model</option>";
+            
 
             //parse the event target value to see if it is validnumber
 
@@ -81,11 +81,17 @@
 
                 const response = await fetch(`/carmodels/getModels?Id=${e.target.value}`);
                 const data = await response.json();
-                data.forEach(model => {
-                    modelSelectList.innerHTML += `<option value="${model.id}">${model.name}</option>`;
-                })
-            }
 
+                modelSelectList.addEventListener("click", async (e) =>
+                {
+                    e.preventDefault();
+                   
+                    data.forEach(model => {
+                        modelSelectList.innerHTML += `<option value="${model.id}">${model.name}</option>`;
+                    })
+                 
+                })            
+            }   
         })
     </script>
 }

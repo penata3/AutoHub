@@ -18,17 +18,13 @@
 
         Task AddSelectListValuesForCarCreateOrEditModel<T>(T input);
 
-        IEnumerable<T> GetAllCars<T>(int page, int itemsPerPage);
+        Task<IEnumerable<T>> GetAllBySearchOptions<T>(AdvancedSearchViewModel model);
 
-        IEnumerable<T> GetAllCars<T>();
+        IEnumerable<T> GetAllCars<T>(int page, int itemsPerPage);
 
         IEnumerable<T> GetCarsFromPriceDescending<T>(int page, int itemsPerPage);
 
         IEnumerable<T> GetCarsFromPriceAscenging<T>(int page, int itemsPerPage);
-
-        IEnumerable<T> GetCarsFromPriceDescending<T>();
-
-        IEnumerable<T> GetCarsFromPriceAscenging<T>();
 
         IEnumerable<T> GetAllCarsFromLatest<T>(int page, int itemsPerPage);
 

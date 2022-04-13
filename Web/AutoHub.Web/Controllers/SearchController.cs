@@ -44,11 +44,11 @@
         }
 
         [HttpGet]
-        public IActionResult List(AdvancedSearchViewModel input)
+        public async Task<IActionResult> List(AdvancedSearchViewModel input)
         {
             var model = new CarsListViewModel()
             {
-                Cars = this.carsService.GetAllBySearchingCriteria<SemiDetailedCarViewModel>(input),
+                Cars = await this.carsService.GetAllBySearchOptions<SemiDetailedCarViewModel>(input),
             };
 
             return this.View(model);

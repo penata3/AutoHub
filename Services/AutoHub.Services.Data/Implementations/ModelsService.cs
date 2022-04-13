@@ -29,12 +29,13 @@
 
         public IEnumerable<KeyValuePair<string, string>> GetAllModels()
         {
-
-            return this.modelsReposirtory.AllAsNoTracking().Select(m => new
+               var models =  this.modelsReposirtory.AllAsNoTracking().Select(m => new
             {
                 m.Id,
                 m.Name,
-            }).ToList().Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
+            }).Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name)).ToList();
+            models.Insert(0, new KeyValuePair<string, string>("Select model", null));
+            return models;
         }
 
         public Model GetModelByName(string name)

@@ -332,35 +332,62 @@
 
             //return query.To<T>().ToList();
 
-            return this.carsRepository.AllAsNoTracking().Where(x => x.ModelId == model.ModelId && x.MakeId == model.MakeId
-            && x.ColorId == model.ColourId
-            && x.RegionId == model.RegionId
-            && x.FuelId == model.FuelId
-            && x.GearBoxId == model.GearBoxId).To<T>().ToList();
+            return this.carsRepository.AllAsNoTracking().Where(x => x.ModelId == model.ModelId || x.MakeId == model.MakeId
+           || x.ColorId == model.ColourId
+            || x.RegionId == model.RegionId
+            || x.FuelId == model.FuelId
+           || x.GearBoxId == model.GearBoxId).To<T>().ToList();
         }
 
-        public IEnumerable<T> GetAllCars<T>()
+        public async Task<IEnumerable<T>> GetAllBySearchOptions<T>(AdvancedSearchViewModel model)
         {
-            return this.carsRepository.AllAsNoTracking()
-                 .OrderByDescending(x => x.Id)
-                 .To<T>()
-                 .ToList();
-        }
+            //var query = this.carsRepository.All().AsQueryable();
 
-        public IEnumerable<T> GetCarsFromPriceDescending<T>()
-        {
-            return this.carsRepository.AllAsNoTracking()
-            .OrderByDescending(x => x.Price)
-            .To<T>()
-            .ToList();
-        }
+            //foreach (var aditionId in aditionsIds)
+            //{
+            //    query = query.Where(x => x.Additions.Any(i => i.AdditionId == aditionId));
+            //}
 
-        public IEnumerable<T> GetCarsFromPriceAscenging<T>()
-        {
-            return this.carsRepository.AllAsNoTracking()
-             .OrderBy(x => x.Price)
-             .To<T>()
-             .ToList();
+            //return query.To<T>().ToList();
+
+            var query = this.carsRepository.All().AsQueryable();
+
+            if (model.MakeId != 0)
+            {
+                query = query
+                .Where(x => x.MakeId == model.MakeId);
+            }
+
+            if (model.ModelId != 0)
+            {
+                query = query
+                  .Where(x => x.ModelId == model.ModelId);
+            }
+            if (model.ColourId != 0)
+            {
+                query = query
+                .Where(x => x.ColorId == model.ColourId);
+            }
+
+            if (model.RegionId != 0)
+            {
+                query = query
+                .Where(x => x.RegionId == model.RegionId);
+            }
+
+            if (model.FuelId != 0)
+            {
+                query = query
+                .Where(x => x.FuelId == model.FuelId);
+            }
+
+            if (model.GearBoxId != 0)
+            {
+                query = query
+                .Where(x => x.GearBoxId == model.GearBoxId);
+            }
+
+            return query.To<T>().ToList();
         }
     }
 }

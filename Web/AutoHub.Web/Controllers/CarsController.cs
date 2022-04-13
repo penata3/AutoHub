@@ -84,21 +84,6 @@
                 viewModel.Cars = this.carsService.GetCarsFromPriceAscenging<SemiDetailedCarViewModel>(id, ItemsPerPage);
             }
 
-            //var viewModel = new CarListingViewModel();
-            ////viewModel.Cars = this.carsService.GetAllCars<SemiDetailedCarViewModel>();
-
-            //if (sortingOrder == "latest")
-            //{
-            //    viewModel.Cars = this.carsService.GetAllCars<SemiDetailedCarViewModel>();
-            //}
-            //else if (sortingOrder == "descending")
-            //{
-            //    viewModel.Cars = this.carsService.GetCarsFromPriceDescending<SemiDetailedCarViewModel>();
-            //}
-            //else if (sortingOrder == "ascending")
-            //{
-            //    viewModel.Cars = this.carsService.GetCarsFromPriceAscenging<SemiDetailedCarViewModel>();
-            //}
             return this.View(viewModel);
         }
 
