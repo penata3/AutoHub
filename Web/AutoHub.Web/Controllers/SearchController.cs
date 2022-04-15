@@ -1,10 +1,11 @@
 ﻿namespace AutoHub.Web.Controllers
 {
+    using System.Threading.Tasks;
+
     using AutoHub.Services.Data;
     using AutoHub.Web.ViewModels.Cars;
     using AutoHub.Web.ViewModels.Search;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
     public class SearchController : Controller
     {
@@ -19,50 +20,32 @@
             this.carsService = carsService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var additionsList = new AllAdditionsListViewModel()
-            {
-                Additions = this.additionsService.GetAllAditions(),
-            };
-            return this.View(additionsList);
-        }
-
-        public async Task<IActionResult> AdvanedSearch()
-        {
-            var input = new AdvancedSearchViewModel();
-            await this.carsService.AddSelectListValuesForAdvancedSearchModel(input);
-
-            return this.View(input);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AdvanedSearch(AdvancedSearchViewModel model)
-        {
-            ;
+            var model = new SearchInputModel();
+            await this.carsService.AddSelectListValuesForAdvancedSearchModel(model);
+            model.Additions = this.additionsService.GetAllAditions();
             return this.View(model);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> List(AdvancedSearchViewModel input)
-        {
-            var model = new CarsListViewModel()
-            {
-                Cars = await this.carsService.GetAllBySearchOptions<SemiDetailedCarViewModel>(input),
-            };
-
-            return this.View(model);
-        }
-
-        //[HttpGet]
-        //public IActionResult List(ChekedAdditionsList input)
+        //public async Task<IActionResult> AdvanedSearch()
         //{
-        //    var model = new CarsListViewModel()
-        //    {
-        //        Cars = this.carsService.GetAllByAdditions<SemiDetailedCarViewModel>(input.Additions),
-        //    };
+        //    var model = new SearchInputModel();
+        //    await this.carsService.AddSelectListValuesForAdvancedSearchModel(model);
+        //    model.Additions = this.additionsService.GetAllAditions();
 
         //    return this.View(model);
         //}
+
+        [HttpGet]
+        public async Task<IActionResult> List(SearchingOptions input, ChekedAdditionsList additionsList)
+        {
+            var model = new CarsListViewModel()
+            {
+                Cars = await this.carsService.GetAllBySearchOptions<SemiDetailedCarViewModel>(input, additionsList.Additions),
+            };
+
+            return this.View(model);
+        }
     }
 }

@@ -3,7 +3,9 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class AdvancedSearchViewModel
+    using AutoHub.Web.ViewModels.Additions;
+
+    public class SearchInputModel
     {
         [Display(Name = "Make")]
         public int MakeId { get; set; }
@@ -18,6 +20,8 @@
         public int ColourId { get; set; }
 
         public int RegionId { get; set; }
+
+        public AdditionViewModel[] Additions { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> Fuels { get; set; }
 

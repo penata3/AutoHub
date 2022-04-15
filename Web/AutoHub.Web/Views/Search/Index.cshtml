@@ -1,21 +1,97 @@
-﻿@model AutoHub.Web.ViewModels.Search.AllAdditionsListViewModel
+﻿@model AutoHub.Web.ViewModels.Search.SearchInputModel
 @{
     ViewData["Title"] = "Search";
+
+        var makesItems = this.Model.MakesItems.Select(x => new SelectListItem(x.Value, x.Key));
+        var fuels = this.Model.Fuels.Select(x => new SelectListItem(x.Value, x.Key));
+        var regions = this.Model.Regions.Select(x => new SelectListItem(x.Value, x.Key));
+        var colors = this.Model.Colors.Select(x => new SelectListItem(x.Value, x.Key));
+        var gearBoxes = this.Model.GearBoxes.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
-<h1 class="mb-6">Find your dream car by listing favorite additions</h1>
+
+<style>
+
+    .aditionsContainer {
+        font-size: 12px;
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+<h1 class="mb-6">Find your dream car by listing favorite additions</h1> 
 
 <form class="mt-6" asp-action="List" method="get">
     <div class="row">
+        <div class="col-md-4">
+           
+            <label asp-for="MakeId"></label>
+            <select asp-for="MakeId" class="form-control" asp-items="makesItems">
+                <option disabled value=''>Select make</option>"
+            </select>
+        </div>
 
-        @foreach (var adition in Model.Additions)
-        {
-            <div class="col-md-4">
 
-                <input id="adition_@adition.Id" type="checkbox" name="Additions" value="@adition.Id" />
-                <label asp-for="adition_@adition.Id">@adition.Name</label>
-            </div>
-        }
+        <div class="col-md-4">
+            <label asp-for="ModelId"></label>
+            <select name="ModelId" id="ModelId" class="form-control"></select>
+            <span asp-validation-for="ModelId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <label asp-for="FuelId"></label>
+            <select asp-for="FuelId" class="form-control" asp-items="fuels">
+                <option disabled value=''>Select fuel</option>
+            </select>           
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="ColourId"></label>
+            <select asp-for="ColourId" class="form-control" asp-items="colors">
+                <option disabled value=''>Select colour</option>
+            </select>
+            <span asp-validation-for="ColourId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <label asp-for="RegionId"></label>
+            <select asp-for="RegionId" class="form-control" asp-items="regions">
+                <option disabled value=''>Select region</option>
+            </select>
+            <span asp-validation-for="RegionId" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="GearBoxId"></label>
+            <select asp-for="GearBoxId" class="form-control" asp-items="gearBoxes">
+                <option disabled value=''>Select gearbox</option>
+            </select>
+            <span asp-validation-for="GearBoxId" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <hr />
+  
+    <div class="aditions">
+
+        <div class="aditionsContainer">
+            @foreach (var adition in Model.Additions)
+            {
+                <div class="addition">
+
+                    <input id="adition_@adition.Id" type="checkbox" name="Additions" value="@adition.Id" />
+                    <label asp-for="@adition.Id">@adition.Name</label>
+                </div>
+            }
+        </div>
     </div>
 
     <button class="btn btn-success">Search </button>

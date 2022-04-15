@@ -12,13 +12,13 @@
 
         Task AddAllSelectListValuesForCarInputModel(AddCarInputModel input);
 
-        Task AddSelectListValuesForAdvancedSearchModel(AdvancedSearchViewModel input);
+        Task AddSelectListValuesForAdvancedSearchModel(SearchInputModel input);
 
         Task AddAllSelectListValuesForCarEditInputModel(EditCarInputModel input);
 
         Task AddSelectListValuesForCarCreateOrEditModel<T>(T input);
 
-        Task<IEnumerable<T>> GetAllBySearchOptions<T>(AdvancedSearchViewModel model);
+        Task<IEnumerable<T>> GetAllBySearchOptions<T>(SearchingOptions model,IEnumerable<int> additions);
 
         IEnumerable<T> GetAllCars<T>(int page, int itemsPerPage);
 
@@ -30,7 +30,7 @@
 
         IEnumerable<T> GetAllCarsFromOldest<T>(int page, int itemsPerPage);
 
-        IEnumerable<T> GetAllBySearchingCriteria<T>(AdvancedSearchViewModel model);
+        IEnumerable<T> GetAllBySearchingCriteria<T>(SearchInputModel model);
 
         int GetCount();
 

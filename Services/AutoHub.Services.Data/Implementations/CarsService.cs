@@ -226,8 +226,6 @@
             car.HorsePower = model.HorsePower;
 
             await this.carsRepository.SaveChangesAsync();
-
-
             //Color,coupe,techData,ConditionId,GearBoxId,RegionId,TownId,FuelId,HorsePower,
         }
 
@@ -262,9 +260,12 @@
         {
             var query = this.carsRepository.All().AsQueryable();
 
-            foreach (var aditionId in aditionsIds)
+            if (aditionsIds != null)
             {
-                query = query.Where(x => x.Additions.Any(i => i.AdditionId == aditionId));
+                foreach (var aditionId in aditionsIds)
+                {
+                    query = query.Where(x => x.Additions.Any(i => i.AdditionId == aditionId));
+                }
             }
 
             return query.To<T>().ToList();
@@ -311,7 +312,7 @@
            .ToList();
         }
 
-        public async Task AddSelectListValuesForAdvancedSearchModel(AdvancedSearchViewModel input)
+        public async Task AddSelectListValuesForAdvancedSearchModel(SearchInputModel input)
         {
             input.MakesItems = await this.makeService.GetAllMakes();
             input.Colors = await this.colorService.GetAllColors();
@@ -320,7 +321,7 @@
             input.Fuels = await this.fuelsServices.GetAllFuelTypesAsync();
         }
 
-        public IEnumerable<T> GetAllBySearchingCriteria<T>(AdvancedSearchViewModel model)
+        public IEnumerable<T> GetAllBySearchingCriteria<T>(SearchInputModel model)
         {
             //var query = this.carsRepository.All().AsQueryable();
 
@@ -339,52 +340,51 @@
            || x.GearBoxId == model.GearBoxId).To<T>().ToList();
         }
 
-        public async Task<IEnumerable<T>> GetAllBySearchOptions<T>(AdvancedSearchViewModel model)
+        public async Task<IEnumerable<T>> GetAllBySearchOptions<T>(SearchingOptions model,IEnumerable<int> additions)
         {
-            //var query = this.carsRepository.All().AsQueryable();
-
-            //foreach (var aditionId in aditionsIds)
-            //{
-            //    query = query.Where(x => x.Additions.Any(i => i.AdditionId == aditionId));
-            //}
-
-            //return query.To<T>().ToList();
-
             var query = this.carsRepository.All().AsQueryable();
 
-            if (model.MakeId != 0)
+            if (model.MakeId != null)
             {
                 query = query
                 .Where(x => x.MakeId == model.MakeId);
             }
 
-            if (model.ModelId != 0)
+            if (model.ModelId != null)
             {
                 query = query
                   .Where(x => x.ModelId == model.ModelId);
             }
-            if (model.ColourId != 0)
+            if (model.ColourId != null)
             {
                 query = query
                 .Where(x => x.ColorId == model.ColourId);
             }
 
-            if (model.RegionId != 0)
+            if (model.RegionId != null)
             {
                 query = query
                 .Where(x => x.RegionId == model.RegionId);
             }
 
-            if (model.FuelId != 0)
+            if (model.FuelId != null)
             {
                 query = query
                 .Where(x => x.FuelId == model.FuelId);
             }
 
-            if (model.GearBoxId != 0)
+            if (model.GearBoxId != null)
             {
                 query = query
                 .Where(x => x.GearBoxId == model.GearBoxId);
+            }
+
+            if (additions != null)
+            {
+                foreach (var aditionId in additions)
+                {
+                    query = query.Where(x => x.Additions.Any(i => i.AdditionId == aditionId));
+                }
             }
 
             return query.To<T>().ToList();
