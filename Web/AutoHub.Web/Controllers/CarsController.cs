@@ -18,10 +18,7 @@
         private readonly IWebHostEnvironment environment;
         private readonly IMakeService makeService;
 
-        public CarsController(
-            ICarsService carsService,
-            IWebHostEnvironment environment,
-            IMakeService makeService)
+        public CarsController(ICarsService carsService, IWebHostEnvironment environment, IMakeService makeService)
         {
             this.carsService = carsService;
             this.environment = environment;
@@ -83,7 +80,6 @@
             {
                 viewModel.Cars = this.carsService.GetCarsFromPriceAscenging<SemiDetailedCarViewModel>(id, ItemsPerPage);
             }
-
             return this.View(viewModel);
         }
 
